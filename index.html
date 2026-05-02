@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+  <title>Вход • Страница клиента</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #fdf7f2;
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 20px;
+      transition: padding 0.3s ease;
+    }
+
+    body.fullscreen {
+      padding: 0;
+      overflow: hidden;
+    }
+
+    /* ==================== */
+    /* КАРТОЧКА ЛОГИНА */
+    /* ==================== */
+    .login-card {
+      background: white;
+      max-width: 460px;
+      width: 100%;
+      margin: auto;
+      border-radius: 32px;
+      box-shadow: 0 20px 35px rgba(0, 0, 0, 0.03), 0 8px 18px rgba(0, 0, 0, 0.05);
+      padding: 40px 34px 34px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: all 0.4s ease;
+    }
+
+    .login-card:hover {
+      box-shadow: 0 28px 48px rgba(0, 0, 0, 0.07), 0 12px 28px rgba(0, 0, 0, 0.1);
+      transform: translateY(-3px);
+    }
+
+    .login-page {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .login-page.hidden {
+      display: none;
+    }
+
+    .header-block {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 4px;
+      margin-bottom: 4px;
+      width: 100%;
+      padding: 0 2px;
+    }
+
+    .title-col {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .title {
+      font-size: 2.6rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      color: #2c2416;
+      line-height: 1.1;
+    }
+
+    .subhead {
+      font-size: 0.88rem;
+      color: #a89880;
+      margin-top: 3px;
+      font-weight: 400;
+      letter-spacing: 0.2px;
+    }
+
+    .lang-dropdown {
+      position: relative;
+      user-select: none;
+      z-index: 50;
+    }
+
+    .lang-dropdown-trigger {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      background: #f5efe6;
+      border: 1px solid #e2d5c3;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      color: #2c2416;
+      white-space: nowrap;
+    }
+
+    .lang-dropdown-trigger:hover {
+      background: #ede3d4;
+      border-color: #cfc0a8;
+    }
+
+    .lang-dropdown-trigger .chevron {
+      width: 14px;
+      height: 14px;
+      transition: transform 0.3s ease;
+      flex-shrink: 0;
+      opacity: 0.6;
+    }
+
+    .lang-dropdown.open .chevron {
+      transform: rotate(180deg);
+    }
+
+    .lang-dropdown-menu {
+      position: absolute;
+      top: calc(100% + 6px);
+      right: 0;
+      background: white;
+      border: 1px solid #e8ddd0;
+      border-radius: 14px;
+      box-shadow: 0 12px 32px rgba(44, 36, 22, 0.14);
+      overflow: hidden;
+      min-width: 100%;
+      opacity: 0;
+      transform: translateY(-8px) scale(0.96);
+      pointer-events: none;
+      transition: all 0.25s ease;
+    }
+
+    .lang-dropdown.open .lang-dropdown-menu {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      pointer-events: auto;
+    }
+
+    .lang-dropdown-option {
+      display: block;
+      width: 100%;
+      padding: 10px 16px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.7px;
+      color: #8b7a62;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.2s ease;
+    }
+
+    .lang-dropdown-option:hover {
+      background: #faf4ec;
+      color: #2c2416;
+    }
+
+    .lang-dropdown-option.active {
+      color: #2c2416;
+      font-weight: 700;
+      background: #f5ede0;
+    }
+
+    .lang-dropdown-option + .lang-dropdown-option {
+      border-top: 1px solid #f2ebe0;
+    }
+
+    .divider-line {
+      width: 100%;
+      border-bottom: 1px solid #f0e7db;
+      margin-bottom: 28px;
+      margin-top: 16px;
+    }
+
+    .client-form {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .input-group label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      color: #6b5e4a;
+      margin-left: 6px;
+    }
+
+    .input-group input {
+      background: #fefcf8;
+      border: 1px solid #ede3d4;
+      border-radius: 16px;
+      padding: 16px 18px;
+      font-size: 1rem;
+      color: #2e271e;
+      outline: none;
+      transition: all 0.3s ease;
+      box-shadow: inset 0 1px 3px rgba(0,0,0,0.02);
+      font-weight: 450;
+    }
+
+    .input-group input:focus {
+      border-color: #c8b294;
+      background: #ffffff;
+      box-shadow: 0 0 0 4px rgba(200, 178, 148, 0.18);
+    }
+
+    .input-group input::placeholder {
+      color: #ccbfaa;
+      font-weight: 300;
+    }
+
+    .buttons-block {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin: 24px 0;
+    }
+
+    .button-primary {
+      background: #2a2419;
+      border: 1px solid #3b3324;
+      border-radius: 18px;
+      padding: 18px 22px;
+      font-weight: 600;
+      font-size: 1rem;
+      color: white;
+      letter-spacing: 0.3px;
+      cursor: pointer;
+      transition: all 0.35s ease;
+      box-shadow: 0 4px 10px rgba(28, 22, 12, 0.08);
+      width: 100%;
+      text-align: center;
+    }
+
+    .button-primary:hover {
+      background: #3f3522;
+      border-color: #5b4d34;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(28, 22, 12, 0.15);
+    }
+
+    .button-primary:active {
+      transform: scale(0.98);
+    }
+
+    .button-secondary {
+      background: #e8e3da;
+      border: 1px solid #d6cdbc;
+      border-radius: 18px;
+      padding: 15px 22px;
+      font-weight: 550;
+      font-size: 0.95rem;
+      color: #b0a590;
+      cursor: not-allowed;
+      width: 100%;
+      text-align: center;
+      letter-spacing: 0.2px;
+      opacity: 0.7;
+      pointer-events: none;
+      transition: all 0.3s ease;
+    }
+
+    .button-secondary .lock-icon {
+      display: inline-block;
+      margin-right: 4px;
+    }
+
+    .button-secondary.active {
+      background: #fefcf9;
+      border-color: #d6cdbc;
+      color: #4a3f2e;
+      cursor: pointer;
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .button-secondary.active .lock-icon {
+      display: none;
+    }
+
+    .button-secondary.active:hover {
+      background: #f7f1e7;
+      border-color: #b7a78b;
+      color: #2d2415;
+      transform: translateY(-2px);
+    }
+
+    .contact-footer {
+      width: 100%;
+      border-top: 1px solid #f1e7d9;
+      padding-top: 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .contact-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      row-gap: 12px;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #5f5340;
+      font-size: 0.9rem;
+      font-weight: 470;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .contact-item svg {
+      width: 20px;
+      height: 20px;
+      stroke: #7b6e58;
+      stroke-width: 1.8;
+      fill: none;
+    }
+
+    .contact-item:hover {
+      color: #1e180e;
+      transform: translateY(-2px);
+    }
+
+    .contact-item:hover svg {
+      stroke: #3d3220;
+    }
+
+    .phone-number {
+      font-weight: 600;
+      background: #f7f0e4;
+      padding: 6px 14px;
+      border-radius: 30px;
+      font-size: 0.9rem;
+      color: #2f2819;
+    }
+
+    .phone-number:hover {
+      background: #efe0cc;
+      transform: scale(1.05);
+    }
+
+    .telegram-channel, .instagram-profile {
+      background: #faf6ef;
+      padding: 6px 16px;
+      border-radius: 30px;
+      color: #4e3f2c;
+      text-decoration: none;
+      font-weight: 470;
+      transition: all 0.3s ease;
+    }
+
+    .telegram-channel:hover, .instagram-profile:hover {
+      background: #e9ddcc;
+      transform: translateY(-2px);
+    }
+
+    /* ==================== */
+    /* ПРИМЕРНАЯ СТРАНИЦА */
+    /* ==================== */
+    .example-page {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      height: 100dvh;
+      background-color: #fdf7f2;
+      z-index: 100;
+      overflow: hidden;
+    }
+
+    .example-page.hidden {
+      display: none;
+    }
+
+    /* ==================== */
+    /* ЭТАП 1: КРУПНЫЙ ТЕКСТ ПО ЦЕНТРУ */
+    /* ==================== */
+    .hero-text {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      transition: 
+        top 1s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+        left 1s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+        transform 1s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+        font-size 1s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+        opacity 0.6s ease;
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    .hero-text.moved {
+      top: 40px;
+      left: 36px;
+      transform: translate(0, 0);
+    }
+
+    .hero-text.fade-out {
+      opacity: 0;
+    }
+
+    .hero-title {
+      font-size: 3.5rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      color: #2c2416;
+      line-height: 1.1;
+      white-space: nowrap;
+      transition: font-size 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .hero-text.moved .hero-title {
+      font-size: 2.6rem;
+    }
+
+    .hero-subtitle {
+      font-size: 1.3rem;
+      color: #8b7a62;
+      margin-top: 8px;
+      transition: all 0.6s ease;
+    }
+
+    .hero-text.moved .hero-subtitle {
+      opacity: 0;
+      font-size: 0;
+      margin-top: 0;
+    }
+
+    /* ==================== */
+    /* ЭТАП 2: КОНТЕНТ (ЗАГОЛОВОК + NAV LIST) */
+    /* ==================== */
+    .example-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 40px 36px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.6s ease 0.3s;
+      overflow-y: auto;
+    }
+
+    .example-container.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .example-title {
+      font-size: 2.6rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      color: #2c2416;
+      line-height: 1.1;
+      margin-bottom: 28px;
+      animation: fadeSlideDown 0.6s ease-out 0.2s both;
+    }
+
+    @keyframes fadeSlideDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Вертикальный nav list */
+    .nav-list-vertical {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      width: 100%;
+      max-width: 340px;
+    }
+
+    .nav-item-vertical {
+      display: block;
+      padding: 12px 18px;
+      font-size: 0.92rem;
+      font-weight: 500;
+      color: #5f5340;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      letter-spacing: 0.3px;
+      border-radius: 10px;
+      position: relative;
+    }
+
+    .nav-item-vertical::before {
+      content: '—';
+      margin-right: 12px;
+      color: #c8b294;
+      font-weight: 300;
+      transition: all 0.3s ease;
+    }
+
+    .nav-item-vertical:hover {
+      background: #faf6ef;
+      color: #2c2416;
+      padding-left: 28px;
+    }
+
+    .nav-item-vertical:hover::before {
+      color: #a89880;
+    }
+
+    .nav-item-vertical.cartier {
+      font-weight: 600;
+      color: #2c2416;
+      font-size: 0.98rem;
+      letter-spacing: 0.5px;
+      padding: 14px 18px;
+    }
+
+    .nav-item-vertical.cartier::before {
+      content: '◆';
+      color: #2a2419;
+      font-size: 0.7rem;
+    }
+
+    .nav-item-vertical.cartier:hover {
+      background: #f5ede0;
+      padding-left: 32px;
+    }
+
+    /* Анимация появления пунктов (запускается после появления контейнера) */
+    .example-container.visible .nav-item-vertical:nth-child(1) { animation: fadeSlideRight 0.4s ease-out 0.4s both; }
+    .example-container.visible .nav-item-vertical:nth-child(2) { animation: fadeSlideRight 0.4s ease-out 0.5s both; }
+    .example-container.visible .nav-item-vertical:nth-child(3) { animation: fadeSlideRight 0.4s ease-out 0.6s both; }
+    .example-container.visible .nav-item-vertical:nth-child(4) { animation: fadeSlideRight 0.4s ease-out 0.7s both; }
+    .example-container.visible .nav-item-vertical:nth-child(5) { animation: fadeSlideRight 0.4s ease-out 0.8s both; }
+
+    @keyframes fadeSlideRight {
+      from { opacity: 0; transform: translateX(-20px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    /* АДАПТИВНОСТЬ */
+    @media (max-width: 768px) {
+      body { padding: 14px; }
+      .login-card { max-width: 100%; border-radius: 28px; padding: 30px 24px 28px; }
+      .title { font-size: 2.2rem; }
+      .hero-title { font-size: 2.5rem; }
+      .hero-text.moved { top: 28px; left: 20px; }
+      .hero-text.moved .hero-title { font-size: 2rem; }
+      .example-container { padding: 28px 24px; }
+      .example-title { font-size: 2rem; }
+    }
+
+    @media (max-width: 480px) {
+      body { padding: 10px; }
+      .login-card { border-radius: 24px; padding: 26px 20px 24px; }
+      .title { font-size: 1.9rem; }
+      .hero-title { font-size: 2rem; }
+      .hero-text.moved { top: 24px; left: 16px; }
+      .hero-text.moved .hero-title { font-size: 1.6rem; }
+      .example-container { padding: 24px 18px; }
+      .example-title { font-size: 1.6rem; margin-bottom: 20px; }
+      .nav-list-vertical { max-width: 100%; }
+      .nav-item-vertical { font-size: 0.85rem; padding: 10px 14px; }
+    }
+
+    @media (max-width: 380px) {
+      body { padding: 8px; }
+      .login-card { border-radius: 20px; padding: 22px 16px 20px; }
+      .title { font-size: 1.6rem; }
+      .hero-title { font-size: 1.6rem; }
+      .hero-text.moved { top: 20px; left: 12px; }
+      .hero-text.moved .hero-title { font-size: 1.3rem; }
+      .example-container { padding: 20px 14px; }
+      .example-title { font-size: 1.3rem; }
+    }
+  </style>
+</head>
+<body id="bodyElement">
+  
+  <!-- КАРТОЧКА ЛОГИНА -->
+  <div class="login-card" id="loginCard">
+    <div class="login-page" id="loginPage">
+      
+      <div class="header-block">
+        <div class="title-col">
+          <h1 class="title" id="pageTitle">Вход</h1>
+          <div class="subhead" id="pageSubhead">добро пожаловать</div>
+        </div>
+        <div class="lang-dropdown" id="langDropdownLogin">
+          <button class="lang-dropdown-trigger" id="langTriggerLogin">
+            <span id="langLabelLogin">RUS</span>
+            <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"/>
+            </svg>
+          </button>
+          <div class="lang-dropdown-menu" id="langMenuLogin">
+            <button class="lang-dropdown-option" data-lang="uzb" data-label="UZB">UZB</button>
+            <button class="lang-dropdown-option active" data-lang="rus" data-label="RUS">RUS</button>
+            <button class="lang-dropdown-option" data-lang="eng" data-label="ENG">ENG</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="divider-line"></div>
+
+      <form class="client-form" id="clientForm">
+        <div class="input-group">
+          <label for="firstname" id="labelFirstname">Имя</label>
+          <input type="text" id="firstname" placeholder="Ваше имя" autocomplete="given-name" required>
+        </div>
+        <div class="input-group">
+          <label for="lastname" id="labelLastname">Фамилия</label>
+          <input type="text" id="lastname" placeholder="Ваша фамилия" autocomplete="family-name" required>
+        </div>
+        <div class="input-group">
+          <label for="phone" id="labelPhone">Номер телефона</label>
+          <input type="tel" id="phone" placeholder="+998 00 000 00 00" autocomplete="tel-national" required>
+        </div>
+      </form>
+
+      <div class="buttons-block">
+        <button type="submit" form="clientForm" class="button-primary" id="submitBtn">Отправить информацию</button>
+        <button type="button" class="button-secondary" id="goToExampleBtn" disabled>
+          <span class="lock-icon">🔒</span> <span id="exampleBtnText">Перейти в примерную</span>
+        </button>
+      </div>
+
+      <div class="contact-footer">
+        <div class="contact-row">
+          <a href="https://t.me/your_channel" target="_blank" rel="noopener" class="telegram-channel">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21.5 2.5L2.5 10.5L10.5 13.5L13.5 21.5L21.5 2.5Z"/>
+              <path d="M10.5 13.5L15.5 8.5"/>
+            </svg>
+            <span>Telegram канал</span>
+          </a>
+          <a href="tel:+998946930002" class="contact-item phone-number">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+            </svg>
+            +998 (94) 693-00-02
+          </a>
+          <a href="https://instagram.com/your_profile" target="_blank" rel="noopener" class="instagram-profile contact-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+            </svg>
+            <span>Instagram профиль</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ПРИМЕРНАЯ СТРАНИЦА -->
+  <div class="example-page hidden" id="examplePage">
+    
+    <!-- ЭТАП 1: Крупный текст по центру -->
+    <div class="hero-text" id="heroText">
+      <h1 class="hero-title" id="heroTitle">Примерная страница</h1>
+      <p class="hero-subtitle" id="heroSubtitle">Добро пожаловать!</p>
+    </div>
+
+    <!-- ЭТАП 2: Контент (заголовок + nav list) -->
+    <div class="example-container" id="exampleContainer">
+      <h1 class="example-title" id="exampleTitle">Примерная страница</h1>
+      
+      <div class="nav-list-vertical">
+        <a href="#" class="nav-item-vertical">Кольца</a>
+        <a href="#" class="nav-item-vertical">Цепочки</a>
+        <a href="#" class="nav-item-vertical cartier">Cartier</a>
+        <a href="#" class="nav-item-vertical">Браслеты</a>
+        <a href="#" class="nav-item-vertical">Серьги</a>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    (function() {
+      const bodyEl = document.getElementById('bodyElement');
+      const loginCard = document.getElementById('loginCard');
+      const loginPage = document.getElementById('loginPage');
+      const examplePage = document.getElementById('examplePage');
+      const heroText = document.getElementById('heroText');
+      const exampleContainer = document.getElementById('exampleContainer');
+      const goToExampleBtn = document.getElementById('goToExampleBtn');
+      const form = document.getElementById('clientForm');
+      const phoneInput = document.getElementById('phone');
+      const exampleBtnText = document.getElementById('exampleBtnText');
+
+      let isFormSubmitted = false;
+      let animationTimeout = null;
+      let currentLang = 'rus';
+
+      const translations = {
+        uzb: {
+          title: 'Kirish', subhead: 'xush kelibsiz',
+          labelFirstname: 'Ism', labelLastname: 'Familiya', labelPhone: 'Telefon raqami',
+          firstNamePlaceholder: 'Ismingiz', lastNamePlaceholder: 'Familiyangiz',
+          phonePlaceholder: '+998 00 000 00 00', submitBtn: 'Ma\'lumotni yuborish',
+          exampleBtnLocked: '🔒 Namunaga o\'tish', exampleBtnActive: 'Namunaga o\'tish',
+          heroTitle: 'Namuna sahifa', heroSubtitle: 'Xush kelibsiz!',
+          exampleTitle: 'Namuna sahifa',
+          alertFillAll: 'Iltimos, barcha maydonlarni to\'ldiring.',
+          alertThanks: (f,l,p) => `Rahmat, ${f} ${l}!\nSizning raqamingiz: ${p}`,
+          alertNeedSubmit: 'Avval formani to\'ldiring va yuboring.'
+        },
+        rus: {
+          title: 'Вход', subhead: 'добро пожаловать',
+          labelFirstname: 'Имя', labelLastname: 'Фамилия', labelPhone: 'Номер телефона',
+          firstNamePlaceholder: 'Ваше имя', lastNamePlaceholder: 'Ваша фамилия',
+          phonePlaceholder: '+998 00 000 00 00', submitBtn: 'Отправить информацию',
+          exampleBtnLocked: '🔒 Перейти в примерную', exampleBtnActive: 'Перейти в примерную',
+          heroTitle: 'Примерная страница', heroSubtitle: 'Добро пожаловать!',
+          exampleTitle: 'Примерная страница',
+          alertFillAll: 'Пожалуйста, заполните все поля.',
+          alertThanks: (f,l,p) => `Спасибо, ${f} ${l}!\nВаш номер: ${p}`,
+          alertNeedSubmit: 'Сначала заполните и отправьте форму.'
+        },
+        eng: {
+          title: 'Login', subhead: 'welcome',
+          labelFirstname: 'First Name', labelLastname: 'Last Name', labelPhone: 'Phone Number',
+          firstNamePlaceholder: 'Your first name', lastNamePlaceholder: 'Your last name',
+          phonePlaceholder: '+998 00 000 00 00', submitBtn: 'Submit Information',
+          exampleBtnLocked: '🔒 Go to Example', exampleBtnActive: 'Go to Example',
+          heroTitle: 'Example Page', heroSubtitle: 'Welcome!',
+          exampleTitle: 'Example Page',
+          alertFillAll: 'Please fill in all fields.',
+          alertThanks: (f,l,p) => `Thank you, ${f} ${l}!\nYour number: ${p}`,
+          alertNeedSubmit: 'Please fill in and submit the form first.'
+        }
+      };
+
+      function setLanguage(lang) {
+        currentLang = lang;
+        const t = translations[lang];
+        document.getElementById('pageTitle').textContent = t.title;
+        document.getElementById('pageSubhead').textContent = t.subhead;
+        document.getElementById('labelFirstname').textContent = t.labelFirstname;
+        document.getElementById('labelLastname').textContent = t.labelLastname;
+        document.getElementById('labelPhone').textContent = t.labelPhone;
+        document.getElementById('firstname').placeholder = t.firstNamePlaceholder;
+        document.getElementById('lastname').placeholder = t.lastNamePlaceholder;
+        document.getElementById('phone').placeholder = t.phonePlaceholder;
+        document.getElementById('submitBtn').textContent = t.submitBtn;
+        document.getElementById('heroTitle').textContent = t.heroTitle;
+        document.getElementById('heroSubtitle').textContent = t.heroSubtitle;
+        document.getElementById('exampleTitle').textContent = t.exampleTitle;
+        if (isFormSubmitted) {
+          exampleBtnText.textContent = t.exampleBtnActive;
+        } else {
+          goToExampleBtn.innerHTML = '<span class="lock-icon">🔒</span> ' + t.exampleBtnLocked.replace('🔒 ', '');
+        }
+        document.querySelectorAll('.lang-dropdown-option').forEach(opt => {
+          opt.classList.remove('active');
+          if (opt.dataset.lang === lang) opt.classList.add('active');
+        });
+        document.getElementById('langLabelLogin').textContent = lang.toUpperCase();
+      }
+
+      function setupDropdown(dropdownId, triggerEl) {
+        const dropdown = document.getElementById(dropdownId);
+        triggerEl.addEventListener('click', function(e) {
+          e.stopPropagation();
+          document.querySelectorAll('.lang-dropdown.open').forEach(d => {
+            if (d !== dropdown) d.classList.remove('open');
+          });
+          dropdown.classList.toggle('open');
+        });
+        dropdown.querySelectorAll('.lang-dropdown-option').forEach(opt => {
+          opt.addEventListener('click', function() {
+            setLanguage(this.dataset.lang);
+            dropdown.classList.remove('open');
+          });
+        });
+      }
+
+      setupDropdown('langDropdownLogin', document.getElementById('langTriggerLogin'));
+      document.addEventListener('click', () => {
+        document.querySelectorAll('.lang-dropdown.open').forEach(d => d.classList.remove('open'));
+      });
+
+      function showExamplePage() {
+        loginPage.classList.add('hidden');
+        loginCard.style.display = 'none';
+        examplePage.classList.remove('hidden');
+        bodyEl.classList.add('fullscreen');
+        bodyEl.style.padding = '0';
+        
+        // Сброс состояний
+        heroText.classList.remove('moved', 'fade-out');
+        exampleContainer.classList.remove('visible');
+        
+        setLanguage(currentLang);
+        
+        // ЭТАП 1: через 1.2с — текст улетает в левый верх
+        animationTimeout = setTimeout(() => {
+          heroText.classList.add('moved');
+          
+          // ЭТАП 2: через 0.8с после перемещения — текст исчезает и появляется контент
+          setTimeout(() => {
+            heroText.classList.add('fade-out');
+            exampleContainer.classList.add('visible');
+          }, 800);
+          
+        }, 1200);
+        
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      function showLoginPage() {
+        if (animationTimeout) clearTimeout(animationTimeout);
+        heroText.classList.remove('moved', 'fade-out');
+        exampleContainer.classList.remove('visible');
+        examplePage.classList.add('hidden');
+        loginPage.classList.remove('hidden');
+        loginCard.style.display = 'flex';
+        bodyEl.classList.remove('fullscreen');
+        bodyEl.style.padding = '';
+        deactivateExampleButton();
+        form.reset();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      function activateExampleButton() {
+        isFormSubmitted = true;
+        goToExampleBtn.disabled = false;
+        goToExampleBtn.classList.add('active');
+        exampleBtnText.textContent = translations[currentLang].exampleBtnActive;
+      }
+
+      function deactivateExampleButton() {
+        isFormSubmitted = false;
+        goToExampleBtn.disabled = true;
+        goToExampleBtn.classList.remove('active');
+        goToExampleBtn.innerHTML = '<span class="lock-icon">🔒</span> ' + translations[currentLang].exampleBtnLocked.replace('🔒 ', '');
+      }
+
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const first = document.getElementById('firstname').value.trim();
+        const last = document.getElementById('lastname').value.trim();
+        const phone = phoneInput.value.trim();
+        const t = translations[currentLang];
+        if (!first || !last || !phone) { alert(t.alertFillAll); return; }
+        activateExampleButton();
+        alert(t.alertThanks(first, last, phone));
+      });
+
+      goToExampleBtn.addEventListener('click', function() {
+        if (!isFormSubmitted) { alert(translations[currentLang].alertNeedSubmit); return; }
+        showExamplePage();
+      });
+
+      document.querySelectorAll('#clientForm input').forEach(input => {
+        input.addEventListener('input', () => { if (isFormSubmitted) deactivateExampleButton(); });
+      });
+
+      phoneInput.addEventListener('input', function() {
+        let val = this.value.replace(/[^\d+]/g, '');
+        if (!val.startsWith('+') && val.startsWith('998')) val = '+' + val;
+        this.value = val;
+      });
+
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && !examplePage.classList.contains('hidden')) showLoginPage();
+      });
+    })();
+  </script>
+</body>
+</html>
