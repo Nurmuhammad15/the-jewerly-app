@@ -413,9 +413,7 @@
       display: none;
     }
 
-    /* ==================== */
-    /* ЭТАП 1: КРУПНЫЙ ТЕКСТ ПО ЦЕНТРУ */
-    /* ==================== */
+    /* ЭТАП 1: Крупный текст по центру */
     .hero-text {
       position: fixed;
       top: 50%;
@@ -426,7 +424,6 @@
         top 1s cubic-bezier(0.25, 0.46, 0.45, 0.94),
         left 1s cubic-bezier(0.25, 0.46, 0.45, 0.94),
         transform 1s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-        font-size 1s cubic-bezier(0.25, 0.46, 0.45, 0.94),
         opacity 0.6s ease;
       z-index: 10;
       pointer-events: none;
@@ -469,9 +466,7 @@
       margin-top: 0;
     }
 
-    /* ==================== */
-    /* ЭТАП 2: КОНТЕНТ (ЗАГОЛОВОК + NAV LIST) */
-    /* ==================== */
+    /* ЭТАП 2: Контент */
     .example-container {
       position: absolute;
       top: 0;
@@ -479,13 +474,12 @@
       width: 100%;
       height: 100%;
       display: flex;
-      flex-direction: column;
       align-items: flex-start;
+      justify-content: space-between;
       padding: 40px 36px;
       opacity: 0;
       pointer-events: none;
       transition: opacity 0.6s ease 0.3s;
-      overflow-y: auto;
     }
 
     .example-container.visible {
@@ -499,7 +493,6 @@
       letter-spacing: -0.5px;
       color: #2c2416;
       line-height: 1.1;
-      margin-bottom: 28px;
       animation: fadeSlideDown 0.6s ease-out 0.2s both;
     }
 
@@ -508,29 +501,124 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* Вертикальный nav list */
-    .nav-list-vertical {
+    /* ==================== */
+    /* БУРГЕР-МЕНЮ (3 полоски) */
+    /* ==================== */
+    .burger-btn {
+      position: fixed;
+      top: 36px;
+      right: 36px;
+      width: 44px;
+      height: 44px;
+      background: white;
+      border: 1px solid #e8ddd0;
+      border-radius: 14px;
       display: flex;
       flex-direction: column;
-      gap: 2px;
-      width: 100%;
-      max-width: 340px;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      cursor: pointer;
+      z-index: 200;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+      animation: fadeSlideDown 0.6s ease-out 0.3s both;
     }
 
-    .nav-item-vertical {
+    .burger-btn:hover {
+      background: #faf6ef;
+      border-color: #d4c4a8;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    }
+
+    .burger-btn span {
       display: block;
-      padding: 12px 18px;
-      font-size: 0.92rem;
+      width: 20px;
+      height: 2px;
+      background: #5f5340;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+
+    /* Анимация бургера в крестик */
+    .burger-btn.open span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    .burger-btn.open span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .burger-btn.open span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    /* ==================== */
+    /* БОКОВАЯ ПАНЕЛЬ */
+    /* ==================== */
+    .side-panel {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 320px;
+      max-width: 85vw;
+      height: 100vh;
+      height: 100dvh;
+      background: white;
+      z-index: 150;
+      box-shadow: -8px 0 30px rgba(0,0,0,0.08);
+      transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      flex-direction: column;
+      padding: 100px 32px 40px;
+      overflow-y: auto;
+    }
+
+    .side-panel.open {
+      right: 0;
+    }
+
+    /* Оверлей */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.3);
+      z-index: 140;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
+
+    .overlay.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* Nav list в боковой панели */
+    .side-nav-list {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .side-nav-item {
+      display: block;
+      padding: 14px 18px;
+      font-size: 0.95rem;
       font-weight: 500;
       color: #5f5340;
       text-decoration: none;
       transition: all 0.3s ease;
       letter-spacing: 0.3px;
       border-radius: 10px;
+      cursor: pointer;
       position: relative;
     }
 
-    .nav-item-vertical::before {
+    .side-nav-item::before {
       content: '—';
       margin-right: 12px;
       color: #c8b294;
@@ -538,45 +626,47 @@
       transition: all 0.3s ease;
     }
 
-    .nav-item-vertical:hover {
+    .side-nav-item:hover {
       background: #faf6ef;
       color: #2c2416;
+      padding-left: 24px;
+    }
+
+    /* Активный (выбранный) пункт */
+    .side-nav-item.active {
+      background: #f5ede0;
+      color: #2c2416;
+      font-weight: 600;
+      padding-left: 24px;
+    }
+
+    .side-nav-item.active::before {
+      content: '◆';
+      color: #2a2419;
+      font-size: 0.65rem;
+      font-weight: 700;
+    }
+
+    .side-nav-item.active:hover {
+      background: #ede0cc;
       padding-left: 28px;
     }
 
-    .nav-item-vertical:hover::before {
-      color: #a89880;
+    /* Разделитель */
+    .side-nav-divider {
+      height: 1px;
+      background: #e8ddd0;
+      margin: 4px 0;
+      opacity: 0.6;
     }
 
-    .nav-item-vertical.cartier {
+    /* Заголовок в панели */
+    .side-panel-title {
+      font-size: 1.1rem;
       font-weight: 600;
       color: #2c2416;
-      font-size: 0.98rem;
-      letter-spacing: 0.5px;
-      padding: 14px 18px;
-    }
-
-    .nav-item-vertical.cartier::before {
-      content: '◆';
-      color: #2a2419;
-      font-size: 0.7rem;
-    }
-
-    .nav-item-vertical.cartier:hover {
-      background: #f5ede0;
-      padding-left: 32px;
-    }
-
-    /* Анимация появления пунктов (запускается после появления контейнера) */
-    .example-container.visible .nav-item-vertical:nth-child(1) { animation: fadeSlideRight 0.4s ease-out 0.4s both; }
-    .example-container.visible .nav-item-vertical:nth-child(2) { animation: fadeSlideRight 0.4s ease-out 0.5s both; }
-    .example-container.visible .nav-item-vertical:nth-child(3) { animation: fadeSlideRight 0.4s ease-out 0.6s both; }
-    .example-container.visible .nav-item-vertical:nth-child(4) { animation: fadeSlideRight 0.4s ease-out 0.7s both; }
-    .example-container.visible .nav-item-vertical:nth-child(5) { animation: fadeSlideRight 0.4s ease-out 0.8s both; }
-
-    @keyframes fadeSlideRight {
-      from { opacity: 0; transform: translateX(-20px); }
-      to { opacity: 1; transform: translateX(0); }
+      margin-bottom: 20px;
+      letter-spacing: 0.3px;
     }
 
     /* АДАПТИВНОСТЬ */
@@ -589,6 +679,8 @@
       .hero-text.moved .hero-title { font-size: 2rem; }
       .example-container { padding: 28px 24px; }
       .example-title { font-size: 2rem; }
+      .burger-btn { top: 24px; right: 24px; width: 40px; height: 40px; }
+      .side-panel { width: 300px; padding: 90px 24px 32px; }
     }
 
     @media (max-width: 480px) {
@@ -598,10 +690,11 @@
       .hero-title { font-size: 2rem; }
       .hero-text.moved { top: 24px; left: 16px; }
       .hero-text.moved .hero-title { font-size: 1.6rem; }
-      .example-container { padding: 24px 18px; }
-      .example-title { font-size: 1.6rem; margin-bottom: 20px; }
-      .nav-list-vertical { max-width: 100%; }
-      .nav-item-vertical { font-size: 0.85rem; padding: 10px 14px; }
+      .example-container { padding: 24px 16px; }
+      .example-title { font-size: 1.6rem; }
+      .burger-btn { top: 20px; right: 16px; width: 38px; height: 38px; border-radius: 12px; }
+      .side-panel { width: 280px; max-width: 80vw; padding: 80px 20px 28px; }
+      .side-nav-item { font-size: 0.88rem; padding: 12px 14px; }
     }
 
     @media (max-width: 380px) {
@@ -611,8 +704,11 @@
       .hero-title { font-size: 1.6rem; }
       .hero-text.moved { top: 20px; left: 12px; }
       .hero-text.moved .hero-title { font-size: 1.3rem; }
-      .example-container { padding: 20px 14px; }
+      .example-container { padding: 20px 12px; }
       .example-title { font-size: 1.3rem; }
+      .burger-btn { top: 16px; right: 12px; width: 34px; height: 34px; gap: 4px; }
+      .burger-btn span { width: 16px; }
+      .side-panel { width: 260px; padding: 70px 16px 24px; }
     }
   </style>
 </head>
@@ -703,16 +799,33 @@
       <p class="hero-subtitle" id="heroSubtitle">Добро пожаловать!</p>
     </div>
 
-    <!-- ЭТАП 2: Контент (заголовок + nav list) -->
+    <!-- ЭТАП 2: Контент (заголовок слева + бургер справа) -->
     <div class="example-container" id="exampleContainer">
       <h1 class="example-title" id="exampleTitle">Примерная страница</h1>
-      
-      <div class="nav-list-vertical">
-        <a href="#" class="nav-item-vertical">Кольца</a>
-        <a href="#" class="nav-item-vertical">Цепочки</a>
-        <a href="#" class="nav-item-vertical cartier">Cartier</a>
-        <a href="#" class="nav-item-vertical">Браслеты</a>
-        <a href="#" class="nav-item-vertical">Серьги</a>
+    </div>
+
+    <!-- БУРГЕР-КНОПКА -->
+    <button class="burger-btn" id="burgerBtn" aria-label="Меню">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <!-- ОВЕРЛЕЙ -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- БОКОВАЯ ПАНЕЛЬ -->
+    <div class="side-panel" id="sidePanel">
+      <p class="side-panel-title">Категории</p>
+      <div class="side-nav-list">
+        <a href="#" class="side-nav-item" data-category="rings">Кольца</a>
+        <a href="#" class="side-nav-item" data-category="chains">Цепочки</a>
+        <div class="side-nav-divider"></div>
+        <a href="#" class="side-nav-item active" data-category="cartier">Cartier</a>
+        <a href="#" class="side-nav-item" data-category="oneclif">One Clif</a>
+        <div class="side-nav-divider"></div>
+        <a href="#" class="side-nav-item" data-category="bracelets">Браслеты</a>
+        <a href="#" class="side-nav-item" data-category="earrings">Серьги</a>
       </div>
     </div>
 
@@ -731,9 +844,15 @@
       const phoneInput = document.getElementById('phone');
       const exampleBtnText = document.getElementById('exampleBtnText');
 
+      // Бургер-меню
+      const burgerBtn = document.getElementById('burgerBtn');
+      const sidePanel = document.getElementById('sidePanel');
+      const overlay = document.getElementById('overlay');
+
       let isFormSubmitted = false;
       let animationTimeout = null;
       let currentLang = 'rus';
+      let isMenuOpen = false;
 
       const translations = {
         uzb: {
@@ -823,6 +942,62 @@
         document.querySelectorAll('.lang-dropdown.open').forEach(d => d.classList.remove('open'));
       });
 
+      // ==================== */
+      // БУРГЕР-МЕНЮ */
+      // ==================== */
+      function openMenu() {
+        isMenuOpen = true;
+        sidePanel.classList.add('open');
+        overlay.classList.add('visible');
+        burgerBtn.classList.add('open');
+        bodyEl.style.overflow = 'hidden';
+      }
+
+      function closeMenu() {
+        isMenuOpen = false;
+        sidePanel.classList.remove('open');
+        overlay.classList.remove('visible');
+        burgerBtn.classList.remove('open');
+        bodyEl.style.overflow = '';
+      }
+
+      burgerBtn.addEventListener('click', () => {
+        if (isMenuOpen) {
+          closeMenu();
+        } else {
+          openMenu();
+        }
+      });
+
+      overlay.addEventListener('click', closeMenu);
+
+      // Выбор пункта меню
+      document.querySelectorAll('.side-nav-item').forEach(item => {
+        item.addEventListener('click', function(e) {
+          e.preventDefault();
+          // Убираем active у всех
+          document.querySelectorAll('.side-nav-item').forEach(el => el.classList.remove('active'));
+          // Добавляем на выбранный
+          this.classList.add('active');
+          // Закрываем меню с задержкой
+          setTimeout(closeMenu, 300);
+        });
+      });
+
+      // Закрытие по Escape
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+          if (isMenuOpen) {
+            closeMenu();
+          } else if (!examplePage.classList.contains('hidden')) {
+            showLoginPage();
+          }
+        }
+      });
+
+      // ==================== */
+      // СТРАНИЦЫ */
+      // ==================== */
       function showExamplePage() {
         loginPage.classList.add('hidden');
         loginCard.style.display = 'none';
@@ -830,22 +1005,20 @@
         bodyEl.classList.add('fullscreen');
         bodyEl.style.padding = '0';
         
-        // Сброс состояний
         heroText.classList.remove('moved', 'fade-out');
         exampleContainer.classList.remove('visible');
+        burgerBtn.style.display = 'none';
+        closeMenu();
         
         setLanguage(currentLang);
         
-        // ЭТАП 1: через 1.2с — текст улетает в левый верх
         animationTimeout = setTimeout(() => {
           heroText.classList.add('moved');
-          
-          // ЭТАП 2: через 0.8с после перемещения — текст исчезает и появляется контент
           setTimeout(() => {
             heroText.classList.add('fade-out');
             exampleContainer.classList.add('visible');
+            burgerBtn.style.display = 'flex';
           }, 800);
-          
         }, 1200);
         
         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -853,8 +1026,10 @@
 
       function showLoginPage() {
         if (animationTimeout) clearTimeout(animationTimeout);
+        closeMenu();
         heroText.classList.remove('moved', 'fade-out');
         exampleContainer.classList.remove('visible');
+        burgerBtn.style.display = 'none';
         examplePage.classList.add('hidden');
         loginPage.classList.remove('hidden');
         loginCard.style.display = 'flex';
@@ -903,10 +1078,6 @@
         let val = this.value.replace(/[^\d+]/g, '');
         if (!val.startsWith('+') && val.startsWith('998')) val = '+' + val;
         this.value = val;
-      });
-
-      document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && !examplePage.classList.contains('hidden')) showLoginPage();
       });
     })();
   </script>
