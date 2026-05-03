@@ -102,7 +102,7 @@
     .product-badge { position: absolute; top: 12px; right: 12px; background: #2a2419; color: #e8dcc8; padding: 5px 12px; border-radius: 20px; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.5px; animation: badgePop 0.4s cubic-bezier(0.34,1.56,0.64,1) both; }
     @keyframes badgePop { from{opacity:0;transform:scale(0.7)}to{opacity:1;transform:scale(1)} }
 
-    /* УЗНАТЬ БОЛЬШЕ BUTTON */
+    /* LEARN MORE BUTTON */
     .btn-learn-more { display: flex; align-items: center; justify-content: center; gap: 7px; margin: 8px 14px 14px; padding: 12px 16px; background: linear-gradient(135deg, #faf6ef, #f5ede0); border: 1.5px solid #ddd0ba; border-radius: 14px; font-size: 0.88rem; font-weight: 600; color: #2c2416; cursor: pointer; font-family: 'Inter', sans-serif; transition: all 0.25s cubic-bezier(0.34,1.56,0.64,1); position: relative; z-index: 5; }
     .btn-learn-more svg { width: 15px; height: 15px; stroke: #7a6a52; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; transition: stroke 0.2s, transform 0.3s ease; }
     .btn-learn-more:hover { background: #2a2419; border-color: #2a2419; color: white; transform: translateY(-1px); box-shadow: 0 6px 18px rgba(42,36,25,0.22); }
@@ -116,18 +116,13 @@
     @keyframes slideInUp { from{opacity:0;transform:translateY(36px) scale(0.97)}to{opacity:1;transform:translateY(0) scale(1)} }
     .inquiry-page.slide-out { animation: slideOutDown 0.28s ease both; }
     @keyframes slideOutDown { from{opacity:1;transform:translateY(0)}to{opacity:0;transform:translateY(28px)} }
-
     .inquiry-card { background: white; max-width: 480px; width: 100%; margin: auto; border-radius: 32px; box-shadow: 0 24px 60px rgba(0,0,0,0.09); overflow: hidden; }
-
-    /* Шапка */
     .inquiry-header { display: flex; align-items: center; gap: 14px; padding: 26px 28px 20px; border-bottom: 1px solid #f0e7db; }
     .inquiry-back-btn { width: 40px; height: 40px; border-radius: 13px; background: #faf6ef; border: 1px solid #e8ddd0; display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0; transition: all 0.2s ease; }
     .inquiry-back-btn:hover { background: #f0e4d4; transform: translateX(-2px); }
     .inquiry-back-btn svg { width: 16px; height: 16px; stroke: #5f5340; fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
     .inquiry-header-title { font-size: 1.15rem; font-weight: 700; color: #2c2416; }
     .inquiry-header-sub { font-size: 0.8rem; color: #a89880; margin-top: 2px; }
-
-    /* Reply-блок (как Telegram) */
     .product-reply { margin: 20px 28px 0; border-radius: 16px; border-left: 3.5px solid #c8a870; background: linear-gradient(135deg, #fdf8f0, #faf4ea); padding: 13px 16px; display: flex; align-items: center; gap: 14px; position: relative; overflow: hidden; animation: replySlide 0.4s cubic-bezier(0.34,1.56,0.64,1) both; animation-delay: 0.1s; }
     @keyframes replySlide { from{opacity:0;transform:translateX(-12px)}to{opacity:1;transform:translateX(0)} }
     .reply-emoji { font-size: 2.2rem; flex-shrink: 0; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1)); }
@@ -136,9 +131,6 @@
     .reply-product-name { font-size: 0.95rem; font-weight: 600; color: #2c2416; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .reply-product-meta { font-size: 0.78rem; color: #8b7a62; margin-top: 1px; }
     .reply-product-price { font-size: 0.88rem; font-weight: 700; color: #2a2419; margin-top: 4px; }
-    .reply-pin-icon { width: 18px; height: 18px; flex-shrink: 0; opacity: 0.25; stroke: #7a6a52; fill: none; stroke-width: 1.8; }
-
-    /* Форма */
     .inquiry-form-body { padding: 20px 28px 28px; display: flex; flex-direction: column; gap: 16px; }
     .inq-group { display: flex; flex-direction: column; gap: 6px; }
     .inq-group label { font-size: 0.78rem; font-weight: 600; text-transform: uppercase; color: #6b5e4a; margin-left: 4px; letter-spacing: 0.3px; }
@@ -146,15 +138,11 @@
     .inq-group textarea { resize: none; min-height: 108px; line-height: 1.55; }
     .inq-group input:focus, .inq-group textarea:focus { border-color: #c8b294; background: #fff; box-shadow: 0 0 0 4px rgba(200,178,148,0.18); }
     .inq-group input.error { border-color: #e07070 !important; box-shadow: 0 0 0 3px rgba(224,112,112,0.15) !important; }
-    .inq-group input::placeholder, .inq-group textarea::placeholder { color: #c4b49e; }
-
     .inquiry-submit { background: #2a2419; border: none; border-radius: 18px; padding: 18px; font-weight: 600; font-size: 1rem; color: white; cursor: pointer; width: 100%; font-family: 'Inter', sans-serif; transition: all 0.25s cubic-bezier(0.34,1.56,0.64,1); display: flex; align-items: center; justify-content: center; gap: 8px; }
     .inquiry-submit svg { width: 17px; height: 17px; stroke: white; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; transition: transform 0.3s ease; }
     .inquiry-submit:hover { background: #3f3522; transform: translateY(-2px); box-shadow: 0 10px 24px rgba(42,36,25,0.28); }
     .inquiry-submit:hover svg { transform: translateX(3px); }
     .inquiry-submit:active { transform: scale(0.97); }
-
-    /* SUCCESS */
     .inquiry-success { display: none; flex-direction: column; align-items: center; padding: 36px 28px 36px; text-align: center; }
     .inquiry-success.show { display: flex; animation: fadeSlideUp 0.5s ease both; }
     .success-icon { width: 76px; height: 76px; border-radius: 50%; background: linear-gradient(135deg, #f5ede0, #ece0cc); display: flex; align-items: center; justify-content: center; font-size: 2.2rem; margin-bottom: 20px; animation: successPop 0.5s cubic-bezier(0.34,1.56,0.64,1) both; animation-delay: 0.1s; }
@@ -171,9 +159,7 @@
     .overlay { display: none; }
 
     @media (max-width: 768px) {
-      /* Скрываем вкладки категорий на мобильных — используется боковое меню */
       .category-tabs { display: none; }
-
       .example-content { padding: 24px 16px 40px; }
       .content-main-title { font-size: clamp(1.3rem, 7vw, 1.8rem); }
       .products-grid { grid-template-columns: repeat(auto-fill, minmax(155px, 1fr)); gap: 12px; }
@@ -230,9 +216,9 @@
         <button type="button" class="button-secondary" id="goToExampleBtn" disabled><span class="lock-icon">🔒</span> <span id="exampleBtnText">Перейти в примерную</span></button>
       </div>
       <div class="contact-footer"><div class="contact-row">
-        <a href="https://t.me/your_channel" class="contact-pill pill-tg"><svg viewBox="0 0 24 24"><path d="M21.5 2.5L2.5 10.5L10.5 13.5L13.5 21.5L21.5 2.5Z"/><path d="M10.5 13.5L15.5 8.5"/></svg><span>Telegram</span></a>
+        <a href="https://t.me/yasmingold21" target="_blank" class="contact-pill pill-tg"><svg viewBox="0 0 24 24"><path d="M21.5 2.5L2.5 10.5L10.5 13.5L13.5 21.5L21.5 2.5Z"/><path d="M10.5 13.5L15.5 8.5"/></svg><span>Telegram</span></a>
         <a href="tel:+998946930002" class="contact-pill pill-phone"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span>+998 (94) 693-00-02</span></a>
-        <a href="https://instagram.com/your_profile" class="contact-pill pill-ig"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg><span>Instagram</span></a>
+        <a href="https://www.instagram.com/kamoliddin_kasimov1?igsh=eXk5b3Nvb29idTdu" target="_blank" class="contact-pill pill-ig"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg><span>Instagram</span></a>
       </div></div>
     </div>
   </div>
@@ -247,7 +233,6 @@
     <div class="example-content" id="exampleContent">
       <h1 class="content-main-title" id="contentTitle">Kamoliddin Gold</h1>
 
-      <!-- Вкладки скрыты на мобильных, видны только на десктопе -->
       <div class="category-tabs">
         <a href="#" class="cat-tab active" data-category="rings"><span class="cat-dot"></span><span>Кольца</span></a>
         <a href="#" class="cat-tab" data-category="chains"><span class="cat-dot"></span><span>Цепочки</span></a>
@@ -263,39 +248,23 @@
         <div class="product-card" data-name='Золотое кольцо "Лотос"' data-weight="585 проба • 4.2 г" data-price="12 500 000 сум" data-emoji="💍">
           <span class="product-badge">Хит</span>
           <div class="product-image">💍</div>
-          <div class="product-info">
-            <div class="product-name">Золотое кольцо "Лотос"</div>
-            <div class="product-weight">585 проба • 4.2 г</div>
-            <div class="product-price">12 500 000 сум</div>
-          </div>
+          <div class="product-info"><div class="product-name">Золотое кольцо "Лотос"</div><div class="product-weight">585 проба • 4.2 г</div><div class="product-price">12 500 000 сум</div></div>
           <button class="btn-learn-more"><svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>Узнать больше</button>
         </div>
         <div class="product-card" data-name="Кольцо с бриллиантом" data-weight="750 проба • 3.8 г" data-price="28 000 000 сум" data-emoji="💎">
           <div class="product-image">💎</div>
-          <div class="product-info">
-            <div class="product-name">Кольцо с бриллиантом</div>
-            <div class="product-weight">750 проба • 3.8 г</div>
-            <div class="product-price">28 000 000 сум</div>
-          </div>
+          <div class="product-info"><div class="product-name">Кольцо с бриллиантом</div><div class="product-weight">750 проба • 3.8 г</div><div class="product-price">28 000 000 сум</div></div>
           <button class="btn-learn-more"><svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>Узнать больше</button>
         </div>
         <div class="product-card" data-name="Обручальное кольцо" data-weight="585 проба • 5.1 г" data-price="9 800 000 сум" data-emoji="✨">
           <span class="product-badge">Новинка</span>
           <div class="product-image">✨</div>
-          <div class="product-info">
-            <div class="product-name">Обручальное кольцо</div>
-            <div class="product-weight">585 проба • 5.1 г</div>
-            <div class="product-price">9 800 000 сум</div>
-          </div>
+          <div class="product-info"><div class="product-name">Обручальное кольцо</div><div class="product-weight">585 проба • 5.1 г</div><div class="product-price">9 800 000 сум</div></div>
           <button class="btn-learn-more"><svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>Узнать больше</button>
         </div>
         <div class="product-card" data-name='Перстень "Империал"' data-weight="750 проба • 8.5 г" data-price="35 000 000 сум" data-emoji="👑">
           <div class="product-image">👑</div>
-          <div class="product-info">
-            <div class="product-name">Перстень "Империал"</div>
-            <div class="product-weight">750 проба • 8.5 г</div>
-            <div class="product-price">35 000 000 сум</div>
-          </div>
+          <div class="product-info"><div class="product-name">Перстень "Империал"</div><div class="product-weight">750 проба • 8.5 г</div><div class="product-price">35 000 000 сум</div></div>
           <button class="btn-learn-more"><svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>Узнать больше</button>
         </div>
       </div>
@@ -318,51 +287,23 @@
     </div>
   </div>
 
-  <!-- СТРАНИЦА ЗАПРОСА -->
+  <!-- INQUIRY PAGE -->
   <div class="inquiry-page hidden" id="inquiryPage">
     <div class="inquiry-card">
       <div class="inquiry-header">
-        <button class="inquiry-back-btn" id="inquiryBackBtn">
-          <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
-        </button>
-        <div>
-          <div class="inquiry-header-title">Узнать больше</div>
-          <div class="inquiry-header-sub">Оставьте контакт — мы свяжемся с вами</div>
-        </div>
+        <button class="inquiry-back-btn" id="inquiryBackBtn"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
+        <div><div class="inquiry-header-title">Узнать больше</div><div class="inquiry-header-sub">Оставьте контакт — мы свяжемся с вами</div></div>
       </div>
-
-      <!-- Прикреплённый товар — reply стиль -->
       <div class="product-reply" id="productReply">
         <div class="reply-emoji" id="replyEmoji">💍</div>
-        <div class="reply-info">
-          <div class="reply-label">📎 Выбранный товар</div>
-          <div class="reply-product-name" id="replyName"></div>
-          <div class="reply-product-meta" id="replyMeta"></div>
-          <div class="reply-product-price" id="replyPrice"></div>
-        </div>
+        <div class="reply-info"><div class="reply-label">📎 Выбранный товар</div><div class="reply-product-name" id="replyName"></div><div class="reply-product-meta" id="replyMeta"></div><div class="reply-product-price" id="replyPrice"></div></div>
       </div>
-
-      <!-- Форма -->
       <div class="inquiry-form-body" id="inquiryFormBody">
-        <div class="inq-group">
-          <label>Имя</label>
-          <input type="text" id="inqName" placeholder="Ваше имя" />
-        </div>
-        <div class="inq-group">
-          <label>Номер телефона</label>
-          <input type="tel" id="inqPhone" placeholder="+998 00 000 00 00" />
-        </div>
-        <div class="inq-group">
-          <label>Ваш вопрос или комментарий</label>
-          <textarea id="inqMessage" placeholder="Например: есть ли в наличии размер 17? Возможна ли доставка? Хочу узнать подробнее..."></textarea>
-        </div>
-        <button class="inquiry-submit" id="inquirySubmitBtn">
-          Отправить запрос
-          <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-        </button>
+        <div class="inq-group"><label>Имя</label><input type="text" id="inqName" placeholder="Ваше имя" /></div>
+        <div class="inq-group"><label>Номер телефона</label><input type="tel" id="inqPhone" placeholder="+998 00 000 00 00" /></div>
+        <div class="inq-group"><label>Ваш вопрос или комментарий</label><textarea id="inqMessage" placeholder="Например: есть ли в наличии размер 17? Возможна ли доставка?"></textarea></div>
+        <button class="inquiry-submit" id="inquirySubmitBtn">Отправить запрос<svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
       </div>
-
-      <!-- Успех -->
       <div class="inquiry-success" id="inquirySuccess">
         <div class="success-icon">✅</div>
         <div class="success-product-chip" id="successChip"></div>
@@ -374,6 +315,30 @@
   </div>
 
   <script>
+    // ============ TELEGRAM CONFIG ============
+    const BOT_TOKEN = '8320132368:AAHbsmappe4VNj728OY_8nGhfN6-bK9xipo';
+    const CHANNEL_ID = '-1003982347576';
+
+    async function sendToTelegram(message) {
+      try {
+        const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
+        const response = await fetch(url, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            chat_id: CHANNEL_ID,
+            text: message,
+            parse_mode: 'HTML'
+          })
+        });
+        return await response.json();
+      } catch (error) {
+        console.error('Ошибка отправки в Telegram:', error);
+        return null;
+      }
+    }
+
+    // ============ DOM ELEMENTS ============
     const bodyEl=document.getElementById('bodyElement'),loginCard=document.getElementById('loginCard'),loginPage=document.getElementById('loginPage'),examplePage=document.getElementById('examplePage'),heroText=document.getElementById('heroText'),exampleContent=document.getElementById('exampleContent'),goToExampleBtn=document.getElementById('goToExampleBtn'),form=document.getElementById('clientForm'),phoneInput=document.getElementById('phone'),exampleBtnText=document.getElementById('exampleBtnText'),burgerBtn=document.getElementById('burgerBtn'),sidePanel=document.getElementById('sidePanel'),overlay=document.getElementById('overlay');
     let isFormSubmitted=false,animationTimeout=null,currentLang='rus',isMenuOpen=false;
 
@@ -390,19 +355,35 @@
     burgerBtn.addEventListener('click',()=>isMenuOpen?closeMenu():openMenu());overlay.addEventListener('click',closeMenu);
     document.querySelectorAll('.cat-tab').forEach(item=>{item.addEventListener('click',function(e){e.preventDefault();document.querySelectorAll('.cat-tab').forEach(el=>el.classList.remove('active'));this.classList.add('active');const cat=this.dataset.category;document.querySelectorAll('.side-nav-item').forEach(el=>{el.classList.remove('active');if(el.dataset.category===cat)el.classList.add('active');});});});
     document.querySelectorAll('.side-nav-item').forEach(item=>{item.addEventListener('click',function(e){e.preventDefault();document.querySelectorAll('.side-nav-item').forEach(el=>el.classList.remove('active'));this.classList.add('active');const cat=this.dataset.category;document.querySelectorAll('.cat-tab').forEach(el=>{el.classList.remove('active');if(el.dataset.category===cat)el.classList.add('active');});setTimeout(closeMenu,300);});});
-
     document.addEventListener('keydown',function(e){if(e.key==='Escape'){const inq=document.getElementById('inquiryPage');if(!inq.classList.contains('hidden'))closeInquiry();else if(isMenuOpen)closeMenu();else if(!examplePage.classList.contains('hidden'))showLogin();}});
 
     function showExample(){loginPage.classList.add('hidden');loginCard.style.display='none';examplePage.classList.remove('hidden');bodyEl.classList.add('fullscreen');bodyEl.style.padding='0';heroText.style.opacity='1';heroText.style.position='fixed';heroText.style.top='50%';heroText.style.left='50%';heroText.style.transform='translate(-50%,-50%)';heroText.classList.remove('moved','moving');exampleContent.classList.remove('visible');burgerBtn.style.display='none';closeMenu();setLang(currentLang);heroText.classList.add('appear');animationTimeout=setTimeout(()=>{heroText.style.opacity='0';heroText.style.transition='opacity 0.5s ease';setTimeout(()=>{heroText.style.display='none';exampleContent.classList.add('visible');if(window.innerWidth<=768)burgerBtn.style.display='flex';},500);},2000);}
     function showLogin(){if(animationTimeout)clearTimeout(animationTimeout);closeMenu();heroText.style.display='';heroText.style.opacity='1';heroText.style.transition='';heroText.style.position='fixed';heroText.style.top='50%';heroText.style.left='50%';heroText.style.transform='translate(-50%,-50%)';heroText.classList.remove('moved','moving','appear');exampleContent.classList.remove('visible');burgerBtn.style.display='none';examplePage.classList.add('hidden');loginPage.classList.remove('hidden');loginCard.style.display='flex';bodyEl.classList.remove('fullscreen');bodyEl.style.padding='';deactivate();form.reset();}
     function activate(){isFormSubmitted=true;goToExampleBtn.disabled=false;goToExampleBtn.classList.add('active');exampleBtnText.textContent=t[currentLang].exampleBtnActive;}
     function deactivate(){isFormSubmitted=false;goToExampleBtn.disabled=true;goToExampleBtn.classList.remove('active');goToExampleBtn.innerHTML='<span class="lock-icon">🔒</span> '+t[currentLang].exampleBtnLocked.replace('🔒 ','');}
-    form.addEventListener('submit',function(e){e.preventDefault();const f=document.getElementById('firstname').value.trim(),l=document.getElementById('lastname').value.trim(),p=phoneInput.value.trim(),o=t[currentLang];if(!f||!l||!p){alert(o.alertFillAll);return;}activate();alert(o.alertThanks(f,l,p));});
+
+    // ============ LOGIN FORM - отправка в Telegram ============
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const first = document.getElementById('firstname').value.trim();
+      const last = document.getElementById('lastname').value.trim();
+      const phone = phoneInput.value.trim();
+      const o = t[currentLang];
+      if(!first||!last||!phone){alert(o.alertFillAll);return;}
+      
+      // Отправка в Telegram
+      const msg = `🆕 <b>Новый клиент</b>\n\n👤 <b>Имя:</b> ${first}\n📝 <b>Фамилия:</b> ${last}\n📞 <b>Телефон:</b> ${phone}\n📅 <b>Дата:</b> ${new Date().toLocaleString('ru-RU')}`;
+      await sendToTelegram(msg);
+      
+      activate();
+      alert(o.alertThanks(first, last, phone));
+    });
+
     goToExampleBtn.addEventListener('click',function(){if(!isFormSubmitted){alert(t[currentLang].alertNeedSubmit);return;}showExample();});
     document.querySelectorAll('#clientForm input').forEach(i=>{i.addEventListener('input',()=>{if(isFormSubmitted)deactivate();});});
     phoneInput.addEventListener('input',function(){let v=this.value.replace(/[^\d+]/g,'');if(!v.startsWith('+')&&v.startsWith('998'))v='+'+v;this.value=v;});
 
-    /* ===== INQUIRY ===== */
+    // ============ INQUIRY ============
     const inquiryPage=document.getElementById('inquiryPage');
     const inqPhone=document.getElementById('inqPhone');
     inqPhone.addEventListener('input',function(){let v=this.value.replace(/[^\d+]/g,'');if(!v.startsWith('+')&&v.startsWith('998'))v='+'+v;this.value=v;});
@@ -445,12 +426,16 @@
     document.getElementById('inquiryBackBtn').addEventListener('click',closeInquiry);
     document.getElementById('successBackBtn').addEventListener('click',closeInquiry);
 
-    document.getElementById('inquirySubmitBtn').addEventListener('click',function(){
+    // ============ INQUIRY SUBMIT - отправка в Telegram ============
+    document.getElementById('inquirySubmitBtn').addEventListener('click', async function(){
       const nameEl=document.getElementById('inqName');
       const name=nameEl.value.trim();
       const phone=inqPhone.value.trim();
+      const message=document.getElementById('inqMessage').value.trim();
       const productName=document.getElementById('replyName').textContent;
+      const productPrice=document.getElementById('replyPrice').textContent;
       const productEmoji=document.getElementById('replyEmoji').textContent;
+      
       let valid=true;
       nameEl.classList.remove('error'); inqPhone.classList.remove('error');
       if(!name){nameEl.classList.add('error');valid=false;}
@@ -459,6 +444,11 @@
         setTimeout(()=>{nameEl.classList.remove('error');inqPhone.classList.remove('error');},1800);
         return;
       }
+
+      // Отправка в Telegram
+      const msg = `📩 <b>Новый запрос с сайта</b>\n\n${productEmoji} <b>Товар:</b> ${productName}\n💰 <b>Цена:</b> ${productPrice}\n\n👤 <b>Имя:</b> ${name}\n📞 <b>Телефон:</b> ${phone}\n💬 <b>Вопрос:</b> ${message || 'Не указан'}\n📅 <b>Дата:</b> ${new Date().toLocaleString('ru-RU')}`;
+      await sendToTelegram(msg);
+
       document.getElementById('inquiryFormBody').style.display='none';
       document.getElementById('successChip').textContent=productEmoji+' '+productName;
       document.getElementById('successText').textContent=`Мы получили ваш интерес и перезвоним на номер ${phone} в ближайшее время.`;
@@ -466,6 +456,7 @@
       inquiryPage.scrollTop=0;
     });
 
+    // ============ AUTO START ============
     (function(){bodyEl.classList.add('fullscreen');bodyEl.style.padding='0';heroText.classList.add('appear');animationTimeout=setTimeout(()=>{heroText.style.opacity='0';heroText.style.transition='opacity 0.5s ease';setTimeout(()=>{heroText.style.display='none';exampleContent.classList.add('visible');if(window.innerWidth<=768)burgerBtn.style.display='flex';},500);},2000);})();
   </script>
 </body>
