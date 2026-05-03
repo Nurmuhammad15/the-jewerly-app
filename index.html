@@ -20,234 +20,204 @@
       padding: 20px;
       transition: padding 0.3s ease;
     }
-    body.fullscreen {
-      padding: 0;
-      overflow-x: hidden;
-    }
+    body.fullscreen { padding: 0; overflow-x: hidden; }
 
     /* ---------- LOGIN ---------- */
     .login-card {
-      background: white;
-      max-width: 460px;
-      width: 100%;
-      margin: auto;
-      border-radius: 32px;
-      box-shadow: 0 20px 35px rgba(0,0,0,0.03);
-      padding: 40px 34px 34px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      background: white; max-width: 460px; width: 100%; margin: auto;
+      border-radius: 32px; box-shadow: 0 30px 60px rgba(0,0,0,0.04);
+      padding: 40px 34px 34px; display: flex; flex-direction: column; align-items: center;
+      animation: cardFloat 6s ease-in-out infinite;
+      transition: box-shadow 0.4s ease, transform 0.3s ease;
     }
+    .login-card:hover { box-shadow: 0 40px 80px rgba(0,0,0,0.08); transform: translateY(-5px); }
+    @keyframes cardFloat { 0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)} }
     .login-page { width: 100%; display: flex; flex-direction: column; align-items: center; }
     .login-page.hidden { display: none; }
     .header-block { display: flex; align-items: center; justify-content: space-between; margin: 4px 0; width: 100%; padding: 0 2px; }
     .title-col { display: flex; flex-direction: column; align-items: flex-start; }
-    .title { font-size: 2.6rem; font-weight: 700; letter-spacing: -0.5px; color: #2c2416; line-height: 1.1; }
+    .title { font-size: 2.6rem; font-weight: 700; letter-spacing: -0.5px; color: #2c2416; line-height: 1.1; position: relative; display: inline-block; }
+    .title::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg, transparent, #c8a870, transparent); transform: scaleX(0); transition: transform 0.5s ease; }
+    .title:hover::after { transform: scaleX(1); }
     .subhead { font-size: 0.88rem; color: #a89880; margin-top: 3px; font-weight: 400; }
 
-    /* ---------- Language Dropdown ---------- */
+    /* Language Dropdown */
     .lang-dropdown { position: relative; user-select: none; z-index: 50; }
     .lang-dropdown-trigger {
-      display: flex; align-items: center; gap: 8px;
-      padding: 9px 16px; background: linear-gradient(135deg, #faf6ef, #f5ede0);
-      border: 1px solid #ddd0ba; border-radius: 50px;
-      cursor: pointer; font-size: 0.78rem; font-weight: 700;
+      display: flex; align-items: center; gap: 8px; padding: 9px 16px;
+      background: linear-gradient(135deg, #faf6ef, #f5ede0); border: 1px solid #ddd0ba;
+      border-radius: 50px; cursor: pointer; font-size: 0.78rem; font-weight: 700;
       letter-spacing: 0.5px; color: #2c2416; transition: all 0.25s ease;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04); position: relative; overflow: hidden;
     }
-    .lang-dropdown-trigger:hover { background: linear-gradient(135deg, #f5ede0, #ece0cc); border-color: #c8b294; }
-    .lang-dropdown-trigger .chevron { width: 13px; height: 13px; transition: transform 0.3s ease; opacity: 0.55; }
+    .lang-dropdown-trigger::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, transparent, rgba(255,255,255,0.6), transparent); transform: translateX(-100%); transition: transform 0.6s ease; }
+    .lang-dropdown-trigger:hover::before { transform: translateX(100%); }
+    .lang-dropdown-trigger:hover { background: linear-gradient(135deg, #f5ede0, #ece0cc); border-color: #c8b294; transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,0.1); }
+    .lang-dropdown-trigger:active { transform: scale(0.97); }
+    .lang-dropdown-trigger .chevron { width: 13px; height: 13px; transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1); opacity: 0.55; }
     .lang-dropdown.open .chevron { transform: rotate(180deg); }
     .lang-dropdown-menu {
       position: absolute; top: calc(100% + 8px); right: 0;
       background: white; border: 1px solid #e8ddd0; border-radius: 16px;
-      box-shadow: 0 16px 40px rgba(44,36,22,0.14); overflow: hidden;
-      min-width: 110%; opacity: 0; transform: translateY(-8px) scale(0.95);
-      pointer-events: none; transition: all 0.25s ease;
+      box-shadow: 0 20px 50px rgba(44,36,22,0.15); overflow: hidden;
+      min-width: 110%; opacity: 0; transform: translateY(-10px) scale(0.92);
+      pointer-events: none; transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1);
     }
     .lang-dropdown.open .lang-dropdown-menu { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
     .lang-dropdown-option {
-      display: block; width: 100%; padding: 11px 18px;
-      font-size: 0.78rem; font-weight: 600; color: #8b7a62;
-      background: transparent; border: none; cursor: pointer;
-      text-align: left; transition: all 0.2s ease;
+      display: block; width: 100%; padding: 11px 18px; font-size: 0.78rem; font-weight: 600;
+      color: #8b7a62; background: transparent; border: none; cursor: pointer;
+      text-align: left; transition: all 0.2s ease; position: relative;
     }
-    .lang-dropdown-option:hover { background: #faf4ec; color: #2c2416; }
+    .lang-dropdown-option::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: #c8a870; transform: scaleY(0); transition: transform 0.2s ease; }
+    .lang-dropdown-option:hover { background: #faf4ec; color: #2c2416; padding-left: 24px; }
+    .lang-dropdown-option:hover::before { transform: scaleY(1); }
     .lang-dropdown-option.active { color: #2c2416; font-weight: 700; background: #f5ede0; }
+    .lang-dropdown-option.active::before { transform: scaleY(1); }
 
     .divider-line { width: 100%; border-bottom: 1px solid #f0e7db; margin: 16px 0 28px; }
     .client-form { width: 100%; display: flex; flex-direction: column; gap: 18px; }
     .input-group { display: flex; flex-direction: column; gap: 6px; }
-    .input-group label { font-size: 0.8rem; font-weight: 600; text-transform: uppercase; color: #6b5e4a; margin-left: 6px; }
+    .input-group label { font-size: 0.8rem; font-weight: 600; text-transform: uppercase; color: #6b5e4a; margin-left: 6px; transition: color 0.3s ease; }
     .input-group input {
-      background: #fefcf8; border: 1px solid #ede3d4; border-radius: 16px;
-      padding: 16px 18px; font-size: 1rem; color: #2e271e;
-      outline: none; font-family: 'Inter', sans-serif;
+      background: #fefcf8; border: 1.5px solid #ede3d4; border-radius: 16px;
+      padding: 16px 18px; font-size: 1rem; color: #2e271e; outline: none;
+      font-family: 'Inter', sans-serif; transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
     }
-    .input-group input:focus { border-color: #c8b294; background: #fff; box-shadow: 0 0 0 4px rgba(200,178,148,0.18); }
+    .input-group input:focus { border-color: #c8b294; background: #fff; box-shadow: 0 0 0 5px rgba(200,178,148,0.2); transform: translateY(-2px); }
+    .input-group input:hover { border-color: #d4c4a8; background: #fffefb; }
     .buttons-block { width: 100%; display: flex; flex-direction: column; gap: 12px; margin: 24px 0; }
     .button-primary {
-      background: #2a2419; border: 1px solid #3b3324; border-radius: 18px;
-      padding: 18px; font-weight: 600; font-size: 1rem; color: white;
-      cursor: pointer; width: 100%; text-align: center;
-      font-family: 'Inter', sans-serif; transition: all 0.2s ease;
+      background: linear-gradient(135deg, #2a2419, #3b3324); border: none; border-radius: 18px;
+      padding: 18px; font-weight: 600; font-size: 1rem; color: white; cursor: pointer;
+      width: 100%; text-align: center; font-family: 'Inter', sans-serif;
+      transition: all 0.35s cubic-bezier(0.34,1.56,0.64,1);
+      position: relative; overflow: hidden; box-shadow: 0 8px 24px rgba(42,36,25,0.2);
     }
-    .button-primary:hover:not(:disabled) { background: #3f3522; }
-    .button-primary:disabled { opacity: 0.6; cursor: not-allowed; }
+    .button-primary::after { content: ''; position: absolute; inset: 0; background: linear-gradient(105deg, transparent 30%, rgba(255,255,255,0.2) 50%, transparent 70%); transform: translateX(-100%); transition: transform 0.6s ease; }
+    .button-primary:hover::after { transform: translateX(100%); }
+    .button-primary:hover { transform: translateY(-3px); box-shadow: 0 14px 32px rgba(42,36,25,0.3); }
+    .button-primary:active { transform: scale(0.96); }
+    .button-primary:disabled { opacity: 0.5; cursor: not-allowed; animation: pulse 1.5s ease-in-out infinite; }
+    @keyframes pulse { 0%,100%{opacity:0.5}50%{opacity:0.7} }
     .button-secondary {
       background: #e8e3da; border: 1px solid #d6cdbc; border-radius: 18px;
       padding: 15px; font-weight: 550; font-size: 0.95rem; color: #b0a590;
-      cursor: not-allowed; width: 100%; text-align: center;
-      opacity: 0.7; pointer-events: none; font-family: 'Inter', sans-serif;
+      cursor: not-allowed; width: 100%; text-align: center; opacity: 0.7;
+      pointer-events: none; font-family: 'Inter', sans-serif; transition: all 0.3s ease;
     }
-    .button-secondary.active { background: #fefcf9; color: #4a3f2e; cursor: pointer; opacity: 1; pointer-events: auto; }
-    .button-secondary .lock-icon { margin-right: 4px; }
-    .button-secondary.active .lock-icon { display: none; }
+    .button-secondary.active { background: #fefcf9; color: #4a3f2e; cursor: pointer; opacity: 1; pointer-events: auto; animation: unlockPop 0.5s cubic-bezier(0.34,1.56,0.64,1); }
+    @keyframes unlockPop { 0%{transform:scale(0.95)}50%{transform:scale(1.04)}100%{transform:scale(1)} }
+    .button-secondary .lock-icon { margin-right: 4px; display: inline-block; animation: lockShake 2s ease-in-out infinite; }
+    @keyframes lockShake { 0%,100%{transform:rotate(0)}20%{transform:rotate(-8deg)}60%{transform:rotate(8deg)} }
+    .button-secondary.active .lock-icon { animation: none; display: none; }
 
-    .contact-footer {
-      width: 100%; border-top: 1px solid #f1e7d9; padding-top: 24px;
-      display: flex; flex-direction: column; align-items: center; gap: 14px;
-    }
+    .contact-footer { width: 100%; border-top: 1px solid #f1e7d9; padding-top: 24px; display: flex; flex-direction: column; align-items: center; gap: 14px; }
     .contact-row { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 10px; }
     .contact-pill {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 9px 16px; border-radius: 50px; font-size: 0.88rem;
-      font-weight: 500; text-decoration: none; white-space: nowrap;
-      transition: all 0.3s ease; border: 1px solid transparent;
+      display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px;
+      border-radius: 50px; font-size: 0.88rem; font-weight: 500; text-decoration: none;
+      white-space: nowrap; transition: all 0.35s cubic-bezier(0.34,1.56,0.64,1);
+      border: 1.5px solid transparent; position: relative; overflow: hidden;
     }
-    .contact-pill svg { width: 16px; height: 16px; flex-shrink: 0; fill: none; stroke-width: 1.9; }
-    .contact-pill:hover { transform: translateY(-2px); }
+    .contact-pill::after { content: ''; position: absolute; inset: 0; background: currentColor; opacity: 0; transition: opacity 0.3s ease; border-radius: inherit; }
+    .contact-pill:hover::after { opacity: 0.05; }
+    .contact-pill svg { width: 16px; height: 16px; flex-shrink: 0; fill: none; stroke-width: 1.9; transition: transform 0.3s ease; }
+    .contact-pill:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.12); }
+    .contact-pill:hover svg { transform: scale(1.2) rotate(5deg); }
+    .contact-pill:active { transform: scale(0.95); }
     .pill-tg { background: #f0f7ff; border-color: #cce0f5; color: #2070b8; }
     .pill-tg svg { stroke: #2070b8; }
-    .pill-phone {
-      background: linear-gradient(135deg, #f7f0e4, #efe0ca); border-color: #d4c0a0;
-      color: #2f2819; font-weight: 600;
-      animation: phonePulse 2.5s ease-in-out infinite;
-    }
-    @keyframes phonePulse { 0%,100%{box-shadow:0 0 0 0 rgba(200,169,110,0.35)}50%{box-shadow:0 0 0 8px rgba(200,169,110,0)} }
+    .pill-phone { background: linear-gradient(135deg, #f7f0e4, #efe0ca); border-color: #d4c0a0; color: #2f2819; font-weight: 600; animation: phonePulse 2.5s ease-in-out infinite; }
+    @keyframes phonePulse { 0%,100%{box-shadow:0 0 0 0 rgba(200,169,110,0.4)}50%{box-shadow:0 0 0 10px rgba(200,169,110,0)} }
     .pill-phone svg { stroke: #7a5c2e; }
+    .pill-phone:hover { animation: none; }
     .pill-ig { background: linear-gradient(135deg,#fff0f5,#fce8f0); border-color: #f0c8d8; color: #a0306a; }
     .pill-ig svg { stroke: #c04080; }
 
     /* ---------- MAIN PAGE ---------- */
-    .example-page {
-      position: fixed; top: 0; left: 0; width: 100vw; height: 100dvh;
-      background-color: #fdf7f2; z-index: 100;
-      overflow-y: auto; overflow-x: hidden;
-    }
+    .example-page { position: fixed; top: 0; left: 0; width: 100vw; height: 100dvh; background-color: #fdf7f2; z-index: 100; overflow-y: auto; overflow-x: hidden; }
     .example-page.hidden { display: none; }
+    .example-page::before { content: ''; position: fixed; top: -200px; right: -150px; width: 600px; height: 600px; background: radial-gradient(circle, rgba(200,178,148,0.12) 0%, transparent 70%); border-radius: 50%; pointer-events: none; z-index: 0; animation: ambientOrb 12s ease-in-out infinite; }
+    @keyframes ambientOrb { 0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(40px,-30px) scale(1.08)}66%{transform:translate(-20px,25px) scale(0.94)} }
 
-    /* Hero */
-    .hero-text {
-      position: fixed; top: 50%; left: 50%;
-      transform: translate(-50%, -50%); text-align: center;
-      z-index: 10; pointer-events: none; max-width: 90vw;
-      transition: opacity 0.5s ease;
-    }
-    .hero-text.appear {
-      animation: heroAppear 1s ease both;
-    }
-    @keyframes heroAppear {
-      from { opacity:0; transform: translate(-50%,-42%) scale(0.85); }
-      to { opacity:1; transform: translate(-50%,-50%) scale(1); }
-    }
-    .hero-title {
-      font-size: clamp(2rem, 6vw, 4rem); font-weight: 700;
-      background: linear-gradient(135deg, #2c2416, #c8a870, #2c2416);
-      background-size: 200% auto;
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      background-clip: text;
-      animation: shimmer 4s ease-in-out infinite;
-    }
+    .hero-text { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; z-index: 10; pointer-events: none; max-width: 90vw; }
+    .hero-text.appear { animation: heroAppear 1.2s cubic-bezier(0.34,1.56,0.64,1) both; }
+    @keyframes heroAppear { from{opacity:0;transform:translate(-50%,-35%) scale(0.82)}to{opacity:1;transform:translate(-50%,-50%) scale(1)} }
+    .hero-title { font-size: clamp(2rem, 6vw, 4.5rem); font-weight: 700; background: linear-gradient(135deg, #2c2416 0%, #c8a870 25%, #e8d090 50%, #c8a870 75%, #2c2416 100%); background-size: 300% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; animation: shimmer 3.5s ease-in-out infinite; }
     @keyframes shimmer { 0%,100%{background-position:0% center}50%{background-position:100% center} }
-    .hero-subtitle { font-size: 1.3rem; color: #8b7a62; margin-top: 8px; }
+    .hero-subtitle { font-size: 1.3rem; color: #8b7a62; margin-top: 10px; animation: fadeSlideUp 1s ease 0.3s both; }
+    @keyframes fadeSlideUp { from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)} }
 
-    /* Content */
-    .example-content {
-      position: relative; z-index: 5; max-width: 1120px;
-      margin: 0 auto; padding: 40px 40px 60px;
-      opacity: 0; pointer-events: none;
-      transition: opacity 0.6s ease 0.3s;
-    }
+    .example-content { position: relative; z-index: 5; max-width: 1120px; margin: 0 auto; padding: 40px 40px 60px; opacity: 0; pointer-events: none; transition: opacity 0.7s ease 0.3s; }
     .example-content.visible { opacity: 1; pointer-events: auto; }
 
-    /* Header */
-    .page-header { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 24px; flex-wrap: wrap; }
+    .page-header { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 24px; flex-wrap: wrap; animation: fadeSlideDown 0.6s ease 0.2s both; }
+    @keyframes fadeSlideDown { from{opacity:0;transform:translateY(-16px)}to{opacity:1;transform:translateY(0)} }
     .content-main-title { font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 700; color: #2c2416; }
 
-    /* Categories */
-    .categories-bar { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; align-items: center; }
-    .cat-tab {
-      display: inline-flex; align-items: center; gap: 6px;
-      padding: 9px 18px; border-radius: 50px; font-size: 0.85rem;
-      font-weight: 500; color: #7a6a52; background: white;
-      border: 1.5px solid #e8ddd0; cursor: pointer; text-decoration: none;
-      transition: all 0.25s ease;
-    }
-    .cat-tab:hover { border-color: #c8b294; transform: translateY(-2px); }
-    .cat-tab.active { background: #2a2419; border-color: #2a2419; color: white; }
-    .cat-dot { width: 5px; height: 5px; border-radius: 50%; background: #d4c4a8; flex-shrink: 0; }
-    .cat-tab.active .cat-dot { background: #c8a870; }
+    .categories-bar { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; align-items: center; animation: fadeSlideRight 0.5s ease 0.35s both; }
+    @keyframes fadeSlideRight { from{opacity:0;transform:translateX(-12px)}to{opacity:1;transform:translateX(0)} }
+    .cat-tab { display: inline-flex; align-items: center; gap: 6px; padding: 9px 18px; border-radius: 50px; font-size: 0.85rem; font-weight: 500; color: #7a6a52; background: white; border: 1.5px solid #e8ddd0; cursor: pointer; text-decoration: none; transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1); position: relative; overflow: hidden; }
+    .cat-tab::before { content: ''; position: absolute; inset: 0; background: #2a2419; transform: scale(0); transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1); border-radius: inherit; z-index: -1; }
+    .cat-tab:hover { border-color: #c8b294; transform: translateY(-3px) scale(1.03); box-shadow: 0 8px 24px rgba(0,0,0,0.1); }
+    .cat-tab.active::before { transform: scale(1); }
+    .cat-tab.active { border-color: #2a2419; color: white; }
+    .cat-dot { width: 5px; height: 5px; border-radius: 50%; background: #d4c4a8; flex-shrink: 0; transition: all 0.3s ease; }
+    .cat-tab.active .cat-dot { background: #c8a870; transform: scale(1.3); }
     .cat-separator { width: 1px; height: 24px; background: #ddd0ba; align-self: center; margin: 0 4px; }
 
-    /* Sections */
-    .section-title { font-size: 1.05rem; font-weight: 700; color: #2c2416; margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
-    .section-title::after { content: ''; flex: 1; height: 1px; background: #e8ddd0; }
+    .section-title { font-size: 1.05rem; font-weight: 700; color: #2c2416; margin-bottom: 14px; display: flex; align-items: center; gap: 10px; animation: fadeSlideRight 0.5s ease 0.4s both; }
+    .section-title::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, #e8ddd0, transparent); }
 
-    /* Brands */
-    .brands-grid { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 32px; }
-    .brand-card {
-      display: flex; align-items: center; gap: 8px; padding: 10px 16px;
-      background: white; border: 1.5px solid #e8ddd0; border-radius: 16px;
-      cursor: pointer; font-size: 0.85rem; font-weight: 500;
-      color: #5f5340; transition: all 0.25s ease; text-decoration: none;
-    }
-    .brand-card:hover { border-color: #c8b294; transform: translateY(-2px); }
-    .brand-card.active { background: #2a2419; border-color: #2a2419; color: white; }
-    .brand-logo { font-size: 1.3rem; flex-shrink: 0; }
+    .brands-grid { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 32px; animation: fadeSlideRight 0.5s ease 0.45s both; }
+    .brand-card { display: flex; align-items: center; gap: 8px; padding: 10px 16px; background: white; border: 1.5px solid #e8ddd0; border-radius: 16px; cursor: pointer; font-size: 0.85rem; font-weight: 500; color: #5f5340; transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1); text-decoration: none; position: relative; overflow: hidden; }
+    .brand-card::before { content: ''; position: absolute; inset: 0; background: #2a2419; transform: scale(0); transition: transform 0.35s ease; border-radius: inherit; z-index: -1; }
+    .brand-card:hover { border-color: #c8b294; transform: translateY(-3px) scale(1.02); box-shadow: 0 8px 24px rgba(0,0,0,0.1); }
+    .brand-card.active::before { transform: scale(1); }
+    .brand-card.active { border-color: #2a2419; color: white; }
+    .brand-logo { font-size: 1.3rem; flex-shrink: 0; transition: transform 0.3s ease; }
+    .brand-card:hover .brand-logo { transform: scale(1.2) rotate(-5deg); }
 
-    /* Products */
     .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 18px; margin-bottom: 16px; }
-    .product-card {
-      background: white; border-radius: 16px; overflow: hidden;
-      cursor: pointer; transition: all 0.3s ease;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.04);
-      display: flex; flex-direction: column; position: relative;
-    }
-    .product-card:hover { transform: translateY(-5px); box-shadow: 0 14px 32px rgba(0,0,0,0.09); }
-    .product-image {
-      width: 100%; height: 170px; background: linear-gradient(135deg, #faf6ef, #f5ede0);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 3.2rem; flex-shrink: 0;
-    }
+    .product-card { background: white; border-radius: 16px; overflow: hidden; cursor: pointer; transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1); box-shadow: 0 4px 12px rgba(0,0,0,0.04); display: flex; flex-direction: column; position: relative; animation: cardAppear 0.5s ease both; }
+    .product-card:nth-child(1){animation-delay:0.05s}.product-card:nth-child(2){animation-delay:0.12s}.product-card:nth-child(3){animation-delay:0.19s}.product-card:nth-child(4){animation-delay:0.26s}.product-card:nth-child(5){animation-delay:0.33s}.product-card:nth-child(6){animation-delay:0.4s}
+    @keyframes cardAppear { from{opacity:0;transform:translateY(24px) scale(0.94)}to{opacity:1;transform:translateY(0) scale(1)} }
+    .product-card:hover { transform: translateY(-8px) scale(1.02); box-shadow: 0 20px 45px rgba(0,0,0,0.1); }
+    .product-card::after { content: ''; position: absolute; inset: 0; background: linear-gradient(105deg, transparent 30%, rgba(255,255,255,0.5) 50%, transparent 70%); transform: translateX(-120%); transition: transform 0.7s ease; pointer-events: none; }
+    .product-card:hover::after { transform: translateX(120%); }
+    .product-image { width: 100%; height: 170px; background: linear-gradient(135deg, #faf6ef, #f5ede0); display: flex; align-items: center; justify-content: center; font-size: 3.2rem; flex-shrink: 0; transition: transform 0.5s ease; }
+    .product-card:hover .product-image { transform: scale(1.06); }
     .product-info { padding: 12px 14px; flex: 1; }
     .product-name { font-size: 0.9rem; font-weight: 600; color: #2c2416; margin-bottom: 2px; }
     .product-weight { font-size: 0.75rem; color: #8b7a62; }
-    .product-badge { position: absolute; top: 8px; right: 8px; background: #2a2419; color: #f0e4c8; padding: 3px 10px; border-radius: 14px; font-size: 0.68rem; font-weight: 600; }
-    .btn-learn-more {
-      display: flex; align-items: center; justify-content: center; gap: 5px;
-      margin: 4px 10px 10px; padding: 10px 12px;
-      background: #faf6ef; border: 1.5px solid #ddd0ba; border-radius: 10px;
-      font-size: 0.82rem; font-weight: 600; color: #2c2416;
-      cursor: pointer; font-family: 'Inter', sans-serif; transition: all 0.2s ease;
-    }
-    .btn-learn-more:hover { background: #2a2419; border-color: #2a2419; color: white; }
-    .btn-learn-more svg { width: 13px; height: 13px; stroke: currentColor; fill: none; stroke-width: 2; }
+    .product-badge { position: absolute; top: 8px; right: 8px; background: #2a2419; color: #f0e4c8; padding: 3px 10px; border-radius: 14px; font-size: 0.68rem; font-weight: 600; animation: badgePop 0.4s cubic-bezier(0.34,1.56,0.64,1) both; }
+    @keyframes badgePop { from{opacity:0;transform:scale(0.5) rotate(-10deg)}to{opacity:1;transform:scale(1) rotate(0)} }
+    .btn-learn-more { display: flex; align-items: center; justify-content: center; gap: 5px; margin: 4px 10px 10px; padding: 10px 12px; background: #faf6ef; border: 1.5px solid #ddd0ba; border-radius: 10px; font-size: 0.82rem; font-weight: 600; color: #2c2416; cursor: pointer; font-family: 'Inter', sans-serif; transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1); position: relative; overflow: hidden; z-index: 1; }
+    .btn-learn-more::before { content: ''; position: absolute; inset: 0; background: #2a2419; transform: scaleX(0); transform-origin: left; transition: transform 0.35s ease; z-index: -1; border-radius: inherit; }
+    .btn-learn-more:hover::before { transform: scaleX(1); }
+    .btn-learn-more:hover { color: white; border-color: #2a2419; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,0.15); }
+    .btn-learn-more svg { width: 13px; height: 13px; stroke: currentColor; fill: none; stroke-width: 2; transition: transform 0.3s ease; }
+    .btn-learn-more:hover svg { transform: translateX(4px) rotate(10deg); }
 
-    /* Footer */
-    .footer-contacts { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 40px; padding-top: 28px; border-top: 1px solid #e8ddd0; justify-content: center; }
+    .footer-contacts { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 40px; padding-top: 28px; border-top: 1px solid #e8ddd0; justify-content: center; animation: fadeSlideUp 0.6s ease 0.5s both; }
 
-    /* ====== INQUIRY ====== */
+    /* INQUIRY */
     .inquiry-page { position: fixed; top: 0; left: 0; width: 100vw; height: 100dvh; background-color: #fdf7f2; z-index: 300; overflow-y: auto; display: flex; align-items: flex-start; justify-content: center; padding: 24px 20px; }
     .inquiry-page.hidden { display: none; }
-    .inquiry-card { background: white; max-width: 440px; width: 100%; margin: auto; border-radius: 26px; box-shadow: 0 20px 50px rgba(0,0,0,0.08); overflow: hidden; }
+    .inquiry-page.slide-in { animation: slideInUp 0.4s cubic-bezier(0.34,1.56,0.64,1) both; }
+    @keyframes slideInUp { from{opacity:0;transform:translateY(40px) scale(0.94)}to{opacity:1;transform:translateY(0) scale(1)} }
+    .inquiry-card { background: white; max-width: 440px; width: 100%; margin: auto; border-radius: 26px; box-shadow: 0 24px 60px rgba(0,0,0,0.08); overflow: hidden; }
     .inquiry-header { display: flex; align-items: center; gap: 12px; padding: 20px 22px 16px; border-bottom: 1px solid #f0e7db; }
-    .inquiry-back-btn { width: 34px; height: 34px; border-radius: 8px; background: #faf6ef; border: 1px solid #e8ddd0; display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0; }
-    .inquiry-back-btn:hover { background: #f0e4d4; }
+    .inquiry-back-btn { width: 34px; height: 34px; border-radius: 8px; background: #faf6ef; border: 1px solid #e8ddd0; display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0; transition: all 0.25s ease; }
+    .inquiry-back-btn:hover { background: #f0e4d4; transform: translateX(-3px); }
     .inquiry-back-btn svg { width: 13px; height: 13px; stroke: #5f5340; fill: none; stroke-width: 2.5; }
     .inquiry-header-title { font-size: 1.05rem; font-weight: 700; color: #2c2416; }
     .inquiry-header-sub { font-size: 0.76rem; color: #a89880; margin-top: 1px; }
-    .product-reply { margin: 16px 22px 0; border-radius: 12px; border-left: 3px solid #c8a870; background: #fdf8f0; padding: 10px 12px; display: flex; align-items: center; gap: 10px; }
-    .reply-emoji { font-size: 2.2rem; flex-shrink: 0; }
+    .product-reply { margin: 16px 22px 0; border-radius: 12px; border-left: 3px solid #c8a870; background: #fdf8f0; padding: 10px 12px; display: flex; align-items: center; gap: 10px; animation: replySlide 0.4s ease both; }
+    @keyframes replySlide { from{opacity:0;transform:translateX(-12px)}to{opacity:1;transform:translateX(0)} }
+    .reply-emoji { font-size: 2.2rem; flex-shrink: 0; animation: bounce 1.5s ease-in-out infinite; }
+    @keyframes bounce { 0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)} }
     .reply-info { flex: 1; min-width: 0; }
     .reply-label { font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; color: #c8a870; margin-bottom: 2px; }
     .reply-product-name { font-size: 0.88rem; font-weight: 600; color: #2c2416; }
@@ -255,20 +225,23 @@
     .inquiry-form-body { padding: 16px 22px 22px; display: flex; flex-direction: column; gap: 12px; }
     .inq-group { display: flex; flex-direction: column; gap: 4px; }
     .inq-group label { font-size: 0.73rem; font-weight: 600; text-transform: uppercase; color: #6b5e4a; }
-    .inq-group input, .inq-group textarea { background: #fefcf8; border: 1.5px solid #ede3d4; border-radius: 12px; padding: 12px 14px; font-size: 0.9rem; color: #2e271e; outline: none; font-family: 'Inter', sans-serif; width: 100%; }
+    .inq-group input, .inq-group textarea { background: #fefcf8; border: 1.5px solid #ede3d4; border-radius: 12px; padding: 12px 14px; font-size: 0.9rem; color: #2e271e; outline: none; font-family: 'Inter', sans-serif; width: 100%; transition: all 0.3s ease; }
     .inq-group textarea { resize: none; min-height: 72px; }
-    .inq-group input:focus, .inq-group textarea:focus { border-color: #c8b294; background: #fff; }
-    .inquiry-submit { background: #2a2419; border: none; border-radius: 14px; padding: 15px; font-weight: 600; font-size: 0.9rem; color: white; cursor: pointer; width: 100%; font-family: 'Inter', sans-serif; transition: all 0.2s ease; }
-    .inquiry-submit:hover:not(:disabled) { background: #3f3522; }
+    .inq-group input:focus, .inq-group textarea:focus { border-color: #c8b294; background: #fff; box-shadow: 0 0 0 4px rgba(200,178,148,0.15); }
+    .inquiry-submit { background: #2a2419; border: none; border-radius: 14px; padding: 15px; font-weight: 600; font-size: 0.9rem; color: white; cursor: pointer; width: 100%; font-family: 'Inter', sans-serif; transition: all 0.3s ease; }
+    .inquiry-submit:hover:not(:disabled) { background: #3f3522; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.2); }
     .inquiry-submit:disabled { opacity: 0.6; cursor: not-allowed; }
     .inquiry-success { display: none; flex-direction: column; align-items: center; padding: 28px 22px; text-align: center; }
-    .inquiry-success.show { display: flex; }
-    .success-icon { font-size: 2.8rem; margin-bottom: 10px; }
+    .inquiry-success.show { display: flex; animation: successPop 0.5s cubic-bezier(0.34,1.56,0.64,1) both; }
+    @keyframes successPop { from{opacity:0;transform:scale(0.8)}to{opacity:1;transform:scale(1)} }
+    .success-icon { font-size: 2.8rem; margin-bottom: 10px; animation: successBounce 0.6s ease both; }
+    @keyframes successBounce { 0%{transform:scale(0)}60%{transform:scale(1.2)}100%{transform:scale(1)} }
     .success-title { font-size: 1.1rem; font-weight: 700; color: #2c2416; margin-bottom: 6px; }
     .success-sub { font-size: 0.82rem; color: #8b7a62; }
-    .success-back-btn { margin-top: 18px; padding: 11px 24px; background: #2a2419; border: none; border-radius: 12px; color: white; font-size: 0.85rem; font-weight: 600; cursor: pointer; font-family: 'Inter', sans-serif; }
+    .success-back-btn { margin-top: 18px; padding: 11px 24px; background: #2a2419; border: none; border-radius: 12px; color: white; font-size: 0.85rem; font-weight: 600; cursor: pointer; font-family: 'Inter', sans-serif; transition: all 0.3s ease; }
+    .success-back-btn:hover { background: #3f3522; transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,0.2); }
 
-    /* ====== BURGER / SIDE PANEL (mobile) ====== */
+    /* BURGER */
     .burger-btn, .side-panel, .overlay { display: none; }
     @media (max-width: 768px) {
       .categories-bar, .brands-grid { display: none; }
@@ -276,31 +249,19 @@
       .products-grid { grid-template-columns: repeat(auto-fill, minmax(148px, 1fr)); gap: 10px; }
       .product-image { height: 130px; font-size: 2.4rem; }
       .btn-learn-more { font-size: 0.75rem; padding: 8px 8px; margin: 3px 6px 8px; }
-
-      .burger-btn {
-        display: flex; position: fixed; top: 12px; right: 12px;
-        width: 36px; height: 36px; background: white;
-        border: 1px solid #e8ddd0; border-radius: 8px;
-        flex-direction: column; align-items: center; justify-content: center;
-        gap: 3px; cursor: pointer; z-index: 200;
-      }
-      .burger-btn span { width: 16px; height: 2px; background: #5f5340; border-radius: 2px; }
-      .side-panel {
-        display: flex; flex-direction: column;
-        position: fixed; top: 0; right: -100%;
-        width: 260px; max-width: 85vw; height: 100dvh;
-        background: white; z-index: 150;
-        padding: 60px 14px 20px; transition: right 0.3s ease; overflow-y: auto;
-      }
+      .burger-btn { display: flex; position: fixed; top: 12px; right: 12px; width: 40px; height: 40px; background: white; border: 1px solid #e8ddd0; border-radius: 10px; flex-direction: column; align-items: center; justify-content: center; gap: 4px; cursor: pointer; z-index: 200; box-shadow: 0 2px 12px rgba(0,0,0,0.08); transition: all 0.3s ease; }
+      .burger-btn:hover { box-shadow: 0 6px 20px rgba(0,0,0,0.14); transform: scale(1.05); }
+      .burger-btn span { width: 18px; height: 2px; background: #5f5340; border-radius: 2px; transition: 0.3s cubic-bezier(0.34,1.56,0.64,1); }
+      .burger-btn.open span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+      .burger-btn.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+      .burger-btn.open span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+      .side-panel { display: flex; flex-direction: column; position: fixed; top: 0; right: -100%; width: 270px; max-width: 88vw; height: 100dvh; background: white; z-index: 150; padding: 70px 16px 20px; transition: right 0.4s cubic-bezier(0.34,1.56,0.64,1); overflow-y: auto; box-shadow: -10px 0 40px rgba(0,0,0,0.1); }
       .side-panel.open { right: 0; }
-      .overlay {
-        display: block; position: fixed; inset: 0;
-        background: rgba(0,0,0,0.3); z-index: 140;
-        opacity: 0; pointer-events: none; transition: opacity 0.3s;
-      }
+      .overlay { display: block; position: fixed; inset: 0; background: rgba(0,0,0,0.3); z-index: 140; opacity: 0; pointer-events: none; transition: opacity 0.4s; }
       .overlay.visible { opacity: 1; pointer-events: auto; }
       .side-panel-title { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.7px; color: #a89880; margin-bottom: 6px; padding: 0 6px; margin-top: 14px; }
-      .side-nav-item { padding: 11px 14px; font-size: 0.88rem; font-weight: 500; color: #5f5340; text-decoration: none; border-radius: 8px; cursor: pointer; display: block; margin: 1px 4px; }
+      .side-nav-item { padding: 11px 14px; font-size: 0.88rem; font-weight: 500; color: #5f5340; text-decoration: none; border-radius: 8px; cursor: pointer; display: block; margin: 1px 4px; transition: all 0.2s ease; }
+      .side-nav-item:hover { background: #faf6ef; color: #2c2416; padding-left: 18px; }
       .side-nav-item.active { background: #f5ede0; color: #2c2416; font-weight: 600; }
       .side-nav-divider { height: 1px; background: #f0e7db; margin: 6px 10px; }
     }
@@ -308,18 +269,14 @@
 </head>
 <body id="bodyElement">
 
-  <!-- ЛОГИН -->
+  <!-- LOGIN (скрыт) -->
   <div class="login-card" id="loginCard" style="display:none;">
     <div class="login-page" id="loginPage">
       <div class="header-block">
         <div class="title-col"><h1 class="title" id="pageTitle">Вход</h1><div class="subhead" id="pageSubhead">добро пожаловать</div></div>
-        <div class="lang-dropdown" id="langDropdownLogin">
-          <button class="lang-dropdown-trigger" id="langTriggerLogin"><span id="langLabelLogin">RUS</span><svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
-          <div class="lang-dropdown-menu" id="langMenuLogin">
-            <button class="lang-dropdown-option" data-lang="uzb">UZB</button>
-            <button class="lang-dropdown-option active" data-lang="rus">RUS</button>
-            <button class="lang-dropdown-option" data-lang="eng">ENG</button>
-          </div>
+        <div class="lang-dropdown" id="langDropdownMain">
+          <button class="lang-dropdown-trigger" id="langTriggerMain"><span id="langLabelMain">RUS</span><svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="lang-dropdown-menu"><button class="lang-dropdown-option" data-lang="uzb">UZB</button><button class="lang-dropdown-option active" data-lang="rus">RUS</button><button class="lang-dropdown-option" data-lang="eng">ENG</button></div>
         </div>
       </div>
       <div class="divider-line"></div>
@@ -340,23 +297,17 @@
     </div>
   </div>
 
-  <!-- KAMOLIDDIN GOLD -->
+  <!-- KAMOLIDDIN GOLD PAGE -->
   <div class="example-page" id="examplePage">
     <div class="hero-text" id="heroText"><h1 class="hero-title">Kamoliddin Gold</h1><p class="hero-subtitle">Добро пожаловать!</p></div>
-
     <div class="example-content" id="exampleContent">
       <div class="page-header">
         <h1 class="content-main-title">Kamoliddin Gold</h1>
-        <div class="lang-dropdown" id="headerLang">
+        <div class="lang-dropdown" id="headerLangDropdown">
           <button class="lang-dropdown-trigger" id="headerLangTrigger"><span id="headerLangLabel">RUS</span><svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
-          <div class="lang-dropdown-menu" id="headerLangMenu">
-            <button class="lang-dropdown-option" data-lang="uzb">UZB</button>
-            <button class="lang-dropdown-option active" data-lang="rus">RUS</button>
-            <button class="lang-dropdown-option" data-lang="eng">ENG</button>
-          </div>
+          <div class="lang-dropdown-menu"><button class="lang-dropdown-option" data-lang="uzb">UZB</button><button class="lang-dropdown-option active" data-lang="rus">RUS</button><button class="lang-dropdown-option" data-lang="eng">ENG</button></div>
         </div>
       </div>
-
       <div class="categories-bar" id="categoriesBar">
         <a href="#" class="cat-tab active" data-category="all"><span class="cat-dot"></span><span>Все товары</span></a>
         <a href="#" class="cat-tab" data-category="rings"><span class="cat-dot"></span><span>Кольца</span></a>
@@ -365,17 +316,14 @@
         <a href="#" class="cat-tab" data-category="bracelets"><span class="cat-dot"></span><span>Браслеты</span></a>
         <a href="#" class="cat-tab" data-category="earrings"><span class="cat-dot"></span><span>Серьги</span></a>
       </div>
-
       <div class="section-title" id="sectionJewelry">Ювелирные изделия</div>
       <div class="products-grid" id="jewelryGrid">
-        <!-- Товары category=all -->
-        <div class="product-card" data-category="rings"><span class="product-badge">Хит</span><div class="product-image">💍</div><div class="product-info"><div class="product-name">Золотое кольцо "Лотос"</div><div class="product-weight">585 проба • 4.2 г</div></div><button class="btn-learn-more">Узнать больше</button></div>
-        <div class="product-card" data-category="rings"><div class="product-image">💎</div><div class="product-info"><div class="product-name">Кольцо с бриллиантом</div><div class="product-weight">750 проба • 3.8 г</div></div><button class="btn-learn-more">Узнать больше</button></div>
-        <div class="product-card" data-category="chains"><span class="product-badge">Новинка</span><div class="product-image">⛓️</div><div class="product-info"><div class="product-name">Золотая цепочка</div><div class="product-weight">585 проба • 7.5 г</div></div><button class="btn-learn-more">Узнать больше</button></div>
-        <div class="product-card" data-category="bracelets"><div class="product-image">📿</div><div class="product-info"><div class="product-name">Золотой браслет</div><div class="product-weight">585 проба • 6.2 г</div></div><button class="btn-learn-more">Узнать больше</button></div>
-        <div class="product-card" data-category="earrings"><div class="product-image">✨</div><div class="product-info"><div class="product-name">Золотые серьги</div><div class="product-weight">585 проба • 3.1 г</div></div><button class="btn-learn-more">Узнать больше</button></div>
+        <div class="product-card" data-category="rings"><span class="product-badge">Хит</span><div class="product-image">💍</div><div class="product-info"><div class="product-name">Золотое кольцо "Лотос"</div><div class="product-weight">585 проба • 4.2 г</div></div><button class="btn-learn-more"><svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>Узнать больше</button></div>
+        <div class="product-card" data-category="rings"><div class="product-image">💎</div><div class="product-info"><div class="product-name">Кольцо с бриллиантом</div><div class="product-weight">750 проба • 3.8 г</div></div><button class="btn-learn-more"><svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>Узнать больше</button></div>
+        <div class="product-card" data-category="chains"><span class="product-badge">Новинка</span><div class="product-image">⛓️</div><div class="product-info"><div class="product-name">Золотая цепочка</div><div class="product-weight">585 проба • 7.5 г</div></div><button class="btn-learn-more"><svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>Узнать больше</button></div>
+        <div class="product-card" data-category="bracelets"><div class="product-image">📿</div><div class="product-info"><div class="product-name">Золотой браслет</div><div class="product-weight">585 проба • 6.2 г</div></div><button class="btn-learn-more"><svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>Узнать больше</button></div>
+        <div class="product-card" data-category="earrings"><div class="product-image">✨</div><div class="product-info"><div class="product-name">Золотые серьги</div><div class="product-weight">585 проба • 3.1 г</div></div><button class="btn-learn-more"><svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>Узнать больше</button></div>
       </div>
-
       <div class="section-title" id="sectionBrands">Премиум бренды</div>
       <div class="brands-grid" id="brandsBar">
         <a href="#" class="brand-card active" data-brand="all"><span class="brand-logo">✨</span>Все бренды</a>
@@ -384,21 +332,19 @@
         <a href="#" class="brand-card" data-brand="dior"><span class="brand-logo">🌹</span>Christian Dior</a>
       </div>
       <div class="products-grid" id="brandsGrid">
-        <div class="product-card" data-category="cartier"><span class="product-badge" style="background:#8B0000;">Cartier</span><div class="product-image">👑</div><div class="product-info"><div class="product-name">Cartier Love Ring</div><div class="product-weight">750 проба • 8.5 г</div></div><button class="btn-learn-more">Узнать больше</button></div>
-        <div class="product-card" data-category="cartier"><span class="product-badge" style="background:#8B0000;">Cartier</span><div class="product-image">🐆</div><div class="product-info"><div class="product-name">Cartier Panthère</div><div class="product-weight">750 проба • 42 г</div></div><button class="btn-learn-more">Узнать больше</button></div>
-        <div class="product-card" data-category="tiffany"><span class="product-badge" style="background:#0abab5;">Tiffany</span><div class="product-image">🩵</div><div class="product-info"><div class="product-name">Tiffany T Wire Ring</div><div class="product-weight">750 проба • 3.2 г</div></div><button class="btn-learn-more">Узнать больше</button></div>
-        <div class="product-card" data-category="tiffany"><span class="product-badge" style="background:#0abab5;">Tiffany</span><div class="product-image">💙</div><div class="product-info"><div class="product-name">Tiffany HardWear</div><div class="product-weight">750 проба • 18 г</div></div><button class="btn-learn-more">Узнать больше</button></div>
-        <div class="product-card" data-category="dior"><span class="product-badge" style="background:#2c2c2c;">Dior</span><div class="product-image">🌹</div><div class="product-info"><div class="product-name">Dior Rose Des Vents</div><div class="product-weight">750 проба • 5.4 г</div></div><button class="btn-learn-more">Узнать больше</button></div>
-        <div class="product-card" data-category="dior"><span class="product-badge" style="background:#2c2c2c;">Dior</span><div class="product-image">🖤</div><div class="product-info"><div class="product-name">Dior Cœur Couture</div><div class="product-weight">750 проба • 12 г</div></div><button class="btn-learn-more">Узнать больше</button></div>
+        <div class="product-card" data-category="cartier"><span class="product-badge" style="background:#8B0000;">Cartier</span><div class="product-image">👑</div><div class="product-info"><div class="product-name">Cartier Love Ring</div><div class="product-weight">750 проба • 8.5 г</div></div><button class="btn-learn-more"><svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>Узнать больше</button></div>
+        <div class="product-card" data-category="cartier"><span class="product-badge" style="background:#8B0000;">Cartier</span><div class="product-image">🐆</div><div class="product-info"><div class="product-name">Cartier Panthère</div><div class="product-weight">750 проба • 42 г</div></div><button class="btn-learn-more"><svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>Узнать больше</button></div>
+        <div class="product-card" data-category="tiffany"><span class="product-badge" style="background:#0abab5;">Tiffany</span><div class="product-image">🩵</div><div class="product-info"><div class="product-name">Tiffany T Wire Ring</div><div class="product-weight">750 проба • 3.2 г</div></div><button class="btn-learn-more"><svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>Узнать больше</button></div>
+        <div class="product-card" data-category="tiffany"><span class="product-badge" style="background:#0abab5;">Tiffany</span><div class="product-image">💙</div><div class="product-info"><div class="product-name">Tiffany HardWear</div><div class="product-weight">750 проба • 18 г</div></div><button class="btn-learn-more"><svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>Узнать больше</button></div>
+        <div class="product-card" data-category="dior"><span class="product-badge" style="background:#2c2c2c;">Dior</span><div class="product-image">🌹</div><div class="product-info"><div class="product-name">Dior Rose Des Vents</div><div class="product-weight">750 проба • 5.4 г</div></div><button class="btn-learn-more"><svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>Узнать больше</button></div>
+        <div class="product-card" data-category="dior"><span class="product-badge" style="background:#2c2c2c;">Dior</span><div class="product-image">🖤</div><div class="product-info"><div class="product-name">Dior Cœur Couture</div><div class="product-weight">750 проба • 12 г</div></div><button class="btn-learn-more"><svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>Узнать больше</button></div>
       </div>
-
       <div class="footer-contacts">
         <a href="https://t.me/yasmingold21" target="_blank" class="contact-pill pill-tg"><svg viewBox="0 0 24 24"><path d="M21.5 2.5L2.5 10.5L10.5 13.5L13.5 21.5L21.5 2.5Z"/><path d="M10.5 13.5L15.5 8.5"/></svg>Telegram</a>
         <a href="tel:+998946930002" class="contact-pill pill-phone"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>+998 (94) 693-00-02</a>
         <a href="https://www.instagram.com/kamoliddin_kasimov1?igsh=eXk5b3Nvb29idTdu" target="_blank" class="contact-pill pill-ig"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>Instagram</a>
       </div>
     </div>
-
     <button class="burger-btn" id="burgerBtn"><span></span><span></span><span></span></button>
     <div class="overlay" id="overlay"></div>
     <div class="side-panel" id="sidePanel">
@@ -416,333 +362,106 @@
     </div>
   </div>
 
-  <!-- INQUIRY -->
   <div class="inquiry-page hidden" id="inquiryPage">
     <div class="inquiry-card">
-      <div class="inquiry-header">
-        <button class="inquiry-back-btn" id="inquiryBackBtn"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
-        <div><div class="inquiry-header-title">Узнать больше</div><div class="inquiry-header-sub">Оставьте контакт — мы свяжемся с вами</div></div>
-      </div>
-      <div class="product-reply" id="productReply">
-        <div class="reply-emoji" id="replyEmoji">💍</div>
-        <div class="reply-info"><div class="reply-label">📎 Выбранный товар</div><div class="reply-product-name" id="replyName"></div><div class="reply-product-meta" id="replyMeta"></div></div>
-      </div>
+      <div class="inquiry-header"><button class="inquiry-back-btn" id="inquiryBackBtn"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button><div><div class="inquiry-header-title">Узнать больше</div><div class="inquiry-header-sub">Оставьте контакт — мы свяжемся с вами</div></div></div>
+      <div class="product-reply" id="productReply"><div class="reply-emoji" id="replyEmoji">💍</div><div class="reply-info"><div class="reply-label">📎 Выбранный товар</div><div class="reply-product-name" id="replyName"></div><div class="reply-product-meta" id="replyMeta"></div></div></div>
       <div class="inquiry-form-body" id="inquiryFormBody">
         <div class="inq-group"><label>Имя</label><input type="text" id="inqName" placeholder="Ваше имя"/></div>
         <div class="inq-group"><label>Номер телефона</label><input type="tel" id="inqPhone" placeholder="+998 00 000 00 00"/></div>
         <div class="inq-group"><label>Вопрос или комментарий</label><textarea id="inqMessage" placeholder="Например: есть ли размер 17?"></textarea></div>
         <button class="inquiry-submit" id="inquirySubmitBtn">Отправить запрос</button>
       </div>
-      <div class="inquiry-success" id="inquirySuccess">
-        <div class="success-icon">✅</div><div class="success-title">Запрос отправлен!</div><div class="success-sub" id="successText"></div>
-        <button class="success-back-btn" id="successBackBtn">← Вернуться к товарам</button>
-      </div>
+      <div class="inquiry-success" id="inquirySuccess"><div class="success-icon">✅</div><div class="success-title">Запрос отправлен!</div><div class="success-sub" id="successText"></div><button class="success-back-btn" id="successBackBtn">← Вернуться к товарам</button></div>
     </div>
   </div>
 
   <script>
     (function() {
-      // === CONFIG ===
-      const BOT_TOKEN = '8320132368:AAHbsmappe4VNj728OY_8nGhfN6-bK9xipo';
-      const CHANNEL_ID = '-1003982347576';
-      let isSending = false;
+      const BOT_TOKEN='8320132368:AAHbsmappe4VNj728OY_8nGhfN6-bK9xipo',CHANNEL_ID='-1003982347576';
+      let isSending=false;
+      async function sendToTelegram(text){try{const r=await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({chat_id:CHANNEL_ID,text,parse_mode:'HTML'})});return await r.json();}catch(e){return null;}}
 
-      async function sendToTelegram(text) {
-        try {
-          const resp = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ chat_id: CHANNEL_ID, text: text, parse_mode: 'HTML' })
-          });
-          return await resp.json();
-        } catch(e) {
-          console.error('TG error:', e);
-          return null;
-        }
-      }
+      const bodyEl=document.getElementById('bodyElement'),loginCard=document.getElementById('loginCard'),loginPage=document.getElementById('loginPage'),examplePage=document.getElementById('examplePage'),heroText=document.getElementById('heroText'),exampleContent=document.getElementById('exampleContent'),submitBtn=document.getElementById('submitBtn'),goToExampleBtn=document.getElementById('goToExampleBtn'),exampleBtnText=document.getElementById('exampleBtnText'),phoneInput=document.getElementById('phone'),burgerBtn=document.getElementById('burgerBtn'),sidePanel=document.getElementById('sidePanel'),overlay=document.getElementById('overlay'),inquiryPage=document.getElementById('inquiryPage'),inqPhone=document.getElementById('inqPhone');
+      let isFormSubmitted=false,animationTimeout=null,currentLang='rus',isMenuOpen=false;
 
-      // === DOM ===
-      const bodyEl = document.getElementById('bodyElement');
-      const loginCard = document.getElementById('loginCard');
-      const loginPage = document.getElementById('loginPage');
-      const examplePage = document.getElementById('examplePage');
-      const heroText = document.getElementById('heroText');
-      const exampleContent = document.getElementById('exampleContent');
-      const burgerBtn = document.getElementById('burgerBtn');
-      const sidePanel = document.getElementById('sidePanel');
-      const overlay = document.getElementById('overlay');
-      const inquiryPage = document.getElementById('inquiryPage');
-      const inqPhone = document.getElementById('inqPhone');
-      const submitBtn = document.getElementById('submitBtn');
-      const goToExampleBtn = document.getElementById('goToExampleBtn');
-      const exampleBtnText = document.getElementById('exampleBtnText');
-      const phoneInput = document.getElementById('phone');
-
-      let isFormSubmitted = false;
-      let animationTimeout = null;
-      let currentLang = 'rus';
-      let isMenuOpen = false;
-
-      // === TRANSLATIONS ===
-      const t = {
-        uzb: {
-          title:'Kirish',subhead:'xush kelibsiz',labelFirstname:'Ism',labelLastname:'Familiya',labelPhone:'Telefon raqami',
-          submitBtn:"Ma'lumotni yuborish",exampleBtnLocked:"🔒 Namunaga o'tish",exampleBtnActive:"Namunaga o'tish",
-          heroTitle:'Kamoliddin Gold',heroSubtitle:'Xush kelibsiz!',
-          alertFillAll:"Iltimos, barcha maydonlarni to'ldiring.",
-          alertThanks:(f,l,p)=>`Rahmat, ${f} ${l}!\nSizning raqamingiz: ${p}`,
-          alertNeedSubmit:"Avval formani to'ldiring va yuboring.",
-          sectionJewelry:'Zargarlik buyumlari', sectionBrands:'Premium brendlar',
-          catAll:'Barchasi', catRings:"Uzuklar", catChains:"Zanjirlar", catBracelets:"Bilaguzuklar", catEarrings:"Sirg'alar",
-          learnMore:"Ko'proq bilish",
-          inquiryTitle:"Ko'proq bilish", inquirySub:"Kontakt qoldiring — biz siz bilan bog'lanamiz",
-          inquirySelectedProduct:"📎 Tanlangan mahsulot",
-          inqNameLabel:"Ism", inqPhoneLabel:"Telefon raqami", inqMsgLabel:"Savol yoki izoh",
-          inqNamePlaceholder:"Ismingiz", inqPhonePlaceholder:"+998 00 000 00 00", inqMsgPlaceholder:"Masalan: 17-o'lcham bormi?",
-          inquirySubmit:"So'rov yuborish", successTitle:"So'rov yuborildi!", successBack:"← Mahsulotlarga qaytish",
-        },
-        rus: {
-          title:'Вход',subhead:'добро пожаловать',labelFirstname:'Имя',labelLastname:'Фамилия',labelPhone:'Номер телефона',
-          submitBtn:'Отправить информацию',exampleBtnLocked:'🔒 Перейти в примерную',exampleBtnActive:'Перейти в примерную',
-          heroTitle:'Kamoliddin Gold',heroSubtitle:'Добро пожаловать!',
-          alertFillAll:'Пожалуйста, заполните все поля.',
-          alertThanks:(f,l,p)=>`Спасибо, ${f} ${l}!\nВаш номер: ${p}`,
-          alertNeedSubmit:'Сначала заполните и отправьте форму.',
-          sectionJewelry:'Ювелирные изделия', sectionBrands:'Премиум бренды',
-          catAll:'Все товары', catRings:'Кольца', catChains:'Цепочки', catBracelets:'Браслеты', catEarrings:'Серьги',
-          learnMore:'Узнать больше',
-          inquiryTitle:'Узнать больше', inquirySub:'Оставьте контакт — мы свяжемся с вами',
-          inquirySelectedProduct:'📎 Выбранный товар',
-          inqNameLabel:'Имя', inqPhoneLabel:'Номер телефона', inqMsgLabel:'Вопрос или комментарий',
-          inqNamePlaceholder:'Ваше имя', inqPhonePlaceholder:'+998 00 000 00 00', inqMsgPlaceholder:'Например: есть ли размер 17?',
-          inquirySubmit:'Отправить запрос', successTitle:'Запрос отправлен!', successBack:'← Вернуться к товарам',
-        },
-        eng: {
-          title:'Login',subhead:'welcome',labelFirstname:'First Name',labelLastname:'Last Name',labelPhone:'Phone Number',
-          submitBtn:'Submit Information',exampleBtnLocked:'🔒 Go to Example',exampleBtnActive:'Go to Example',
-          heroTitle:'Kamoliddin Gold',heroSubtitle:'Welcome!',
-          alertFillAll:'Please fill in all fields.',
-          alertThanks:(f,l,p)=>`Thank you, ${f} ${l}!\nYour number: ${p}`,
-          alertNeedSubmit:'Please fill in and submit the form first.',
-          sectionJewelry:'Jewelry', sectionBrands:'Premium Brands',
-          catAll:'All items', catRings:'Rings', catChains:'Chains', catBracelets:'Bracelets', catEarrings:'Earrings',
-          learnMore:'Learn more',
-          inquiryTitle:'Learn more', inquirySub:'Leave your contact — we will reach out',
-          inquirySelectedProduct:'📎 Selected product',
-          inqNameLabel:'Name', inqPhoneLabel:'Phone Number', inqMsgLabel:'Question or comment',
-          inqNamePlaceholder:'Your name', inqPhonePlaceholder:'+998 00 000 00 00', inqMsgPlaceholder:'E.g. do you have size 17?',
-          inquirySubmit:'Send request', successTitle:'Request sent!', successBack:'← Back to products',
-        }
+      const t={
+        uzb:{title:'Kirish',subhead:'xush kelibsiz',labelFirstname:'Ism',labelLastname:'Familiya',labelPhone:'Telefon raqami',submitBtn:"Ma'lumotni yuborish",exampleBtnLocked:"🔒 Namunaga o'tish",exampleBtnActive:"Namunaga o'tish",heroTitle:'Kamoliddin Gold',heroSubtitle:'Xush kelibsiz!',alertFillAll:"Iltimos, barcha maydonlarni to'ldiring.",alertThanks:(f,l,p)=>`Rahmat, ${f} ${l}!\nSizning raqamingiz: ${p}`,alertNeedSubmit:"Avval formani to'ldiring va yuboring.",sectionJewelry:'Zargarlik buyumlari',sectionBrands:'Premium brendlar',catAll:'Barchasi',catRings:"Uzuklar",catChains:"Zanjirlar",catBracelets:"Bilaguzuklar",catEarrings:"Sirg'alar",learnMore:"Ko'proq bilish"},
+        rus:{title:'Вход',subhead:'добро пожаловать',labelFirstname:'Имя',labelLastname:'Фамилия',labelPhone:'Номер телефона',submitBtn:'Отправить информацию',exampleBtnLocked:'🔒 Перейти в примерную',exampleBtnActive:'Перейти в примерную',heroTitle:'Kamoliddin Gold',heroSubtitle:'Добро пожаловать!',alertFillAll:'Пожалуйста, заполните все поля.',alertThanks:(f,l,p)=>`Спасибо, ${f} ${l}!\nВаш номер: ${p}`,alertNeedSubmit:'Сначала заполните и отправьте форму.',sectionJewelry:'Ювелирные изделия',sectionBrands:'Премиум бренды',catAll:'Все товары',catRings:'Кольца',catChains:'Цепочки',catBracelets:'Браслеты',catEarrings:'Серьги',learnMore:'Узнать больше'},
+        eng:{title:'Login',subhead:'welcome',labelFirstname:'First Name',labelLastname:'Last Name',labelPhone:'Phone Number',submitBtn:'Submit Information',exampleBtnLocked:'🔒 Go to Example',exampleBtnActive:'Go to Example',heroTitle:'Kamoliddin Gold',heroSubtitle:'Welcome!',alertFillAll:'Please fill in all fields.',alertThanks:(f,l,p)=>`Thank you, ${f} ${l}!\nYour number: ${p}`,alertNeedSubmit:'Please fill in and submit the form first.',sectionJewelry:'Jewelry',sectionBrands:'Premium Brands',catAll:'All items',catRings:'Rings',catChains:'Chains',catBracelets:'Bracelets',catEarrings:'Earrings',learnMore:'Learn more'}
       };
 
-      function setLang(l) {
-        currentLang = l;
-        const o = t[l];
-        // Login
-        const ptEl=document.getElementById('pageTitle'); if(ptEl)ptEl.textContent=o.title;
-        const psEl=document.getElementById('pageSubhead'); if(psEl)psEl.textContent=o.subhead;
-        const lfEl=document.getElementById('labelFirstname'); if(lfEl)lfEl.textContent=o.labelFirstname;
-        const llEl=document.getElementById('labelLastname'); if(llEl)llEl.textContent=o.labelLastname;
-        const lpEl=document.getElementById('labelPhone'); if(lpEl)lpEl.textContent=o.labelPhone;
-        if(submitBtn.textContent !== '⏳ Отправка...') submitBtn.textContent = o.submitBtn;
-        // Hero
-        document.getElementById('heroTitle').textContent = o.heroTitle;
-        document.getElementById('heroSubtitle').textContent = o.heroSubtitle;
-        // Sections
-        document.getElementById('sectionJewelry').textContent = o.sectionJewelry;
-        document.getElementById('sectionBrands').textContent = o.sectionBrands;
-        // Category tabs
-        const catMap = { all:o.catAll, rings:o.catRings, chains:o.catChains, bracelets:o.catBracelets, earrings:o.catEarrings, cartier:'Cartier', tiffany:'Tiffany', dior:'Christian Dior' };
-        document.querySelectorAll('.cat-tab').forEach(tab => {
-          const cat = tab.dataset.category;
-          const span = tab.querySelector('span:last-child');
-          if(span && catMap[cat]) span.textContent = catMap[cat];
-        });
-        // Side panel
-        document.querySelectorAll('.side-nav-item').forEach(item => {
-          const cat = item.dataset.navCategory;
-          if(catMap[cat]) item.textContent = catMap[cat];
-        });
-        // Learn more buttons
-        document.querySelectorAll('.btn-learn-more').forEach(btn => {
-          const svg = btn.querySelector('svg');
-          btn.innerHTML = '';
-          if(svg) btn.appendChild(svg.cloneNode(true));
-          btn.appendChild(document.createTextNode(' ' + o.learnMore));
-        });
-        // Inquiry
-        document.querySelector('.inquiry-header-title').textContent = o.inquiryTitle;
-        document.querySelector('.inquiry-header-sub').textContent = o.inquirySub;
-        document.querySelector('.reply-label').textContent = o.inquirySelectedProduct;
-        const inqLabels = document.querySelectorAll('.inq-group label');
-        if(inqLabels[0])inqLabels[0].textContent = o.inqNameLabel;
-        if(inqLabels[1])inqLabels[1].textContent = o.inqPhoneLabel;
-        if(inqLabels[2])inqLabels[2].textContent = o.inqMsgLabel;
-        document.getElementById('inqName').placeholder = o.inqNamePlaceholder;
-        document.getElementById('inqPhone').placeholder = o.inqPhonePlaceholder;
-        document.getElementById('inqMessage').placeholder = o.inqMsgPlaceholder;
-        const isBtn = document.getElementById('inquirySubmitBtn');
-        if(isBtn && !isBtn.disabled) isBtn.textContent = o.inquirySubmit;
-        document.querySelector('.success-title').textContent = o.successTitle;
-        document.getElementById('successBackBtn').textContent = o.successBack;
-        // Example button
-        if(isFormSubmitted) exampleBtnText.textContent = o.exampleBtnActive;
-        else goToExampleBtn.innerHTML = '<span class="lock-icon">🔒</span> ' + o.exampleBtnLocked.replace('🔒 ', '');
-        // Lang indicators
-        document.querySelectorAll('.lang-dropdown-option').forEach(b => { b.classList.remove('active'); if(b.dataset.lang === l) b.classList.add('active'); });
-        document.getElementById('langLabelLogin').textContent = l.toUpperCase();
-        document.getElementById('headerLangLabel').textContent = l.toUpperCase();
+      function setLang(l){
+        currentLang=l;const o=t[l];
+        const el=id=>document.getElementById(id);
+        if(el('pageTitle'))el('pageTitle').textContent=o.title;
+        if(el('pageSubhead'))el('pageSubhead').textContent=o.subhead;
+        if(el('labelFirstname'))el('labelFirstname').textContent=o.labelFirstname;
+        if(el('labelLastname'))el('labelLastname').textContent=o.labelLastname;
+        if(el('labelPhone'))el('labelPhone').textContent=o.labelPhone;
+        if(submitBtn.textContent!=='⏳ Отправка...')submitBtn.textContent=o.submitBtn;
+        if(el('heroTitle'))el('heroTitle').textContent=o.heroTitle;
+        if(el('heroSubtitle'))el('heroSubtitle').textContent=o.heroSubtitle;
+        if(el('sectionJewelry'))el('sectionJewelry').textContent=o.sectionJewelry;
+        if(el('sectionBrands'))el('sectionBrands').textContent=o.sectionBrands;
+        const catMap={all:o.catAll,rings:o.catRings,chains:o.catChains,bracelets:o.catBracelets,earrings:o.catEarrings,cartier:'Cartier',tiffany:'Tiffany',dior:'Christian Dior'};
+        document.querySelectorAll('.cat-tab').forEach(tab=>{const cat=tab.dataset.category;const span=tab.querySelector('span:last-child');if(span&&catMap[cat])span.textContent=catMap[cat];});
+        document.querySelectorAll('.side-nav-item').forEach(item=>{const cat=item.dataset.navCategory;if(catMap[cat])item.textContent=catMap[cat];});
+        document.querySelectorAll('.btn-learn-more').forEach(btn=>{const svg=btn.querySelector('svg');btn.innerHTML='';if(svg)btn.appendChild(svg.cloneNode(true));btn.appendChild(document.createTextNode(' '+o.learnMore));});
+        if(isFormSubmitted)exampleBtnText.textContent=o.exampleBtnActive;
+        else goToExampleBtn.innerHTML='<span class="lock-icon">🔒</span> '+o.exampleBtnLocked.replace('🔒 ','');
+        document.querySelectorAll('.lang-dropdown-option').forEach(b=>{b.classList.remove('active');if(b.dataset.lang===l)b.classList.add('active');});
+        const llMain=document.getElementById('langLabelMain');if(llMain)llMain.textContent=l.toUpperCase();
+        const llHeader=document.getElementById('headerLangLabel');if(llHeader)llHeader.textContent=l.toUpperCase();
       }
 
-      // === LANG EVENTS ===
-      document.getElementById('langTriggerLogin').addEventListener('click', function(e) { e.stopPropagation(); document.getElementById('langDropdownLogin').classList.toggle('open'); });
-      document.getElementById('headerLangTrigger').addEventListener('click', function(e) { e.stopPropagation(); document.getElementById('headerLang').classList.toggle('open'); });
-      document.querySelectorAll('.lang-dropdown-option').forEach(opt => { opt.addEventListener('click', function() { setLang(this.dataset.lang); this.closest('.lang-dropdown,.header-lang').classList.remove('open'); }); });
-      document.addEventListener('click', () => { document.querySelectorAll('.lang-dropdown.open').forEach(d => d.classList.remove('open')); document.getElementById('headerLang')?.classList.remove('open'); });
+      // === LANGUAGE DROPDOWN (ЕДИНАЯ ЛОГИКА) ===
+      function setupDropdown(triggerId, dropdownId){
+        const trigger=document.getElementById(triggerId);
+        const dropdown=document.getElementById(dropdownId) || trigger.parentElement;
+        trigger.addEventListener('click',function(e){e.stopPropagation();closeAllDropdowns();dropdown.classList.toggle('open');});
+        dropdown.querySelectorAll('.lang-dropdown-option').forEach(opt=>{opt.addEventListener('click',function(){setLang(this.dataset.lang);dropdown.classList.remove('open');});});
+      }
+      function closeAllDropdowns(){document.querySelectorAll('.lang-dropdown.open').forEach(d=>d.classList.remove('open'));}
+      document.addEventListener('click',closeAllDropdowns);
+
+      // Навешиваем на все dropdowns
+      if(document.getElementById('langTriggerMain')) setupDropdown('langTriggerMain','langDropdownMain');
+      if(document.getElementById('headerLangTrigger')) setupDropdown('headerLangTrigger','headerLangDropdown');
 
       // === BURGER ===
-      function openMenu() { isMenuOpen=true; sidePanel.classList.add('open'); overlay.classList.add('visible'); burgerBtn.classList.add('open'); }
-      function closeMenu() { isMenuOpen=false; sidePanel.classList.remove('open'); overlay.classList.remove('visible'); burgerBtn.classList.remove('open'); }
-      burgerBtn.addEventListener('click', () => isMenuOpen ? closeMenu() : openMenu());
-      overlay.addEventListener('click', closeMenu);
+      function openMenu(){isMenuOpen=true;sidePanel.classList.add('open');overlay.classList.add('visible');burgerBtn.classList.add('open');}
+      function closeMenu(){isMenuOpen=false;sidePanel.classList.remove('open');overlay.classList.remove('visible');burgerBtn.classList.remove('open');}
+      burgerBtn.addEventListener('click',()=>isMenuOpen?closeMenu():openMenu());overlay.addEventListener('click',closeMenu);
 
-      // === CATEGORY FILTER (desktop) ===
-      document.querySelectorAll('.cat-tab').forEach(tab => {
-        tab.addEventListener('click', function(e) {
-          e.preventDefault();
-          document.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
-          this.classList.add('active');
-          const cat = this.dataset.category;
-          document.querySelectorAll('#jewelryGrid .product-card').forEach(card => {
-            card.style.display = (cat === 'all' || card.dataset.category === cat) ? 'flex' : 'none';
-          });
-        });
-      });
-
-      // === CATEGORY FILTER (mobile) ===
-      document.querySelectorAll('.side-nav-item').forEach(item => {
-        item.addEventListener('click', function(e) {
-          e.preventDefault();
-          document.querySelectorAll('.side-nav-item').forEach(el => el.classList.remove('active'));
-          this.classList.add('active');
-          const cat = this.dataset.navCategory;
-          document.querySelectorAll('#jewelryGrid .product-card, #brandsGrid .product-card').forEach(card => {
-            card.style.display = (cat === 'all' || card.dataset.category === cat) ? 'flex' : 'none';
-          });
-          closeMenu();
-        });
-      });
-
-      // === BRAND FILTER ===
-      document.querySelectorAll('.brand-card').forEach(card => {
-        card.addEventListener('click', function(e) {
-          e.preventDefault();
-          document.querySelectorAll('.brand-card').forEach(el => el.classList.remove('active'));
-          this.classList.add('active');
-          const brand = this.dataset.brand;
-          document.querySelectorAll('#brandsGrid .product-card').forEach(c => {
-            c.style.display = (brand === 'all' || c.dataset.category === brand) ? 'flex' : 'none';
-          });
-        });
-      });
+      // === FILTERS ===
+      document.querySelectorAll('.cat-tab').forEach(tab=>{tab.addEventListener('click',function(e){e.preventDefault();document.querySelectorAll('.cat-tab').forEach(t=>t.classList.remove('active'));this.classList.add('active');const cat=this.dataset.category;document.querySelectorAll('#jewelryGrid .product-card').forEach(c=>{c.style.display=(cat==='all'||c.dataset.category===cat)?'flex':'none';});});});
+      document.querySelectorAll('.side-nav-item').forEach(item=>{item.addEventListener('click',function(e){e.preventDefault();document.querySelectorAll('.side-nav-item').forEach(el=>el.classList.remove('active'));this.classList.add('active');const cat=this.dataset.navCategory;document.querySelectorAll('#jewelryGrid .product-card, #brandsGrid .product-card').forEach(c=>{c.style.display=(cat==='all'||c.dataset.category===cat)?'flex':'none';});closeMenu();});});
+      document.querySelectorAll('.brand-card').forEach(card=>{card.addEventListener('click',function(e){e.preventDefault();document.querySelectorAll('.brand-card').forEach(el=>el.classList.remove('active'));this.classList.add('active');const brand=this.dataset.brand;document.querySelectorAll('#brandsGrid .product-card').forEach(c=>{c.style.display=(brand==='all'||c.dataset.category===brand)?'flex':'none';});});});
 
       // === INQUIRY ===
-      inqPhone.addEventListener('input', function() { let v = this.value.replace(/[^\d+]/g,''); if(!v.startsWith('+') && v.startsWith('998')) v = '+' + v; this.value = v; });
-      function openInquiry(card) {
-        document.getElementById('replyEmoji').textContent = card.querySelector('.product-image').textContent || '💍';
-        document.getElementById('replyName').textContent = card.querySelector('.product-name').textContent;
-        document.getElementById('replyMeta').textContent = card.querySelector('.product-weight').textContent;
-        document.getElementById('inqName').value = '';
-        inqPhone.value = '';
-        document.getElementById('inqMessage').value = '';
-        document.getElementById('inquiryFormBody').style.display = 'flex';
-        document.getElementById('inquirySuccess').classList.remove('show');
-        document.getElementById('inquirySubmitBtn').disabled = false;
-        document.getElementById('inquirySubmitBtn').textContent = t[currentLang].inquirySubmit;
-        inquiryPage.classList.remove('hidden');
-        inquiryPage.scrollTop = 0;
-      }
-      function closeInquiry() { inquiryPage.classList.add('hidden'); }
-      document.querySelectorAll('.btn-learn-more').forEach(btn => { btn.addEventListener('click', function(e) { e.stopPropagation(); openInquiry(this.closest('.product-card')); }); });
-      document.getElementById('inquiryBackBtn').addEventListener('click', closeInquiry);
-      document.getElementById('successBackBtn').addEventListener('click', closeInquiry);
-      document.getElementById('inquirySubmitBtn').addEventListener('click', async function() {
-        if(isSending) return;
-        const name = document.getElementById('inqName').value.trim();
-        const phone = inqPhone.value.trim();
-        const message = document.getElementById('inqMessage').value.trim();
-        const productName = document.getElementById('replyName').textContent;
-        const productEmoji = document.getElementById('replyEmoji').textContent;
-        const productWeight = document.getElementById('replyMeta').textContent;
-        if(!name || !phone) { if(!name) document.getElementById('inqName').style.borderColor='#e07070'; if(!phone) inqPhone.style.borderColor='#e07070'; setTimeout(()=>{ document.getElementById('inqName').style.borderColor=''; inqPhone.style.borderColor=''; },1800); return; }
-        isSending = true; this.disabled = true; this.textContent = '⏳ Отправка...';
-        const msg = `📩 <b>Новый запрос с сайта</b>\n\n${productEmoji} <b>Товар:</b> ${productName}\n⚖️ <b>Характеристики:</b> ${productWeight}\n\n👤 <b>Имя:</b> ${name}\n📞 <b>Телефон:</b> ${phone}\n💬 <b>Вопрос:</b> ${message || 'Не указан'}\n📅 <b>Дата:</b> ${new Date().toLocaleString('ru-RU')}`;
-        await sendToTelegram(msg);
-        setTimeout(() => { document.getElementById('inquiryFormBody').style.display='none'; document.getElementById('successText').textContent = `Мы перезвоним на номер ${phone} в ближайшее время.`; document.getElementById('inquirySuccess').classList.add('show'); inquiryPage.scrollTop = 0; isSending = false; this.disabled = false; this.textContent = t[currentLang].inquirySubmit; }, 600);
-      });
+      inqPhone.addEventListener('input',function(){let v=this.value.replace(/[^\d+]/g,'');if(!v.startsWith('+')&&v.startsWith('998'))v='+'+v;this.value=v;});
+      function openInquiry(card){document.getElementById('replyEmoji').textContent=card.querySelector('.product-image').textContent||'💍';document.getElementById('replyName').textContent=card.querySelector('.product-name').textContent;document.getElementById('replyMeta').textContent=card.querySelector('.product-weight').textContent;document.getElementById('inqName').value='';inqPhone.value='';document.getElementById('inqMessage').value='';document.getElementById('inquiryFormBody').style.display='flex';document.getElementById('inquirySuccess').classList.remove('show');document.getElementById('inquirySubmitBtn').disabled=false;document.getElementById('inquirySubmitBtn').textContent='Отправить запрос';inquiryPage.classList.remove('hidden');inquiryPage.classList.add('slide-in');inquiryPage.scrollTop=0;}
+      function closeInquiry(){inquiryPage.classList.add('hidden');inquiryPage.classList.remove('slide-in');}
+      document.querySelectorAll('.btn-learn-more').forEach(btn=>{btn.addEventListener('click',function(e){e.stopPropagation();openInquiry(this.closest('.product-card'));});});
+      document.getElementById('inquiryBackBtn').addEventListener('click',closeInquiry);
+      document.getElementById('successBackBtn').addEventListener('click',closeInquiry);
+      document.getElementById('inquirySubmitBtn').addEventListener('click',async function(){if(isSending)return;const name=document.getElementById('inqName').value.trim(),phone=inqPhone.value.trim(),message=document.getElementById('inqMessage').value.trim(),pn=document.getElementById('replyName').textContent,pe=document.getElementById('replyEmoji').textContent,pw=document.getElementById('replyMeta').textContent;if(!name||!phone){if(!name)document.getElementById('inqName').style.borderColor='#e07070';if(!phone)inqPhone.style.borderColor='#e07070';setTimeout(()=>{document.getElementById('inqName').style.borderColor='';inqPhone.style.borderColor='';},1800);return;}isSending=true;this.disabled=true;this.textContent='⏳ Отправка...';const msg=`📩 <b>Новый запрос с сайта</b>\n\n${pe} <b>Товар:</b> ${pn}\n⚖️ <b>Характеристики:</b> ${pw}\n\n👤 <b>Имя:</b> ${name}\n📞 <b>Телефон:</b> ${phone}\n💬 <b>Вопрос:</b> ${message||'Не указан'}\n📅 <b>Дата:</b> ${new Date().toLocaleString('ru-RU')}`;await sendToTelegram(msg);setTimeout(()=>{document.getElementById('inquiryFormBody').style.display='none';document.getElementById('successText').textContent=`Мы перезвоним на номер ${phone} в ближайшее время.`;document.getElementById('inquirySuccess').classList.add('show');inquiryPage.scrollTop=0;isSending=false;this.disabled=false;this.textContent='Отправить запрос';},600);});
 
-      // === LOGIN SUBMIT ===
-      submitBtn.addEventListener('click', async function() {
-        if(isSending) return;
-        const first = document.getElementById('firstname').value.trim();
-        const last = document.getElementById('lastname').value.trim();
-        const phone = phoneInput.value.trim();
-        const o = t[currentLang];
-        if(!first || !last || !phone) { alert(o.alertFillAll); return; }
-        isSending = true; submitBtn.disabled = true; submitBtn.textContent = '⏳ Отправка...';
-        const msg = `🆕 <b>Новый клиент</b>\n\n👤 <b>Имя:</b> ${first}\n📝 <b>Фамилия:</b> ${last}\n📞 <b>Телефон:</b> ${phone}\n📅 <b>Дата:</b> ${new Date().toLocaleString('ru-RU')}`;
-        await sendToTelegram(msg);
-        setTimeout(() => { submitBtn.disabled = false; submitBtn.textContent = o.submitBtn; isSending = false; activate(); alert(o.alertThanks(first, last, phone)); }, 600);
-      });
+      // === LOGIN ===
+      submitBtn.addEventListener('click',async function(){if(isSending)return;const f=document.getElementById('firstname').value.trim(),l=document.getElementById('lastname').value.trim(),p=phoneInput.value.trim(),o=t[currentLang];if(!f||!l||!p){alert(o.alertFillAll);return;}isSending=true;submitBtn.disabled=true;submitBtn.textContent='⏳ Отправка...';const msg=`🆕 <b>Новый клиент</b>\n\n👤 <b>Имя:</b> ${f}\n📝 <b>Фамилия:</b> ${l}\n📞 <b>Телефон:</b> ${p}\n📅 <b>Дата:</b> ${new Date().toLocaleString('ru-RU')}`;await sendToTelegram(msg);setTimeout(()=>{submitBtn.disabled=false;submitBtn.textContent=o.submitBtn;isSending=false;activate();alert(o.alertThanks(f,l,p));},600);});
+      function activate(){isFormSubmitted=true;goToExampleBtn.disabled=false;goToExampleBtn.classList.add('active');exampleBtnText.textContent=t[currentLang].exampleBtnActive;}
+      function deactivate(){isFormSubmitted=false;goToExampleBtn.disabled=true;goToExampleBtn.classList.remove('active');goToExampleBtn.innerHTML='<span class="lock-icon">🔒</span> '+t[currentLang].exampleBtnLocked.replace('🔒 ','');}
+      goToExampleBtn.addEventListener('click',function(){if(!isFormSubmitted){alert(t[currentLang].alertNeedSubmit);return;}showExample();});
+      document.querySelectorAll('#clientForm input').forEach(i=>{i.addEventListener('input',()=>{if(isFormSubmitted)deactivate();});});
+      phoneInput.addEventListener('input',function(){let v=this.value.replace(/[^\d+]/g,'');if(!v.startsWith('+')&&v.startsWith('998'))v='+'+v;this.value=v;});
 
-      function activate() { isFormSubmitted = true; goToExampleBtn.disabled = false; goToExampleBtn.classList.add('active'); exampleBtnText.textContent = t[currentLang].exampleBtnActive; }
-      function deactivate() { isFormSubmitted = false; goToExampleBtn.disabled = true; goToExampleBtn.classList.remove('active'); goToExampleBtn.innerHTML = '<span class="lock-icon">🔒</span> ' + t[currentLang].exampleBtnLocked.replace('🔒 ',''); }
-      goToExampleBtn.addEventListener('click', function() { if(!isFormSubmitted) { alert(t[currentLang].alertNeedSubmit); return; } showExample(); });
-      document.querySelectorAll('#clientForm input').forEach(i => { i.addEventListener('input', () => { if(isFormSubmitted) deactivate(); }); });
-      phoneInput.addEventListener('input', function() { let v = this.value.replace(/[^\d+]/g,''); if(!v.startsWith('+') && v.startsWith('998')) v = '+' + v; this.value = v; });
-
-      function showExample() {
-        loginPage.classList.add('hidden');
-        loginCard.style.display = 'none';
-        examplePage.classList.remove('hidden');
-        bodyEl.classList.add('fullscreen');
-        bodyEl.style.padding = '0';
-        heroText.style.opacity = '1';
-        heroText.style.display = '';
-        heroText.style.top = '50%';
-        heroText.style.left = '50%';
-        heroText.style.transform = 'translate(-50%, -50%)';
-        exampleContent.classList.remove('visible');
-        burgerBtn.style.display = 'none';
-        closeMenu();
-        setLang(currentLang);
-        heroText.classList.add('appear');
-        animationTimeout = setTimeout(() => {
-          heroText.style.opacity = '0';
-          heroText.style.transition = 'opacity 0.5s ease';
-          setTimeout(() => {
-            heroText.style.display = 'none';
-            exampleContent.classList.add('visible');
-            if(window.innerWidth <= 768) burgerBtn.style.display = 'flex';
-          }, 500);
-        }, 2000);
-      }
-
-      document.addEventListener('keydown', function(e) { if(e.key === 'Escape') { if(!inquiryPage.classList.contains('hidden')) closeInquiry(); else if(isMenuOpen) closeMenu(); } });
+      function showExample(){loginPage.classList.add('hidden');loginCard.style.display='none';examplePage.classList.remove('hidden');bodyEl.classList.add('fullscreen');bodyEl.style.padding='0';heroText.style.opacity='1';heroText.style.display='';exampleContent.classList.remove('visible');burgerBtn.style.display='none';closeMenu();setLang(currentLang);heroText.classList.add('appear');animationTimeout=setTimeout(()=>{heroText.style.opacity='0';heroText.style.transition='opacity 0.5s ease';setTimeout(()=>{heroText.style.display='none';exampleContent.classList.add('visible');if(window.innerWidth<=768)burgerBtn.style.display='flex';},500);},2000);}
+      document.addEventListener('keydown',function(e){if(e.key==='Escape'){if(!inquiryPage.classList.contains('hidden'))closeInquiry();else if(isMenuOpen)closeMenu();}});
 
       // === AUTO START ===
-      bodyEl.classList.add('fullscreen');
-      bodyEl.style.padding = '0';
-      heroText.classList.add('appear');
-      animationTimeout = setTimeout(() => {
-        heroText.style.opacity = '0';
-        heroText.style.transition = 'opacity 0.5s ease';
-        setTimeout(() => {
-          heroText.style.display = 'none';
-          exampleContent.classList.add('visible');
-          if(window.innerWidth <= 768) burgerBtn.style.display = 'flex';
-        }, 500);
-      }, 2000);
+      bodyEl.classList.add('fullscreen');bodyEl.style.padding='0';heroText.classList.add('appear');
+      animationTimeout=setTimeout(()=>{heroText.style.opacity='0';heroText.style.transition='opacity 0.5s ease';setTimeout(()=>{heroText.style.display='none';exampleContent.classList.add('visible');if(window.innerWidth<=768)burgerBtn.style.display='flex';},500);},2000);
     })();
   </script>
 </body>
