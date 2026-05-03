@@ -12,7 +12,7 @@
     body { background-color: #fdf7f2; font-family: 'Inter', system-ui, -apple-system, sans-serif; display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; padding: 20px; transition: padding 0.3s ease; }
     body.fullscreen { padding: 0; overflow-x: hidden; }
 
-    /* LOGIN */
+    /* ========== LOGIN ========== */
     .login-card { background: white; max-width: 460px; width: 100%; margin: auto; border-radius: 32px; box-shadow: 0 20px 35px rgba(0,0,0,0.03); padding: 40px 34px 34px; display: flex; flex-direction: column; align-items: center; }
     .login-page { width: 100%; display: flex; flex-direction: column; align-items: center; }
     .login-page.hidden { display: none; }
@@ -21,7 +21,7 @@
     .title { font-size: 2.6rem; font-weight: 700; letter-spacing: -0.5px; color: #2c2416; line-height: 1.1; }
     .subhead { font-size: 0.88rem; color: #a89880; margin-top: 3px; font-weight: 400; }
     .lang-dropdown { position: relative; user-select: none; z-index: 50; }
-    .lang-dropdown-trigger { display: flex; align-items: center; gap: 8px; padding: 9px 16px; background: linear-gradient(135deg, #faf6ef, #f5ede0); border: 1px solid #ddd0ba; border-radius: 50px; cursor: pointer; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.5px; color: #2c2416; transition: all 0.25s ease; box-shadow: 0 2px 8px rgba(44,36,22,0.07); }
+    .lang-dropdown-trigger { display: flex; align-items: center; gap: 8px; padding: 9px 16px; background: linear-gradient(135deg, #faf6ef, #f5ede0); border: 1px solid #ddd0ba; border-radius: 50px; cursor: pointer; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.5px; color: #2c2416; transition: all 0.25s ease; }
     .lang-dropdown-trigger:hover { background: linear-gradient(135deg, #f5ede0, #ece0cc); border-color: #c8b294; transform: translateY(-1px); }
     .lang-dropdown-trigger .chevron { width: 13px; height: 13px; transition: transform 0.3s ease; opacity: 0.55; }
     .lang-dropdown.open .chevron { transform: rotate(180deg); }
@@ -34,13 +34,14 @@
     .client-form { width: 100%; display: flex; flex-direction: column; gap: 18px; }
     .input-group { display: flex; flex-direction: column; gap: 6px; }
     .input-group label { font-size: 0.8rem; font-weight: 600; text-transform: uppercase; color: #6b5e4a; margin-left: 6px; }
-    .input-group input { background: #fefcf8; border: 1px solid #ede3d4; border-radius: 16px; padding: 16px 18px; font-size: 1rem; color: #2e271e; outline: none; font-family: 'Inter', sans-serif; transition: all 0.2s ease; }
+    .input-group input { background: #fefcf8; border: 1px solid #ede3d4; border-radius: 16px; padding: 16px 18px; font-size: 1rem; color: #2e271e; outline: none; font-family: 'Inter', sans-serif; }
     .input-group input:focus { border-color: #c8b294; background: #fff; box-shadow: 0 0 0 4px rgba(200,178,148,0.18); }
     .buttons-block { width: 100%; display: flex; flex-direction: column; gap: 12px; margin: 24px 0; }
     .button-primary { background: #2a2419; border: 1px solid #3b3324; border-radius: 18px; padding: 18px; font-weight: 600; font-size: 1rem; color: white; cursor: pointer; width: 100%; text-align: center; font-family: 'Inter', sans-serif; transition: all 0.2s ease; }
-    .button-primary:hover { background: #3f3522; transform: translateY(-1px); box-shadow: 0 8px 20px rgba(42,36,25,0.25); }
+    .button-primary:hover:not(:disabled) { background: #3f3522; transform: translateY(-1px); }
+    .button-primary:disabled { opacity: 0.6; cursor: not-allowed; }
     .button-secondary { background: #e8e3da; border: 1px solid #d6cdbc; border-radius: 18px; padding: 15px; font-weight: 550; font-size: 0.95rem; color: #b0a590; cursor: not-allowed; width: 100%; text-align: center; opacity: 0.7; pointer-events: none; font-family: 'Inter', sans-serif; }
-    .button-secondary.active { background: #fefcf9; color: #4a3f2e; cursor: pointer; opacity: 1; pointer-events: auto; transition: all 0.2s ease; }
+    .button-secondary.active { background: #fefcf9; color: #4a3f2e; cursor: pointer; opacity: 1; pointer-events: auto; }
     .button-secondary.active:hover { background: #f5ede0; transform: translateY(-1px); }
     .button-secondary .lock-icon { margin-right: 4px; }
     .button-secondary.active .lock-icon { display: none; }
@@ -48,7 +49,7 @@
     .contact-row { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 10px; }
     .contact-pill { display: inline-flex; align-items: center; gap: 8px; padding: 9px 16px; border-radius: 50px; font-size: 0.88rem; font-weight: 500; text-decoration: none; white-space: nowrap; transition: all 0.3s ease; border: 1px solid transparent; }
     .contact-pill svg { width: 16px; height: 16px; flex-shrink: 0; fill: none; stroke-width: 1.9; }
-    .contact-pill:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,0.1); }
+    .contact-pill:hover { transform: translateY(-2px); }
     .pill-tg { background: #f0f7ff; border-color: #cce0f5; color: #2070b8; }
     .pill-tg svg { stroke: #2070b8; }
     .pill-phone { background: linear-gradient(135deg, #f7f0e4, #efe0ca); border-color: #d4c0a0; color: #2f2819; font-weight: 600; animation: phonePulse 2.5s ease-in-out infinite; }
@@ -57,201 +58,106 @@
     .pill-ig { background: linear-gradient(135deg,#fff0f5,#fce8f0); border-color: #f0c8d8; color: #a0306a; }
     .pill-ig svg { stroke: #c04080; }
 
-    /* ========== MAIN GOLD PAGE ========== */
-    .example-page { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; height: 100dvh; background-color: #fdf7f2; z-index: 100; overflow-y: auto; overflow-x: hidden; }
+    /* ========== MAIN ========== */
+    .example-page { position: fixed; top: 0; left: 0; width: 100vw; height: 100dvh; background-color: #fdf7f2; z-index: 100; overflow-y: auto; overflow-x: hidden; }
     .example-page.hidden { display: none; }
-    .example-page::before { content: ''; position: fixed; top: -200px; right: -150px; width: 600px; height: 600px; background: radial-gradient(circle, rgba(200,178,148,0.18) 0%, transparent 70%); border-radius: 50%; pointer-events: none; z-index: 0; animation: ambientFloat 8s ease-in-out infinite; }
-    .example-page::after { content: ''; position: fixed; bottom: -100px; left: -100px; width: 400px; height: 400px; background: radial-gradient(circle, rgba(200,150,100,0.1) 0%, transparent 70%); border-radius: 50%; pointer-events: none; z-index: 0; animation: ambientFloat2 10s ease-in-out infinite; }
-    @keyframes ambientFloat { 0%,100%{transform:translate(0,0) scale(1)} 33%{transform:translate(-30px,20px) scale(1.05)} 66%{transform:translate(20px,-15px) scale(0.95)} }
-    @keyframes ambientFloat2 { 0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(25px,-20px) scale(1.08)} }
-
-    .hero-text { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; z-index: 10; pointer-events: none; max-width: 90vw; word-break: break-word; }
-    .hero-text.appear { animation: heroAppear 1s cubic-bezier(0.34,1.56,0.64,1) both; }
+    .hero-text { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; z-index: 10; pointer-events: none; max-width: 90vw; }
+    .hero-text.appear { animation: heroAppear 1s ease both; }
     @keyframes heroAppear { from{opacity:0;transform:translate(-50%,-42%) scale(0.85)}to{opacity:1;transform:translate(-50%,-50%) scale(1)} }
-    .hero-title { font-size: clamp(2rem, 6vw, 4.2rem); font-weight: 700; color: #2c2416; white-space: nowrap; background: linear-gradient(135deg, #2c2416 0%, #c8a870 50%, #2c2416 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; animation: shimmer 4s ease-in-out infinite; background-size: 200% auto; }
+    .hero-title { font-size: clamp(2rem, 6vw, 4rem); font-weight: 700; color: #2c2416; background: linear-gradient(135deg, #2c2416, #c8a870, #2c2416); background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; animation: shimmer 4s ease-in-out infinite; }
     @keyframes shimmer { 0%,100%{background-position:0% center}50%{background-position:100% center} }
-    .hero-subtitle { font-size: 1.3rem; color: #8b7a62; margin-top: 10px; animation: fadeInUp 1s ease 0.3s both; }
-    @keyframes fadeInUp { from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)} }
-
+    .hero-subtitle { font-size: 1.3rem; color: #8b7a62; margin-top: 10px; }
     .example-content { position: relative; z-index: 5; max-width: 1120px; margin: 0 auto; padding: 40px 40px 60px; opacity: 0; pointer-events: none; transition: opacity 0.6s ease 0.3s; }
     .example-content.visible { opacity: 1; pointer-events: auto; }
-    .content-main-title { font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 700; color: #2c2416; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: calc(100% - 60px); }
-
-    /* CATEGORY TABS */
-    .category-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; margin-bottom: 32px; animation: fadeSlideUp 0.6s ease both; }
-    @keyframes fadeSlideUp { from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)} }
-    .cat-tab { display: inline-flex; align-items: center; gap: 6px; padding: 9px 18px; border-radius: 50px; font-size: 0.85rem; font-weight: 500; color: #7a6a52; background: white; border: 1.5px solid #e8ddd0; cursor: pointer; text-decoration: none; transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1); user-select: none; }
-    .cat-tab span { transition: color 0.25s ease; }
-    .cat-dot { width: 5px; height: 5px; border-radius: 50%; background: #d4c4a8; flex-shrink: 0; transition: background 0.25s ease, transform 0.3s cubic-bezier(0.34,1.56,0.64,1); }
-    .cat-tab:hover { border-color: #c8b294; transform: translateY(-3px) scale(1.03); box-shadow: 0 8px 20px rgba(42,36,25,0.14); }
-    .cat-tab:active { transform: scale(0.95); }
-    .cat-tab.active { background: #2a2419; border-color: #2a2419; color: white; box-shadow: 0 6px 20px rgba(42,36,25,0.28); transform: translateY(-1px); }
-    .cat-tab.active .cat-dot { background: #c8a870; transform: scale(1.4); }
-    .cat-tab.active span { color: white; }
+    .content-main-title { font-size: clamp(1.4rem, 3vw, 2.2rem); font-weight: 700; color: #2c2416; margin-bottom: 16px; }
+    .category-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; }
+    .cat-tab { display: inline-flex; align-items: center; gap: 6px; padding: 9px 18px; border-radius: 50px; font-size: 0.85rem; font-weight: 500; color: #7a6a52; background: white; border: 1.5px solid #e8ddd0; cursor: pointer; text-decoration: none; transition: all 0.25s ease; }
+    .cat-tab:hover { border-color: #c8b294; transform: translateY(-2px); }
+    .cat-tab.active { background: #2a2419; border-color: #2a2419; color: white; }
+    .cat-dot { width: 5px; height: 5px; border-radius: 50%; background: #d4c4a8; flex-shrink: 0; }
+    .cat-tab.active .cat-dot { background: #c8a870; }
     .cat-separator { width: 1px; height: 24px; background: #ddd0ba; align-self: center; margin: 0 4px; }
 
-    /* PRODUCT CARDS */
-    .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; }
-    .product-card { background: white; border-radius: 20px; overflow: hidden; cursor: pointer; transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1); box-shadow: 0 4px 14px rgba(0,0,0,0.05); position: relative; display: flex; flex-direction: column; animation: cardAppear 0.6s cubic-bezier(0.34,1.56,0.64,1) both; }
-    .product-card:nth-child(1){animation-delay:0.05s}.product-card:nth-child(2){animation-delay:0.15s}.product-card:nth-child(3){animation-delay:0.25s}.product-card:nth-child(4){animation-delay:0.35s}
-    @keyframes cardAppear { from{opacity:0;transform:translateY(28px) scale(0.94)}to{opacity:1;transform:translateY(0) scale(1)} }
-    .product-card:hover { transform: translateY(-10px) scale(1.02); box-shadow: 0 24px 48px rgba(42,36,25,0.16); }
-    .product-card:active { transform: scale(0.97); transition-duration: 0.1s; }
-    .product-card::after { content: ''; position: absolute; inset: 0; background: linear-gradient(105deg, transparent 30%, rgba(255,255,255,0.55) 50%, transparent 70%); transform: translateX(-120%); transition: transform 0.7s ease; pointer-events: none; }
-    .product-card:hover::after { transform: translateX(120%); }
-    .product-image { width: 100%; height: 200px; background: linear-gradient(135deg, #faf6ef, #f5ede0); display: flex; align-items: center; justify-content: center; font-size: 3.8rem; transition: transform 0.5s cubic-bezier(0.34,1.56,0.64,1); flex-shrink: 0; position: relative; overflow: hidden; }
-    .product-image::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 50% 120%, rgba(200,168,112,0.15), transparent 60%); }
-    .product-card:hover .product-image { transform: scale(1.06); }
-    .product-info { padding: 16px; flex: 1; display: flex; flex-direction: column; }
-    .product-name { font-size: 1rem; font-weight: 600; color: #2c2416; margin-bottom: 5px; }
-    .product-price { font-size: 1.05rem; font-weight: 700; color: #2a2419; }
-    .product-weight { font-size: 0.8rem; color: #8b7a62; margin-top: 3px; }
-    .product-badge { position: absolute; top: 12px; right: 12px; background: #2a2419; color: #e8dcc8; padding: 5px 12px; border-radius: 20px; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.5px; animation: badgePop 0.5s cubic-bezier(0.34,1.56,0.64,1) both 0.4s; }
-    @keyframes badgePop { from{opacity:0;transform:scale(0.5) rotate(-8deg)}to{opacity:1;transform:scale(1) rotate(0deg)} }
-
-    .btn-learn-more { display: flex; align-items: center; justify-content: center; gap: 7px; margin: 8px 14px 14px; padding: 12px 16px; background: linear-gradient(135deg, #faf6ef, #f5ede0); border: 1.5px solid #ddd0ba; border-radius: 14px; font-size: 0.88rem; font-weight: 600; color: #2c2416; cursor: pointer; font-family: 'Inter', sans-serif; transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1); position: relative; z-index: 5; overflow: hidden; }
-    .btn-learn-more::before { content: ''; position: absolute; inset: 0; background: #2a2419; transform: scaleX(0); transform-origin: left; transition: transform 0.3s ease; z-index: -1; }
-    .btn-learn-more:hover::before { transform: scaleX(1); }
-    .btn-learn-more svg { width: 15px; height: 15px; stroke: #7a6a52; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; transition: stroke 0.2s, transform 0.35s cubic-bezier(0.34,1.56,0.64,1); }
-    .btn-learn-more:hover { color: white; border-color: #2a2419; transform: translateY(-1px); box-shadow: 0 8px 20px rgba(42,36,25,0.25); }
-    .btn-learn-more:hover svg { stroke: white; transform: translateX(4px) rotate(12deg); }
-    .btn-learn-more:active { transform: scale(0.96); }
+    .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 20px; }
+    .product-card { background: white; border-radius: 18px; overflow: hidden; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 14px rgba(0,0,0,0.04); display: flex; flex-direction: column; position: relative; }
+    .product-card:hover { transform: translateY(-6px); box-shadow: 0 16px 36px rgba(0,0,0,0.1); }
+    .product-image { width: 100%; height: 190px; background: linear-gradient(135deg, #faf6ef, #f5ede0); display: flex; align-items: center; justify-content: center; font-size: 3.5rem; flex-shrink: 0; position: relative; overflow: hidden; }
+    .product-info { padding: 14px; flex: 1; }
+    .product-name { font-size: 0.95rem; font-weight: 600; color: #2c2416; margin-bottom: 3px; }
+    .product-weight { font-size: 0.78rem; color: #8b7a62; }
+    .product-badge { position: absolute; top: 10px; right: 10px; background: #2a2419; color: #e8dcc8; padding: 4px 10px; border-radius: 16px; font-size: 0.68rem; font-weight: 600; }
+    .btn-learn-more { display: flex; align-items: center; justify-content: center; gap: 6px; margin: 6px 12px 12px; padding: 11px 14px; background: #faf6ef; border: 1.5px solid #ddd0ba; border-radius: 12px; font-size: 0.85rem; font-weight: 600; color: #2c2416; cursor: pointer; font-family: 'Inter', sans-serif; transition: all 0.25s ease; }
+    .btn-learn-more:hover { background: #2a2419; border-color: #2a2419; color: white; }
+    .btn-learn-more svg { width: 14px; height: 14px; stroke: #7a6a52; fill: none; stroke-width: 2; transition: all 0.3s ease; }
+    .btn-learn-more:hover svg { stroke: white; transform: translateX(3px); }
 
     /* INQUIRY */
-    .inquiry-page { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; height: 100dvh; background-color: #fdf7f2; z-index: 300; overflow-y: auto; display: flex; align-items: flex-start; justify-content: center; padding: 24px 20px; }
+    .inquiry-page { position: fixed; top: 0; left: 0; width: 100vw; height: 100dvh; background-color: #fdf7f2; z-index: 300; overflow-y: auto; display: flex; align-items: flex-start; justify-content: center; padding: 24px 20px; }
     .inquiry-page.hidden { display: none; }
-    .inquiry-page.slide-in { animation: slideInUp 0.45s cubic-bezier(0.34,1.56,0.64,1) both; }
-    @keyframes slideInUp { from{opacity:0;transform:translateY(40px) scale(0.96)}to{opacity:1;transform:translateY(0) scale(1)} }
-    .inquiry-page.slide-out { animation: slideOutDown 0.28s ease both; }
-    @keyframes slideOutDown { from{opacity:1;transform:translateY(0)}to{opacity:0;transform:translateY(28px)} }
-    .inquiry-card { background: white; max-width: 480px; width: 100%; margin: auto; border-radius: 32px; box-shadow: 0 24px 60px rgba(0,0,0,0.09); overflow: hidden; }
-    .inquiry-header { display: flex; align-items: center; gap: 14px; padding: 26px 28px 20px; border-bottom: 1px solid #f0e7db; }
-    .inquiry-back-btn { width: 40px; height: 40px; border-radius: 13px; background: #faf6ef; border: 1px solid #e8ddd0; display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0; transition: all 0.25s cubic-bezier(0.34,1.56,0.64,1); }
-    .inquiry-back-btn:hover { background: #f0e4d4; transform: translateX(-3px) scale(1.05); }
-    .inquiry-back-btn svg { width: 16px; height: 16px; stroke: #5f5340; fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
-    .inquiry-header-title { font-size: 1.15rem; font-weight: 700; color: #2c2416; }
-    .inquiry-header-sub { font-size: 0.8rem; color: #a89880; margin-top: 2px; }
-    .product-reply { margin: 20px 28px 0; border-radius: 16px; border-left: 3.5px solid #c8a870; background: linear-gradient(135deg, #fdf8f0, #faf4ea); padding: 13px 16px; display: flex; align-items: center; gap: 14px; position: relative; overflow: hidden; animation: replySlide 0.4s cubic-bezier(0.34,1.56,0.64,1) both; animation-delay: 0.1s; }
-    @keyframes replySlide { from{opacity:0;transform:translateX(-16px)}to{opacity:1;transform:translateX(0)} }
-    .reply-emoji { font-size: 2.2rem; flex-shrink: 0; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1)); }
+    .inquiry-card { background: white; max-width: 460px; width: 100%; margin: auto; border-radius: 28px; box-shadow: 0 20px 50px rgba(0,0,0,0.08); overflow: hidden; }
+    .inquiry-header { display: flex; align-items: center; gap: 12px; padding: 22px 24px 18px; border-bottom: 1px solid #f0e7db; }
+    .inquiry-back-btn { width: 36px; height: 36px; border-radius: 10px; background: #faf6ef; border: 1px solid #e8ddd0; display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0; }
+    .inquiry-back-btn:hover { background: #f0e4d4; }
+    .inquiry-back-btn svg { width: 14px; height: 14px; stroke: #5f5340; fill: none; stroke-width: 2.5; }
+    .inquiry-header-title { font-size: 1.1rem; font-weight: 700; color: #2c2416; }
+    .inquiry-header-sub { font-size: 0.78rem; color: #a89880; margin-top: 2px; }
+    .product-reply { margin: 18px 24px 0; border-radius: 14px; border-left: 3px solid #c8a870; background: #fdf8f0; padding: 12px 14px; display: flex; align-items: center; gap: 12px; }
+    .reply-emoji { font-size: 2.5rem; flex-shrink: 0; }
     .reply-info { flex: 1; min-width: 0; }
-    .reply-label { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.7px; color: #c8a870; margin-bottom: 3px; }
-    .reply-product-name { font-size: 0.95rem; font-weight: 600; color: #2c2416; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .reply-product-meta { font-size: 0.78rem; color: #8b7a62; margin-top: 1px; }
-    .reply-product-price { font-size: 0.88rem; font-weight: 700; color: #2a2419; margin-top: 4px; }
-    .inquiry-form-body { padding: 20px 28px 28px; display: flex; flex-direction: column; gap: 16px; }
-    .inq-group { display: flex; flex-direction: column; gap: 6px; }
-    .inq-group label { font-size: 0.78rem; font-weight: 600; text-transform: uppercase; color: #6b5e4a; margin-left: 4px; letter-spacing: 0.3px; }
-    .inq-group input, .inq-group textarea { background: #fefcf8; border: 1.5px solid #ede3d4; border-radius: 16px; padding: 14px 16px; font-size: 0.95rem; color: #2e271e; outline: none; font-family: 'Inter', sans-serif; transition: all 0.2s ease; width: 100%; }
-    .inq-group textarea { resize: none; min-height: 108px; line-height: 1.55; }
-    .inq-group input:focus, .inq-group textarea:focus { border-color: #c8b294; background: #fff; box-shadow: 0 0 0 4px rgba(200,178,148,0.18); }
-    .inq-group input.error { border-color: #e07070 !important; box-shadow: 0 0 0 3px rgba(224,112,112,0.15) !important; animation: shake 0.4s ease; }
-    @keyframes shake { 0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)} }
-    .inq-group input::placeholder, .inq-group textarea::placeholder { color: #c4b49e; }
-    .inquiry-submit { background: #2a2419; border: none; border-radius: 18px; padding: 18px; font-weight: 600; font-size: 1rem; color: white; cursor: pointer; width: 100%; font-family: 'Inter', sans-serif; transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1); display: flex; align-items: center; justify-content: center; gap: 8px; }
-    .inquiry-submit svg { width: 17px; height: 17px; stroke: white; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1); }
-    .inquiry-submit:hover { background: #3f3522; transform: translateY(-2px); box-shadow: 0 12px 28px rgba(42,36,25,0.3); }
-    .inquiry-submit:hover svg { transform: translateX(4px) rotate(10deg); }
-    .inquiry-submit:active { transform: scale(0.97); }
-    .inquiry-success { display: none; flex-direction: column; align-items: center; padding: 36px 28px 36px; text-align: center; }
-    .inquiry-success.show { display: flex; animation: fadeSlideUp 0.5s ease both; }
-    .success-icon { width: 76px; height: 76px; border-radius: 50%; background: linear-gradient(135deg, #f5ede0, #ece0cc); display: flex; align-items: center; justify-content: center; font-size: 2.2rem; margin-bottom: 20px; animation: successPop 0.6s cubic-bezier(0.34,1.56,0.64,1) both; animation-delay: 0.1s; }
-    @keyframes successPop { from{opacity:0;transform:scale(0.4) rotate(-15deg)}to{opacity:1;transform:scale(1) rotate(0)} }
-    .success-product-chip { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; background: linear-gradient(135deg, #fdf8f0, #faf4ea); border: 1px solid #e8d8b8; border-radius: 50px; font-size: 0.82rem; font-weight: 600; color: #7a6040; margin-bottom: 16px; }
-    .success-title { font-size: 1.3rem; font-weight: 700; color: #2c2416; margin-bottom: 8px; }
-    .success-sub { font-size: 0.88rem; color: #8b7a62; line-height: 1.6; max-width: 320px; }
-    .success-back-btn { margin-top: 28px; padding: 14px 32px; background: #2a2419; border: none; border-radius: 16px; color: white; font-size: 0.95rem; font-weight: 600; cursor: pointer; font-family: 'Inter', sans-serif; transition: all 0.25s ease; }
-    .success-back-btn:hover { background: #3f3522; transform: translateY(-1px); box-shadow: 0 6px 16px rgba(42,36,25,0.2); }
+    .reply-label { font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; color: #c8a870; margin-bottom: 2px; }
+    .reply-product-name { font-size: 0.9rem; font-weight: 600; color: #2c2416; }
+    .reply-product-meta { font-size: 0.75rem; color: #8b7a62; margin-top: 1px; }
+    .inquiry-form-body { padding: 18px 24px 24px; display: flex; flex-direction: column; gap: 14px; }
+    .inq-group { display: flex; flex-direction: column; gap: 5px; }
+    .inq-group label { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; color: #6b5e4a; }
+    .inq-group input, .inq-group textarea { background: #fefcf8; border: 1.5px solid #ede3d4; border-radius: 14px; padding: 13px 15px; font-size: 0.9rem; color: #2e271e; outline: none; font-family: 'Inter', sans-serif; width: 100%; }
+    .inq-group textarea { resize: none; min-height: 80px; }
+    .inq-group input:focus, .inq-group textarea:focus { border-color: #c8b294; background: #fff; }
+    .inquiry-submit { background: #2a2419; border: none; border-radius: 16px; padding: 16px; font-weight: 600; font-size: 0.95rem; color: white; cursor: pointer; width: 100%; font-family: 'Inter', sans-serif; transition: all 0.2s ease; display: flex; align-items: center; justify-content: center; gap: 8px; }
+    .inquiry-submit:hover:not(:disabled) { background: #3f3522; }
+    .inquiry-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+    .inquiry-success { display: none; flex-direction: column; align-items: center; padding: 32px 24px; text-align: center; }
+    .inquiry-success.show { display: flex; }
+    .success-icon { font-size: 3rem; margin-bottom: 12px; }
+    .success-title { font-size: 1.2rem; font-weight: 700; color: #2c2416; margin-bottom: 6px; }
+    .success-sub { font-size: 0.85rem; color: #8b7a62; }
+    .success-back-btn { margin-top: 20px; padding: 12px 28px; background: #2a2419; border: none; border-radius: 14px; color: white; font-size: 0.9rem; font-weight: 600; cursor: pointer; font-family: 'Inter', sans-serif; }
 
-    /* BURGER / SIDE PANEL */
+    /* BURGER */
     .burger-btn { display: none; }
     .side-panel { display: none; }
     .overlay { display: none; }
 
     @media (max-width: 768px) {
       .category-tabs { display: none; }
-      .example-content { padding: 24px 16px 40px; }
-      .content-main-title { font-size: clamp(1.3rem, 7vw, 1.8rem); }
-      .products-grid { grid-template-columns: repeat(auto-fill, minmax(155px, 1fr)); gap: 12px; }
-      .product-image { height: 145px; font-size: 2.6rem; }
-      .btn-learn-more { font-size: 0.81rem; padding: 10px 12px; margin: 6px 10px 10px; }
-      .inquiry-page { padding: 12px 12px; }
-      .inquiry-card { border-radius: 24px; }
-      .inquiry-header { padding: 18px 20px 16px; }
-      .product-reply { margin: 16px 20px 0; }
-      .inquiry-form-body { padding: 16px 20px 24px; }
-
-      .burger-btn { display: flex; position: fixed; top: 16px; right: 16px; width: 42px; height: 42px; background: white; border: 1px solid #e8ddd0; border-radius: 13px; flex-direction: column; align-items: center; justify-content: center; gap: 4px; cursor: pointer; z-index: 200; box-shadow: 0 2px 12px rgba(0,0,0,0.1); transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1); }
-      .burger-btn:hover { box-shadow: 0 6px 20px rgba(0,0,0,0.16); transform: scale(1.05); }
-      .burger-btn span { width: 18px; height: 2px; background: #5f5340; border-radius: 2px; transition: 0.35s cubic-bezier(0.34,1.56,0.64,1); }
+      .example-content { padding: 20px 14px 36px; }
+      .products-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
+      .product-image { height: 140px; font-size: 2.5rem; }
+      .btn-learn-more { font-size: 0.78rem; padding: 9px 10px; margin: 4px 8px 8px; }
+      .burger-btn { display: flex; position: fixed; top: 14px; right: 14px; width: 38px; height: 38px; background: white; border: 1px solid #e8ddd0; border-radius: 10px; flex-direction: column; align-items: center; justify-content: center; gap: 4px; cursor: pointer; z-index: 200; }
+      .burger-btn span { width: 17px; height: 2px; background: #5f5340; border-radius: 2px; transition: 0.3s; }
       .burger-btn.open span:nth-child(1){transform:translateY(6px) rotate(45deg)}
-      .burger-btn.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+      .burger-btn.open span:nth-child(2){opacity:0}
       .burger-btn.open span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
-
-      .side-panel { display: flex; flex-direction: column; position: fixed; top: 0; right: -100%; width: 288px; max-width: 88vw; height: 100dvh; background: white; z-index: 150; transition: right 0.4s cubic-bezier(0.34,1.56,0.64,1); overflow: hidden; box-shadow: -12px 0 40px rgba(0,0,0,0.12); }
+      .side-panel { display: flex; flex-direction: column; position: fixed; top: 0; right: -100%; width: 270px; max-width: 85vw; height: 100dvh; background: white; z-index: 150; padding: 70px 18px 24px; transition: right 0.35s ease; overflow-y: auto; }
       .side-panel.open { right: 0; }
-
-      /* Panel layout */
-      .side-panel-inner { display: flex; flex-direction: column; height: 100%; }
-
-      /* TOP: brand + lang */
-      .side-panel-top { padding: 52px 20px 18px; border-bottom: 1px solid #f0e7db; display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; }
-      .side-panel-brand { font-size: 0.95rem; font-weight: 700; color: #2c2416; letter-spacing: -0.2px; }
-
-      /* Side lang dropdown */
-      .side-lang-dropdown { position: relative; user-select: none; z-index: 50; }
-      .side-lang-trigger { display: flex; align-items: center; gap: 6px; padding: 7px 13px; background: linear-gradient(135deg, #faf6ef, #f5ede0); border: 1px solid #ddd0ba; border-radius: 50px; cursor: pointer; font-size: 0.73rem; font-weight: 700; letter-spacing: 0.5px; color: #2c2416; transition: all 0.2s ease; }
-      .side-lang-trigger .chevron2 { width: 11px; height: 11px; transition: transform 0.3s ease; opacity: 0.55; }
-      .side-lang-dropdown.open .chevron2 { transform: rotate(180deg); }
-      .side-lang-menu { position: absolute; top: calc(100% + 6px); right: 0; background: white; border: 1px solid #e8ddd0; border-radius: 14px; box-shadow: 0 12px 32px rgba(44,36,22,0.14); overflow: hidden; min-width: 100px; opacity: 0; transform: translateY(-6px) scale(0.95); pointer-events: none; transition: all 0.22s ease; z-index: 999; }
-      .side-lang-dropdown.open .side-lang-menu { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
-      .side-lang-opt { display: block; width: 100%; padding: 10px 16px; font-size: 0.75rem; font-weight: 600; color: #8b7a62; background: transparent; border: none; cursor: pointer; text-align: left; transition: all 0.2s ease; }
-      .side-lang-opt:hover { background: #faf4ec; color: #2c2416; }
-      .side-lang-opt.active { color: #2c2416; font-weight: 700; background: #f5ede0; }
-
-      /* NAV */
-      .side-panel-nav { padding: 18px 14px; flex: 1; overflow-y: auto; }
-      .side-panel-title { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.9px; color: #b0a080; margin-bottom: 10px; padding: 0 6px; }
-      .side-nav-list { display: flex; flex-direction: column; gap: 2px; }
-      .side-nav-item { padding: 12px 14px; font-size: 0.9rem; font-weight: 500; color: #5f5340; text-decoration: none; border-radius: 12px; cursor: pointer; transition: all 0.25s cubic-bezier(0.34,1.56,0.64,1); display: flex; align-items: center; gap: 10px; }
-      .side-nav-item:hover { background: #faf6ef; transform: translateX(4px); }
-      .side-nav-item.active { background: linear-gradient(135deg, #f5ede0, #ece0cc); color: #2c2416; font-weight: 700; }
-      .side-nav-dot { width: 6px; height: 6px; border-radius: 50%; background: #d4c4a8; flex-shrink: 0; transition: all 0.25s ease; }
-      .side-nav-item.active .side-nav-dot { background: #c8a870; transform: scale(1.4); }
-      .side-nav-divider { height: 1px; background: #f0e7db; margin: 5px 6px; }
-
-      /* BOTTOM: contacts */
-      .side-panel-bottom { padding: 14px 14px 28px; border-top: 1px solid #f0e7db; display: flex; flex-direction: column; gap: 8px; flex-shrink: 0; }
-      .side-contact-title { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.9px; color: #b0a080; margin-bottom: 4px; padding: 0 4px; }
-      .side-contact-pill { display: flex; align-items: center; gap: 10px; padding: 11px 14px; border-radius: 14px; font-size: 0.85rem; font-weight: 500; text-decoration: none; border: 1px solid transparent; transition: all 0.25s cubic-bezier(0.34,1.56,0.64,1); }
-      .side-contact-pill svg { width: 16px; height: 16px; flex-shrink: 0; fill: none; stroke-width: 1.9; }
-      .side-contact-pill:hover { transform: translateX(4px) scale(1.02); box-shadow: 0 4px 14px rgba(0,0,0,0.1); }
-      .side-pill-tg { background: #f0f7ff; border-color: #cce0f5; color: #2070b8; }
-      .side-pill-tg svg { stroke: #2070b8; }
-      .side-pill-phone { background: linear-gradient(135deg, #f7f0e4, #efe0ca); border-color: #d4c0a0; color: #2f2819; font-weight: 600; }
-      .side-pill-phone svg { stroke: #7a5c2e; }
-      .side-pill-ig { background: linear-gradient(135deg, #fff0f5, #fce8f0); border-color: #f0c8d8; color: #a0306a; }
-      .side-pill-ig svg { stroke: #c04080; }
-
-      .overlay { display: block; position: fixed; inset: 0; background: rgba(0,0,0,0.35); z-index: 140; opacity: 0; pointer-events: none; transition: opacity 0.4s; backdrop-filter: blur(2px); -webkit-backdrop-filter: blur(2px); }
+      .overlay { display: block; position: fixed; inset: 0; background: rgba(0,0,0,0.3); z-index: 140; opacity: 0; pointer-events: none; transition: opacity 0.35s; }
       .overlay.visible { opacity: 1; pointer-events: auto; }
+      .side-nav-item { padding: 12px 14px; font-size: 0.88rem; font-weight: 500; color: #5f5340; text-decoration: none; border-radius: 8px; cursor: pointer; display: block; }
+      .side-nav-item.active { background: #f5ede0; color: #2c2416; font-weight: 600; }
     }
   </style>
 </head>
 <body id="bodyElement">
 
-  <!-- ЛОГИН -->
+  <!-- LOGIN -->
   <div class="login-card" id="loginCard" style="display:none;">
     <div class="login-page" id="loginPage">
       <div class="header-block">
         <div class="title-col"><h1 class="title" id="pageTitle">Вход</h1><div class="subhead" id="pageSubhead">добро пожаловать</div></div>
         <div class="lang-dropdown" id="langDropdownLogin">
           <button class="lang-dropdown-trigger" id="langTriggerLogin"><span id="langLabelLogin">RUS</span><svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
-          <div class="lang-dropdown-menu" id="langMenuLogin">
-            <button class="lang-dropdown-option" data-lang="uzb">UZB</button>
-            <button class="lang-dropdown-option active" data-lang="rus">RUS</button>
-            <button class="lang-dropdown-option" data-lang="eng">ENG</button>
-          </div>
+          <div class="lang-dropdown-menu" id="langMenuLogin"><button class="lang-dropdown-option" data-lang="uzb">UZB</button><button class="lang-dropdown-option active" data-lang="rus">RUS</button><button class="lang-dropdown-option" data-lang="eng">ENG</button></div>
         </div>
       </div>
       <div class="divider-line"></div>
@@ -261,122 +167,53 @@
         <div class="input-group"><label id="labelPhone">Номер телефона</label><input type="tel" id="phone" placeholder="+998 00 000 00 00" required></div>
       </form>
       <div class="buttons-block">
-        <button type="submit" form="clientForm" class="button-primary" id="submitBtn">Отправить информацию</button>
+        <button type="button" class="button-primary" id="submitBtn">Отправить информацию</button>
         <button type="button" class="button-secondary" id="goToExampleBtn" disabled><span class="lock-icon">🔒</span> <span id="exampleBtnText">Перейти в примерную</span></button>
       </div>
       <div class="contact-footer"><div class="contact-row">
-        <a href="https://t.me/your_channel" class="contact-pill pill-tg"><svg viewBox="0 0 24 24"><path d="M21.5 2.5L2.5 10.5L10.5 13.5L13.5 21.5L21.5 2.5Z"/><path d="M10.5 13.5L15.5 8.5"/></svg><span>Telegram</span></a>
+        <a href="https://t.me/yasmingold21" target="_blank" class="contact-pill pill-tg"><svg viewBox="0 0 24 24"><path d="M21.5 2.5L2.5 10.5L10.5 13.5L13.5 21.5L21.5 2.5Z"/><path d="M10.5 13.5L15.5 8.5"/></svg><span>Telegram</span></a>
         <a href="tel:+998946930002" class="contact-pill pill-phone"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span>+998 (94) 693-00-02</span></a>
-        <a href="https://instagram.com/your_profile" class="contact-pill pill-ig"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg><span>Instagram</span></a>
+        <a href="https://www.instagram.com/kamoliddin_kasimov1?igsh=eXk5b3Nvb29idTdu" target="_blank" class="contact-pill pill-ig"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg><span>Instagram</span></a>
       </div></div>
     </div>
   </div>
 
   <!-- KAMOLIDDIN GOLD -->
   <div class="example-page" id="examplePage">
-    <div class="hero-text" id="heroText">
-      <h1 class="hero-title" id="heroTitle">Kamoliddin Gold</h1>
-      <p class="hero-subtitle" id="heroSubtitle">Добро пожаловать!</p>
-    </div>
-
+    <div class="hero-text" id="heroText"><h1 class="hero-title" id="heroTitle">Kamoliddin Gold</h1><p class="hero-subtitle" id="heroSubtitle">Добро пожаловать!</p></div>
     <div class="example-content" id="exampleContent">
       <h1 class="content-main-title" id="contentTitle">Kamoliddin Gold</h1>
       <div class="category-tabs">
         <a href="#" class="cat-tab active" data-category="rings"><span class="cat-dot"></span><span>Кольца</span></a>
         <a href="#" class="cat-tab" data-category="chains"><span class="cat-dot"></span><span>Цепочки</span></a>
-        <div class="cat-separator"></div>
+        <span class="cat-separator"></span>
         <a href="#" class="cat-tab" data-category="cartier"><span class="cat-dot"></span><span>Cartier</span></a>
         <a href="#" class="cat-tab" data-category="oneclif"><span class="cat-dot"></span><span>One Clif</span></a>
-        <div class="cat-separator"></div>
+        <span class="cat-separator"></span>
         <a href="#" class="cat-tab" data-category="bracelets"><span class="cat-dot"></span><span>Браслеты</span></a>
         <a href="#" class="cat-tab" data-category="earrings"><span class="cat-dot"></span><span>Серьги</span></a>
       </div>
       <div class="products-grid">
-        <div class="product-card" data-name='Золотое кольцо "Лотос"' data-weight="585 проба • 4.2 г" data-price="12 500 000 сум" data-emoji="💍">
-          <span class="product-badge">Хит</span>
-          <div class="product-image">💍</div>
-          <div class="product-info"><div class="product-name">Золотое кольцо "Лотос"</div><div class="product-weight">585 проба • 4.2 г</div><div class="product-price">12 500 000 сум</div></div>
-          <button class="btn-learn-more"><svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>Узнать больше</button>
-        </div>
-        <div class="product-card" data-name="Кольцо с бриллиантом" data-weight="750 проба • 3.8 г" data-price="28 000 000 сум" data-emoji="💎">
-          <div class="product-image">💎</div>
-          <div class="product-info"><div class="product-name">Кольцо с бриллиантом</div><div class="product-weight">750 проба • 3.8 г</div><div class="product-price">28 000 000 сум</div></div>
-          <button class="btn-learn-more"><svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>Узнать больше</button>
-        </div>
-        <div class="product-card" data-name="Обручальное кольцо" data-weight="585 проба • 5.1 г" data-price="9 800 000 сум" data-emoji="✨">
-          <span class="product-badge">Новинка</span>
-          <div class="product-image">✨</div>
-          <div class="product-info"><div class="product-name">Обручальное кольцо</div><div class="product-weight">585 проба • 5.1 г</div><div class="product-price">9 800 000 сум</div></div>
-          <button class="btn-learn-more"><svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>Узнать больше</button>
-        </div>
-        <div class="product-card" data-name='Перстень "Империал"' data-weight="750 проба • 8.5 г" data-price="35 000 000 сум" data-emoji="👑">
-          <div class="product-image">👑</div>
-          <div class="product-info"><div class="product-name">Перстень "Империал"</div><div class="product-weight">750 проба • 8.5 г</div><div class="product-price">35 000 000 сум</div></div>
-          <button class="btn-learn-more"><svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>Узнать больше</button>
-        </div>
+        <div class="product-card" data-name='Золотое кольцо "Лотос"' data-weight="585 проба • 4.2 г" data-emoji="💍"><span class="product-badge">Хит</span><div class="product-image">💍</div><div class="product-info"><div class="product-name">Золотое кольцо "Лотос"</div><div class="product-weight">585 проба • 4.2 г</div></div><button class="btn-learn-more"><svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>Узнать больше</button></div>
+        <div class="product-card" data-name="Кольцо с бриллиантом" data-weight="750 проба • 3.8 г" data-emoji="💎"><div class="product-image">💎</div><div class="product-info"><div class="product-name">Кольцо с бриллиантом</div><div class="product-weight">750 проба • 3.8 г</div></div><button class="btn-learn-more"><svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>Узнать больше</button></div>
+        <div class="product-card" data-name="Обручальное кольцо" data-weight="585 проба • 5.1 г" data-emoji="✨"><span class="product-badge">Новинка</span><div class="product-image">✨</div><div class="product-info"><div class="product-name">Обручальное кольцо</div><div class="product-weight">585 проба • 5.1 г</div></div><button class="btn-learn-more"><svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>Узнать больше</button></div>
+        <div class="product-card" data-name='Перстень "Империал"' data-weight="750 проба • 8.5 г" data-emoji="👑"><div class="product-image">👑</div><div class="product-info"><div class="product-name">Перстень "Империал"</div><div class="product-weight">750 проба • 8.5 г</div></div><button class="btn-learn-more"><svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>Узнать больше</button></div>
       </div>
     </div>
-
     <button class="burger-btn" id="burgerBtn"><span></span><span></span><span></span></button>
     <div class="overlay" id="overlay"></div>
-
-    <!-- SIDE PANEL -->
     <div class="side-panel" id="sidePanel">
-      <div class="side-panel-inner">
-
-        <!-- TOP: brand + lang switcher -->
-        <div class="side-panel-top">
-          <span class="side-panel-brand">Kamoliddin Gold</span>
-          <div class="side-lang-dropdown" id="sideLangDropdown">
-            <button class="side-lang-trigger" id="sideLangTrigger">
-              <span id="sideLangLabel">RUS</span>
-              <svg class="chevron2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
-            </button>
-            <div class="side-lang-menu" id="sideLangMenu">
-              <button class="side-lang-opt" data-lang="uzb">UZB</button>
-              <button class="side-lang-opt active" data-lang="rus">RUS</button>
-              <button class="side-lang-opt" data-lang="eng">ENG</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- MIDDLE: nav categories -->
-        <div class="side-panel-nav">
-          <p class="side-panel-title">Категории</p>
-          <div class="side-nav-list" id="sideNavList">
-            <a href="#" class="side-nav-item active" data-category="rings"><span class="side-nav-dot"></span>Кольца</a>
-            <a href="#" class="side-nav-item" data-category="chains"><span class="side-nav-dot"></span>Цепочки</a>
-            <div class="side-nav-divider"></div>
-            <a href="#" class="side-nav-item" data-category="cartier"><span class="side-nav-dot"></span>Cartier</a>
-            <a href="#" class="side-nav-item" data-category="oneclif"><span class="side-nav-dot"></span>One Clif</a>
-            <div class="side-nav-divider"></div>
-            <a href="#" class="side-nav-item" data-category="bracelets"><span class="side-nav-dot"></span>Браслеты</a>
-            <a href="#" class="side-nav-item" data-category="earrings"><span class="side-nav-dot"></span>Серьги</a>
-          </div>
-        </div>
-
-        <!-- BOTTOM: contacts -->
-        <div class="side-panel-bottom">
-          <p class="side-contact-title">Контакты</p>
-          <a href="https://t.me/yasmingold21" class="side-contact-pill side-pill-tg">
-            <svg viewBox="0 0 24 24"><path d="M21.5 2.5L2.5 10.5L10.5 13.5L13.5 21.5L21.5 2.5Z"/><path d="M10.5 13.5L15.5 8.5"/></svg>
-            Telegram
-          </a>
-          <a href="tel:+998946930002" class="side-contact-pill side-pill-phone">
-            <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-            +998 (94) 693-00-02
-          </a>
-          <a href="https://www.instagram.com/kamoliddin_kasimov1?igsh=eXk5b3Nvb29idTdu" class="side-contact-pill side-pill-ig">
-            <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-            Instagram
-          </a>
-        </div>
-
-      </div>
+      <p style="font-weight:600;color:#2c2416;margin-bottom:14px;">Категории</p>
+      <a href="#" class="side-nav-item active" data-category="rings">Кольца</a>
+      <a href="#" class="side-nav-item" data-category="chains">Цепочки</a>
+      <a href="#" class="side-nav-item" data-category="cartier">Cartier</a>
+      <a href="#" class="side-nav-item" data-category="oneclif">One Clif</a>
+      <a href="#" class="side-nav-item" data-category="bracelets">Браслеты</a>
+      <a href="#" class="side-nav-item" data-category="earrings">Серьги</a>
     </div>
   </div>
 
-  <!-- СТРАНИЦА ЗАПРОСА -->
+  <!-- INQUIRY -->
   <div class="inquiry-page hidden" id="inquiryPage">
     <div class="inquiry-card">
       <div class="inquiry-header">
@@ -385,22 +222,16 @@
       </div>
       <div class="product-reply" id="productReply">
         <div class="reply-emoji" id="replyEmoji">💍</div>
-        <div class="reply-info">
-          <div class="reply-label">📎 Выбранный товар</div>
-          <div class="reply-product-name" id="replyName"></div>
-          <div class="reply-product-meta" id="replyMeta"></div>
-          <div class="reply-product-price" id="replyPrice"></div>
-        </div>
+        <div class="reply-info"><div class="reply-label">📎 Выбранный товар</div><div class="reply-product-name" id="replyName"></div><div class="reply-product-meta" id="replyMeta"></div></div>
       </div>
       <div class="inquiry-form-body" id="inquiryFormBody">
         <div class="inq-group"><label>Имя</label><input type="text" id="inqName" placeholder="Ваше имя"/></div>
         <div class="inq-group"><label>Номер телефона</label><input type="tel" id="inqPhone" placeholder="+998 00 000 00 00"/></div>
-        <div class="inq-group"><label>Вопрос или комментарий</label><textarea id="inqMessage" placeholder="Например: есть ли размер 17? Возможна доставка?"></textarea></div>
-        <button class="inquiry-submit" id="inquirySubmitBtn">Отправить запрос<svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
+        <div class="inq-group"><label>Вопрос или комментарий</label><textarea id="inqMessage" placeholder="Например: есть ли размер 17?"></textarea></div>
+        <button class="inquiry-submit" id="inquirySubmitBtn">Отправить запрос</button>
       </div>
       <div class="inquiry-success" id="inquirySuccess">
         <div class="success-icon">✅</div>
-        <div class="success-product-chip" id="successChip"></div>
         <div class="success-title">Запрос отправлен!</div>
         <div class="success-sub" id="successText"></div>
         <button class="success-back-btn" id="successBackBtn">← Вернуться к товарам</button>
@@ -409,7 +240,27 @@
   </div>
 
   <script>
-    const bodyEl=document.getElementById('bodyElement'),loginCard=document.getElementById('loginCard'),loginPage=document.getElementById('loginPage'),examplePage=document.getElementById('examplePage'),heroText=document.getElementById('heroText'),exampleContent=document.getElementById('exampleContent'),goToExampleBtn=document.getElementById('goToExampleBtn'),form=document.getElementById('clientForm'),phoneInput=document.getElementById('phone'),exampleBtnText=document.getElementById('exampleBtnText'),burgerBtn=document.getElementById('burgerBtn'),sidePanel=document.getElementById('sidePanel'),overlay=document.getElementById('overlay');
+    // ============ TELEGRAM CONFIG ============
+    const BOT_TOKEN = '8320132368:AAHbsmappe4VNj728OY_8nGhfN6-bK9xipo';
+    const CHANNEL_ID = '-1003982347576';
+    let isSending = false;
+
+    async function sendToTelegram(text) {
+      try {
+        const resp = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ chat_id: CHANNEL_ID, text: text, parse_mode: 'HTML' })
+        });
+        return await resp.json();
+      } catch(e) {
+        console.error('TG send error:', e);
+        return null;
+      }
+    }
+
+    // ============ DOM ============
+    const bodyEl=document.getElementById('bodyElement'),loginCard=document.getElementById('loginCard'),loginPage=document.getElementById('loginPage'),examplePage=document.getElementById('examplePage'),heroText=document.getElementById('heroText'),exampleContent=document.getElementById('exampleContent'),goToExampleBtn=document.getElementById('goToExampleBtn'),submitBtn=document.getElementById('submitBtn'),phoneInput=document.getElementById('phone'),exampleBtnText=document.getElementById('exampleBtnText'),burgerBtn=document.getElementById('burgerBtn'),sidePanel=document.getElementById('sidePanel'),overlay=document.getElementById('overlay');
     let isFormSubmitted=false,animationTimeout=null,currentLang='rus',isMenuOpen=false;
 
     const t={
@@ -425,83 +276,90 @@
       document.getElementById('labelFirstname').textContent=o.labelFirstname;
       document.getElementById('labelLastname').textContent=o.labelLastname;
       document.getElementById('labelPhone').textContent=o.labelPhone;
-      document.getElementById('submitBtn').textContent=o.submitBtn;
+      submitBtn.textContent=o.submitBtn;
       document.getElementById('heroTitle').textContent=o.heroTitle;
       document.getElementById('heroSubtitle').textContent=o.heroSubtitle;
       document.getElementById('contentTitle').textContent=o.heroTitle;
       if(isFormSubmitted)exampleBtnText.textContent=o.exampleBtnActive;
       else goToExampleBtn.innerHTML='<span class="lock-icon">🔒</span> '+o.exampleBtnLocked.replace('🔒 ','');
       document.querySelectorAll('.lang-dropdown-option').forEach(b=>{b.classList.remove('active');if(b.dataset.lang===l)b.classList.add('active');});
-      document.querySelectorAll('.side-lang-opt').forEach(b=>{b.classList.remove('active');if(b.dataset.lang===l)b.classList.add('active');});
       document.getElementById('langLabelLogin').textContent=l.toUpperCase();
-      document.getElementById('sideLangLabel').textContent=l.toUpperCase();
     }
 
     document.getElementById('langTriggerLogin').addEventListener('click',function(e){e.stopPropagation();document.getElementById('langDropdownLogin').classList.toggle('open');});
     document.querySelectorAll('#langMenuLogin .lang-dropdown-option').forEach(o=>{o.addEventListener('click',function(){setLang(this.dataset.lang);document.getElementById('langDropdownLogin').classList.remove('open');});});
-    document.getElementById('sideLangTrigger').addEventListener('click',function(e){e.stopPropagation();document.getElementById('sideLangDropdown').classList.toggle('open');});
-    document.querySelectorAll('#sideLangMenu .side-lang-opt').forEach(o=>{o.addEventListener('click',function(){setLang(this.dataset.lang);document.getElementById('sideLangDropdown').classList.remove('open');});});
-    document.addEventListener('click',()=>{document.getElementById('langDropdownLogin').classList.remove('open');document.getElementById('sideLangDropdown').classList.remove('open');});
+    document.addEventListener('click',()=>{document.getElementById('langDropdownLogin').classList.remove('open');});
 
     function openMenu(){isMenuOpen=true;sidePanel.classList.add('open');overlay.classList.add('visible');burgerBtn.classList.add('open');}
     function closeMenu(){isMenuOpen=false;sidePanel.classList.remove('open');overlay.classList.remove('visible');burgerBtn.classList.remove('open');}
-    burgerBtn.addEventListener('click',()=>isMenuOpen?closeMenu():openMenu());
-    overlay.addEventListener('click',closeMenu);
-    document.querySelectorAll('.cat-tab').forEach(item=>{item.addEventListener('click',function(e){e.preventDefault();document.querySelectorAll('.cat-tab').forEach(el=>el.classList.remove('active'));this.classList.add('active');const cat=this.dataset.category;document.querySelectorAll('.side-nav-item').forEach(el=>{el.classList.remove('active');if(el.dataset.category===cat)el.classList.add('active');});});});
-    document.querySelectorAll('.side-nav-item').forEach(item=>{item.addEventListener('click',function(e){e.preventDefault();document.querySelectorAll('.side-nav-item').forEach(el=>el.classList.remove('active'));this.classList.add('active');const cat=this.dataset.category;document.querySelectorAll('.cat-tab').forEach(el=>{el.classList.remove('active');if(el.dataset.category===cat)el.classList.add('active');});setTimeout(closeMenu,300);});});
-    document.addEventListener('keydown',function(e){if(e.key==='Escape'){const inq=document.getElementById('inquiryPage');if(!inq.classList.contains('hidden'))closeInquiry();else if(isMenuOpen)closeMenu();}});
+    burgerBtn.addEventListener('click',()=>isMenuOpen?closeMenu():openMenu());overlay.addEventListener('click',closeMenu);
+    document.querySelectorAll('.cat-tab').forEach(item=>{item.addEventListener('click',function(e){e.preventDefault();document.querySelectorAll('.cat-tab').forEach(el=>el.classList.remove('active'));this.classList.add('active');});});
+    document.querySelectorAll('.side-nav-item').forEach(item=>{item.addEventListener('click',function(e){e.preventDefault();document.querySelectorAll('.side-nav-item').forEach(el=>el.classList.remove('active'));this.classList.add('active');setTimeout(closeMenu,300);});});
+    document.addEventListener('keydown',function(e){if(e.key==='Escape'){if(!document.getElementById('inquiryPage').classList.contains('hidden'))closeInquiry();else if(isMenuOpen)closeMenu();}});
 
-    function showExample(){loginPage.classList.add('hidden');loginCard.style.display='none';examplePage.classList.remove('hidden');bodyEl.classList.add('fullscreen');bodyEl.style.padding='0';heroText.style.opacity='1';heroText.style.position='fixed';heroText.style.top='50%';heroText.style.left='50%';heroText.style.transform='translate(-50%,-50%)';heroText.classList.remove('moved','moving');exampleContent.classList.remove('visible');burgerBtn.style.display='none';closeMenu();setLang(currentLang);heroText.classList.add('appear');animationTimeout=setTimeout(()=>{heroText.style.opacity='0';heroText.style.transition='opacity 0.6s ease';setTimeout(()=>{heroText.style.display='none';exampleContent.classList.add('visible');if(window.innerWidth<=768)burgerBtn.style.display='flex';},600);},2200);}
-    function showLogin(){if(animationTimeout)clearTimeout(animationTimeout);closeMenu();heroText.style.display='';heroText.style.opacity='1';heroText.style.transition='';heroText.style.position='fixed';heroText.style.top='50%';heroText.style.left='50%';heroText.style.transform='translate(-50%,-50%)';heroText.classList.remove('moved','moving','appear');exampleContent.classList.remove('visible');burgerBtn.style.display='none';examplePage.classList.add('hidden');loginPage.classList.remove('hidden');loginCard.style.display='flex';bodyEl.classList.remove('fullscreen');bodyEl.style.padding='';deactivate();form.reset();}
+    function showExample(){loginPage.classList.add('hidden');loginCard.style.display='none';examplePage.classList.remove('hidden');bodyEl.classList.add('fullscreen');bodyEl.style.padding='0';heroText.style.opacity='1';heroText.style.display='';heroText.style.top='50%';heroText.style.left='50%';heroText.style.transform='translate(-50%,-50%)';exampleContent.classList.remove('visible');burgerBtn.style.display='none';closeMenu();setLang(currentLang);heroText.classList.add('appear');animationTimeout=setTimeout(()=>{heroText.style.opacity='0';heroText.style.transition='opacity 0.5s ease';setTimeout(()=>{heroText.style.display='none';exampleContent.classList.add('visible');if(window.innerWidth<=768)burgerBtn.style.display='flex';},500);},2000);}
     function activate(){isFormSubmitted=true;goToExampleBtn.disabled=false;goToExampleBtn.classList.add('active');exampleBtnText.textContent=t[currentLang].exampleBtnActive;}
     function deactivate(){isFormSubmitted=false;goToExampleBtn.disabled=true;goToExampleBtn.classList.remove('active');goToExampleBtn.innerHTML='<span class="lock-icon">🔒</span> '+t[currentLang].exampleBtnLocked.replace('🔒 ','');}
-    form.addEventListener('submit',function(e){e.preventDefault();const f=document.getElementById('firstname').value.trim(),l=document.getElementById('lastname').value.trim(),p=phoneInput.value.trim(),o=t[currentLang];if(!f||!l||!p){alert(o.alertFillAll);return;}activate();alert(o.alertThanks(f,l,p));});
+
+    // ============ LOGIN SUBMIT ============
+    submitBtn.addEventListener('click', async function(){
+      if(isSending) return;
+      const first=document.getElementById('firstname').value.trim(),last=document.getElementById('lastname').value.trim(),phone=phoneInput.value.trim(),o=t[currentLang];
+      if(!first||!last||!phone){alert(o.alertFillAll);return;}
+      isSending=true;submitBtn.disabled=true;submitBtn.textContent='⏳ Отправка...';
+      const msg=`🆕 <b>Новый клиент</b>\n\n👤 <b>Имя:</b> ${first}\n📝 <b>Фамилия:</b> ${last}\n📞 <b>Телефон:</b> ${phone}\n📅 <b>Дата:</b> ${new Date().toLocaleString('ru-RU')}`;
+      await sendToTelegram(msg);
+      setTimeout(()=>{submitBtn.disabled=false;submitBtn.textContent=o.submitBtn;isSending=false;activate();alert(o.alertThanks(first,last,phone));},600);
+    });
     goToExampleBtn.addEventListener('click',function(){if(!isFormSubmitted){alert(t[currentLang].alertNeedSubmit);return;}showExample();});
     document.querySelectorAll('#clientForm input').forEach(i=>{i.addEventListener('input',()=>{if(isFormSubmitted)deactivate();});});
     phoneInput.addEventListener('input',function(){let v=this.value.replace(/[^\d+]/g,'');if(!v.startsWith('+')&&v.startsWith('998'))v='+'+v;this.value=v;});
 
-    const inquiryPage=document.getElementById('inquiryPage');
-    const inqPhone=document.getElementById('inqPhone');
+    // ============ INQUIRY ============
+    const inquiryPage=document.getElementById('inquiryPage'),inqPhone=document.getElementById('inqPhone');
     inqPhone.addEventListener('input',function(){let v=this.value.replace(/[^\d+]/g,'');if(!v.startsWith('+')&&v.startsWith('998'))v='+'+v;this.value=v;});
 
     function openInquiry(card){
-      const name=card.dataset.name||'',weight=card.dataset.weight||'',price=card.dataset.price||'',emoji=card.dataset.emoji||'💍';
-      document.getElementById('replyEmoji').textContent=emoji;
-      document.getElementById('replyName').textContent=name;
-      document.getElementById('replyMeta').textContent=weight;
-      document.getElementById('replyPrice').textContent=price;
-      document.getElementById('inqName').value='';
-      inqPhone.value='';
-      document.getElementById('inqMessage').value='';
-      document.getElementById('inqName').classList.remove('error');
-      inqPhone.classList.remove('error');
+      document.getElementById('replyEmoji').textContent=card.dataset.emoji||'💍';
+      document.getElementById('replyName').textContent=card.dataset.name||'';
+      document.getElementById('replyMeta').textContent=card.dataset.weight||'';
+      document.getElementById('inqName').value='';inqPhone.value='';document.getElementById('inqMessage').value='';
       document.getElementById('inquiryFormBody').style.display='flex';
       document.getElementById('inquirySuccess').classList.remove('show');
-      inquiryPage.classList.remove('hidden','slide-out');
-      void inquiryPage.offsetWidth;
-      inquiryPage.classList.add('slide-in');
-      inquiryPage.scrollTop=0;
+      document.getElementById('inquirySubmitBtn').disabled=false;
+      document.getElementById('inquirySubmitBtn').textContent='Отправить запрос';
+      inquiryPage.classList.remove('hidden');inquiryPage.scrollTop=0;
     }
-    function closeInquiry(){inquiryPage.classList.remove('slide-in');inquiryPage.classList.add('slide-out');setTimeout(()=>{inquiryPage.classList.add('hidden');inquiryPage.classList.remove('slide-out');},280);}
+    function closeInquiry(){inquiryPage.classList.add('hidden');}
     document.querySelectorAll('.btn-learn-more').forEach(btn=>{btn.addEventListener('click',function(e){e.stopPropagation();openInquiry(this.closest('.product-card'));});});
     document.getElementById('inquiryBackBtn').addEventListener('click',closeInquiry);
     document.getElementById('successBackBtn').addEventListener('click',closeInquiry);
-    document.getElementById('inquirySubmitBtn').addEventListener('click',function(){
-      const nameEl=document.getElementById('inqName'),name=nameEl.value.trim(),phone=inqPhone.value.trim();
-      const productName=document.getElementById('replyName').textContent,productEmoji=document.getElementById('replyEmoji').textContent;
-      let valid=true;
-      nameEl.classList.remove('error');inqPhone.classList.remove('error');
-      if(!name){nameEl.classList.add('error');valid=false;}
-      if(!phone){inqPhone.classList.add('error');valid=false;}
-      if(!valid){setTimeout(()=>{nameEl.classList.remove('error');inqPhone.classList.remove('error');},1800);return;}
-      document.getElementById('inquiryFormBody').style.display='none';
-      document.getElementById('successChip').textContent=productEmoji+' '+productName;
-      document.getElementById('successText').textContent=`Мы получили ваш интерес и перезвоним на номер ${phone} в ближайшее время.`;
-      document.getElementById('inquirySuccess').classList.add('show');
-      inquiryPage.scrollTop=0;
+
+    // ============ INQUIRY SUBMIT ============
+    document.getElementById('inquirySubmitBtn').addEventListener('click', async function(){
+      if(isSending) return;
+      const name=document.getElementById('inqName').value.trim(),phone=inqPhone.value.trim(),message=document.getElementById('inqMessage').value.trim();
+      const productName=document.getElementById('replyName').textContent,productEmoji=document.getElementById('replyEmoji').textContent,productWeight=document.getElementById('replyMeta').textContent;
+      if(!name||!phone){
+        if(!name) document.getElementById('inqName').style.borderColor='#e07070';
+        if(!phone) inqPhone.style.borderColor='#e07070';
+        setTimeout(()=>{document.getElementById('inqName').style.borderColor='';inqPhone.style.borderColor='';},1800);
+        return;
+      }
+      isSending=true;this.disabled=true;this.textContent='⏳ Отправка...';
+      const msg=`📩 <b>Новый запрос с сайта</b>\n\n${productEmoji} <b>Товар:</b> ${productName}\n⚖️ <b>Характеристики:</b> ${productWeight}\n\n👤 <b>Имя:</b> ${name}\n📞 <b>Телефон:</b> ${phone}\n💬 <b>Вопрос:</b> ${message||'Не указан'}\n📅 <b>Дата:</b> ${new Date().toLocaleString('ru-RU')}`;
+      await sendToTelegram(msg);
+      setTimeout(()=>{
+        document.getElementById('inquiryFormBody').style.display='none';
+        document.getElementById('successText').textContent=`Мы перезвоним на номер ${phone} в ближайшее время.`;
+        document.getElementById('inquirySuccess').classList.add('show');
+        inquiryPage.scrollTop=0;
+        isSending=false;this.disabled=false;this.textContent='Отправить запрос';
+      },600);
     });
 
-    (function(){bodyEl.classList.add('fullscreen');bodyEl.style.padding='0';heroText.classList.add('appear');animationTimeout=setTimeout(()=>{heroText.style.opacity='0';heroText.style.transition='opacity 0.6s ease';setTimeout(()=>{heroText.style.display='none';exampleContent.classList.add('visible');if(window.innerWidth<=768)burgerBtn.style.display='flex';},600);},2200);})();
+    // ============ AUTO START ============
+    (function(){bodyEl.classList.add('fullscreen');bodyEl.style.padding='0';heroText.classList.add('appear');animationTimeout=setTimeout(()=>{heroText.style.opacity='0';heroText.style.transition='opacity 0.5s ease';setTimeout(()=>{heroText.style.display='none';exampleContent.classList.add('visible');if(window.innerWidth<=768)burgerBtn.style.display='flex';},500);},2000);})();
   </script>
 </body>
 </html>
