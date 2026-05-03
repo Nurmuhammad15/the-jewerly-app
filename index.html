@@ -812,6 +812,27 @@
       .side-nav-item.active { background: #f5ede0; color: #2c2416; font-weight: 600; }
       .side-nav-divider { height: 1px; background: #f0e7db; margin: 6px 10px; }
     }
+    .btn-ar-try {
+      display: flex; align-items: center; justify-content: center; gap: 7px;
+      margin: 0 10px 12px; padding: 12px 14px;
+      background: linear-gradient(135deg, #c8a870, #e8d090);
+      border: none; border-radius: 10px;
+      font-size: 0.85rem; font-weight: 700; color: #2c2416;
+      cursor: pointer; font-family: 'Inter', sans-serif;
+      transition: all 0.35s cubic-bezier(0.34,1.56,0.64,1);
+      position: relative; overflow: hidden;
+      box-shadow: 0 6px 20px rgba(200,168,112,0.4);
+    }
+    .btn-ar-try:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 12px 32px rgba(200,168,112,0.6);
+    }
+    .btn-ar-try svg { width: 15px; height: 15px; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @keyframes braceletPulse {
+      0%,100% { box-shadow: 0 0 0 0 rgba(200,168,112,0.5); }
+      50% { box-shadow: 0 0 0 12px rgba(200,168,112,0); }
+    }
   </style>
 </head>
 <body id="bodyElement">
@@ -867,110 +888,32 @@
 
       <div class="section-title" id="sectionJewelry">Ювелирные изделия</div>
       <div class="products-grid" id="jewelryGrid">
-        <!-- Золотое кольцо "Лотос" -->
-        <div class="product-card" data-category="rings">
-          <span class="product-badge">Хит</span>
-          <div class="product-image">
-            <img src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=400&h=300&fit=crop" alt="Золотое кольцо Лотос" loading="lazy">
+        <!-- Cartier Love Bracelet v2 -->
+        <div class="product-card" data-category="bracelets" style="max-width:320px;">
+          <span class="product-badge" style="background:#8B0000;">Cartier</span>
+          <div class="product-image" style="height:240px;background:linear-gradient(135deg,#fdf3e0,#f5e6c0);">
+            <canvas id="braceletPreviewCanvas" width="320" height="240" style="width:100%;height:100%;"></canvas>
           </div>
           <div class="product-info">
-            <div class="product-name">Золотое кольцо "Лотос"</div>
-            <div class="product-weight">585 проба • 4.2 г</div>
+            <div class="product-name">Cartier Love Bracelet</div>
+            <div class="product-weight">750 проба (18k) • Жёлтое золото • 38.5 г</div>
           </div>
-          <button class="btn-learn-more">Узнать больше</button>
-        </div>
-        <!-- Кольцо с бриллиантом -->
-        <div class="product-card" data-category="rings">
-          <div class="product-image">
-            <img src="https://images.unsplash.com/photo-1603561591411-07134e71a2a9?w=400&h=300&fit=crop" alt="Кольцо с бриллиантом" loading="lazy">
-          </div>
-          <div class="product-info">
-            <div class="product-name">Кольцо с бриллиантом</div>
-            <div class="product-weight">750 проба • 3.8 г</div>
-          </div>
-          <button class="btn-learn-more">Узнать больше</button>
-        </div>
-        <!-- Золотая цепочка -->
-        <div class="product-card" data-category="chains">
-          <span class="product-badge">Новинка</span>
-          <div class="product-image">
-            <img src="https://images.unsplash.com/photo-1599643478518-a86b0b1a3e1c?w=400&h=300&fit=crop" alt="Золотая цепочка" loading="lazy">
-          </div>
-          <div class="product-info">
-            <div class="product-name">Золотая цепочка</div>
-            <div class="product-weight">585 проба • 7.5 г</div>
-          </div>
-          <button class="btn-learn-more">Узнать больше</button>
-        </div>
-        <!-- Золотой браслет -->
-        <div class="product-card" data-category="bracelets">
-          <div class="product-image">
-            <img src="https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=400&h=300&fit=crop" alt="Золотой браслет" loading="lazy">
-          </div>
-          <div class="product-info">
-            <div class="product-name">Золотой браслет</div>
-            <div class="product-weight">585 проба • 6.2 г</div>
-          </div>
-          <button class="btn-learn-more">Узнать больше</button>
-        </div>
-        <!-- Золотые серьги -->
-        <div class="product-card" data-category="earrings">
-          <div class="product-image">
-            <img src="https://images.unsplash.com/photo-1633810542706-73e7d5f1c2d9?w=400&h=300&fit=crop" alt="Золотые серьги" loading="lazy">
-          </div>
-          <div class="product-info">
-            <div class="product-name">Золотые серьги</div>
-            <div class="product-weight">585 проба • 3.1 г</div>
-          </div>
-          <button class="btn-learn-more">Узнать больше</button>
+          <button class="btn-learn-more" id="learnMoreCartier">
+            <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            Узнать больше
+          </button>
+          <button class="btn-ar-try" id="btnArTry">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+            Одеть 3D модель
+          </button>
         </div>
       </div>
 
       <div class="section-title" id="sectionBrands">Премиум бренды</div>
       <div class="brands-grid" id="brandsBar">
-        <a href="#" class="brand-card active" data-brand="all"><span class="brand-logo">✦</span><span>Все бренды</span></a>
-        <a href="#" class="brand-card" data-brand="cartier"><span class="brand-logo">Cartier</span></a>
-        <a href="#" class="brand-card" data-brand="tiffany"><span class="brand-logo">Tiffany & Co.</span></a>
-        <a href="#" class="brand-card" data-brand="dior"><span class="brand-logo">Christian Dior</span></a>
+        <a href="#" class="brand-card active" data-brand="all"><span class="brand-logo">Cartier</span></a>
       </div>
-      <div class="products-grid" id="brandsGrid">
-        <!-- Cartier Love Ring -->
-        <div class="product-card" data-category="cartier">
-          <span class="product-badge" style="background:#8B0000;">Cartier</span>
-          <div class="product-image">
-            <img src="https://images.unsplash.com/photo-1589128777073-263566ae5e4d?w=400&h=300&fit=crop" alt="Cartier Love Ring" loading="lazy">
-          </div>
-          <div class="product-info">
-            <div class="product-name">Cartier Love Ring</div>
-            <div class="product-weight">750 проба • 8.5 г</div>
-          </div>
-          <button class="btn-learn-more">Узнать больше</button>
-        </div>
-        <!-- Tiffany T Wire Ring -->
-        <div class="product-card" data-category="tiffany">
-          <span class="product-badge" style="background:#0abab5;">Tiffany</span>
-          <div class="product-image">
-            <img src="https://images.unsplash.com/photo-1598560917807-1b26944f6a2a?w=400&h=300&fit=crop" alt="Tiffany T Wire Ring" loading="lazy">
-          </div>
-          <div class="product-info">
-            <div class="product-name">Tiffany T Wire Ring</div>
-            <div class="product-weight">750 проба • 3.2 г</div>
-          </div>
-          <button class="btn-learn-more">Узнать больше</button>
-        </div>
-        <!-- Dior Rose Des Vents -->
-        <div class="product-card" data-category="dior">
-          <span class="product-badge" style="background:#2c2c2c;">Dior</span>
-          <div class="product-image">
-            <img src="https://images.unsplash.com/photo-1617038260897-41a1f14a5ca0?w=400&h=300&fit=crop" alt="Dior Rose Des Vents" loading="lazy">
-          </div>
-          <div class="product-info">
-            <div class="product-name">Dior Rose Des Vents</div>
-            <div class="product-weight">750 проба • 5.4 г</div>
-          </div>
-          <button class="btn-learn-more">Узнать больше</button>
-        </div>
-      </div>
+      <div class="products-grid" id="brandsGrid"></div>
 
       <div class="footer-contacts">
         <a href="https://t.me/yasmingold21" target="_blank" class="contact-pill pill-tg"><svg viewBox="0 0 24 24"><path d="M21.5 2.5L2.5 10.5L10.5 13.5L13.5 21.5L21.5 2.5Z"/><path d="M10.5 13.5L15.5 8.5"/></svg>Telegram</a>
@@ -989,6 +932,25 @@
       <a href="#" class="side-nav-item" data-nav-category="chains">Цепочки</a>
       <a href="#" class="side-nav-item" data-nav-category="bracelets">Браслеты</a>
       <a href="#" class="side-nav-item" data-nav-category="earrings">Серьги</a>
+    </div>
+  </div>
+
+  <!-- AR Try-On Modal -->
+  <div id="arModal" style="display:none;position:fixed;inset:0;z-index:500;background:#000;flex-direction:column;">
+    <div style="position:relative;width:100%;height:100%;overflow:hidden;">
+      <video id="arVideo" autoplay playsinline muted style="width:100%;height:100%;object-fit:cover;transform:scaleX(-1);"></video>
+      <canvas id="arCanvas" style="position:absolute;inset:0;width:100%;height:100%;transform:scaleX(-1);"></canvas>
+      <div id="arStatus" style="position:absolute;bottom:110px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.6);color:white;padding:10px 22px;border-radius:30px;font-size:14px;font-family:'Inter',sans-serif;text-align:center;backdrop-filter:blur(8px);pointer-events:none;transition:opacity 0.4s;white-space:nowrap;">
+        📷 Наведите камеру на запястье руки
+      </div>
+      <div id="arDetected" style="display:none;position:absolute;top:20px;left:50%;transform:translateX(-50%);background:rgba(200,168,112,0.95);color:#2c2416;padding:8px 20px;border-radius:20px;font-size:13px;font-weight:700;font-family:'Inter',sans-serif;">
+        ✨ Браслет надет
+      </div>
+      <button id="arClose" style="position:absolute;top:16px;right:16px;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,0.2);border:none;color:white;font-size:22px;cursor:pointer;backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;z-index:10;">✕</button>
+      <div id="arLoading" style="position:absolute;inset:0;background:rgba(0,0,0,0.9);display:flex;flex-direction:column;align-items:center;justify-content:center;color:white;font-family:'Inter',sans-serif;gap:16px;">
+        <div style="width:48px;height:48px;border:3px solid rgba(255,255,255,0.2);border-top-color:#c8a870;border-radius:50%;animation:spin 1s linear infinite;"></div>
+        <div id="arLoadingText" style="font-size:15px;opacity:0.85;">Загрузка камеры...</div>
+      </div>
     </div>
   </div>
 
@@ -1123,6 +1085,328 @@
 
     function showExample(){loginPage.classList.add('hidden');loginCard.style.display='none';examplePage.classList.remove('hidden');bodyEl.classList.add('fullscreen');bodyEl.style.padding='0';heroText.style.opacity='1';heroText.style.display='';exampleContent.classList.remove('visible');burgerBtn.style.display='none';closeMenu();setLang(currentLang);heroText.classList.add('appear');animationTimeout=setTimeout(()=>{heroText.style.opacity='0';heroText.style.transition='opacity 0.5s ease';setTimeout(()=>{heroText.style.display='none';exampleContent.classList.add('visible');if(window.innerWidth<=768)burgerBtn.style.display='flex';},500);},2000);}
     document.addEventListener('keydown',function(e){if(e.key==='Escape'){if(!inquiryPage.classList.contains('hidden'))closeInquiry();else if(isMenuOpen)closeMenu();}});
+
+    // ── Bracelet preview canvas (rotating 3D-like render) ──
+    (function initPreview(){
+      const canvas = document.getElementById('braceletPreviewCanvas');
+      if(!canvas) return;
+      const ctx = canvas.getContext('2d');
+      let angle = 0;
+      function drawBracelet(a){
+        const W=canvas.width, H=canvas.height;
+        ctx.clearRect(0,0,W,H);
+        // Background shimmer
+        const bg = ctx.createRadialGradient(W/2,H/2,20,W/2,H/2,160);
+        bg.addColorStop(0,'#fdf3e0'); bg.addColorStop(1,'#ede0c4');
+        ctx.fillStyle=bg; ctx.fillRect(0,0,W,H);
+        ctx.save(); ctx.translate(W/2, H/2);
+        // Perspective squish based on angle
+        const scaleY = 0.35 + 0.15*Math.abs(Math.sin(a));
+        const RX = 88, RY = RX*scaleY;
+        const bandH = 26;
+        // Shadow
+        ctx.save();
+        ctx.scale(1,0.18); ctx.beginPath();
+        ctx.ellipse(4, H*2.1, RX+2, 18, 0,0,Math.PI*2);
+        ctx.fillStyle='rgba(0,0,0,0.18)'; ctx.fill(); ctx.restore();
+        // ── Draw band faces ──
+        // Top edge face
+        ctx.beginPath();
+        ctx.ellipse(0,-bandH/2, RX, RY, 0,Math.PI,2*Math.PI);
+        ctx.ellipse(0,-bandH/2, RX-16, RY*0.78, 0,2*Math.PI,Math.PI,true);
+        const topGrad = ctx.createLinearGradient(-RX,-bandH/2,RX,-bandH/2);
+        topGrad.addColorStop(0,'#c8a040'); topGrad.addColorStop(0.5,'#f0d878'); topGrad.addColorStop(1,'#b89030');
+        ctx.fillStyle=topGrad; ctx.fill();
+        // Outer band body
+        ctx.beginPath();
+        ctx.ellipse(0,-bandH/2, RX, RY, 0,0,Math.PI);
+        ctx.lineTo(RX, bandH/2);
+        ctx.ellipse(0, bandH/2, RX, RY, 0,Math.PI,0,true);
+        ctx.closePath();
+        const outerGrad = ctx.createLinearGradient(-RX,0,RX,0);
+        outerGrad.addColorStop(0,'#9a7820'); outerGrad.addColorStop(0.25,'#d4a840');
+        outerGrad.addColorStop(0.5,'#f5d060'); outerGrad.addColorStop(0.75,'#c8a040');
+        outerGrad.addColorStop(1,'#8a6818');
+        ctx.fillStyle=outerGrad; ctx.fill();
+        // Inner shadow
+        ctx.beginPath();
+        ctx.ellipse(0,bandH/2, RX-16, RY*0.78, 0,0,Math.PI);
+        ctx.lineTo(-(RX-16), -bandH/2);
+        ctx.ellipse(0,-bandH/2, RX-16, RY*0.78, 0,Math.PI,0,true);
+        ctx.closePath();
+        ctx.fillStyle='rgba(0,0,0,0.22)'; ctx.fill();
+        // Bottom ellipse
+        ctx.beginPath();
+        ctx.ellipse(0,bandH/2, RX, RY, 0,0,Math.PI*2);
+        ctx.ellipse(0,bandH/2, RX-16, RY*0.78, 0,2*Math.PI,0,true);
+        const botGrad = ctx.createLinearGradient(-RX,bandH/2,RX,bandH/2);
+        botGrad.addColorStop(0,'#a88020'); botGrad.addColorStop(0.5,'#e0c050'); botGrad.addColorStop(1,'#907010');
+        ctx.fillStyle=botGrad; ctx.fill();
+        // Highlight sheen
+        ctx.save(); ctx.beginPath();
+        ctx.ellipse(0,-bandH/2, RX, RY,0,Math.PI*1.1,Math.PI*1.9);
+        ctx.ellipse(0,-bandH/2, RX-8, RY*0.9,0,Math.PI*1.9,Math.PI*1.1,true);
+        ctx.closePath();
+        ctx.fillStyle='rgba(255,255,200,0.25)'; ctx.fill(); ctx.restore();
+        // ── Screws (10 around the band) ──
+        for(let s=0;s<10;s++){
+          const sa = (2*Math.PI*s/10) + a;
+          const sx = RX * Math.cos(sa);
+          const sy = RY * Math.sin(sa);
+          // only show screws on front half
+          const visible = Math.cos(sa-a) > -0.15;
+          if(!visible) continue;
+          const sz = bandH * (s%2===0 ? -0.38 : 0.38);
+          const sRad = 7;
+          // screw base circle
+          const screwGrad = ctx.createRadialGradient(sx-1,sy+sz-1,0,sx,sy+sz,sRad);
+          screwGrad.addColorStop(0,'#f0d060'); screwGrad.addColorStop(0.6,'#c8a030');
+          screwGrad.addColorStop(1,'#8a6010');
+          ctx.beginPath(); ctx.arc(sx,sy+sz,sRad,0,Math.PI*2);
+          ctx.fillStyle=screwGrad; ctx.fill();
+          ctx.strokeStyle='rgba(0,0,0,0.25)'; ctx.lineWidth=0.7; ctx.stroke();
+          // slot line
+          ctx.save();
+          ctx.translate(sx, sy+sz);
+          ctx.rotate(sa + Math.PI/4);
+          ctx.beginPath();
+          ctx.moveTo(-sRad*0.75, -1.2); ctx.lineTo(sRad*0.75,-1.2);
+          ctx.lineTo(sRad*0.75, 1.2); ctx.lineTo(-sRad*0.75, 1.2);
+          ctx.closePath();
+          ctx.fillStyle='rgba(0,0,0,0.35)'; ctx.fill(); ctx.restore();
+        }
+        // "Cartier" engraving
+        ctx.save(); ctx.font='italic 9px serif'; ctx.fillStyle='rgba(120,80,0,0.55)';
+        ctx.textAlign='center';
+        ctx.fillText('© Cartier', 0, bandH*0.4); ctx.restore();
+        ctx.restore();
+      }
+      function loop(){angle+=0.008; drawBracelet(angle); requestAnimationFrame(loop);}
+      loop();
+    })();
+
+    // ── AR Try-On system ──
+    (function initAR(){
+      const btnAr = document.getElementById('btnArTry');
+      const modal = document.getElementById('arModal');
+      const arClose = document.getElementById('arClose');
+      const arVideo = document.getElementById('arVideo');
+      const arCanvas = document.getElementById('arCanvas');
+      const arLoading = document.getElementById('arLoading');
+      const arLoadingText = document.getElementById('arLoadingText');
+      const arStatus = document.getElementById('arStatus');
+      const arDetected = document.getElementById('arDetected');
+      const ctx = arCanvas.getContext('2d');
+
+      let stream = null, handsModel = null, animFrameId = null;
+      let handVisible = false, braceletAngle = 0;
+      let smoothWrist = null, smoothIndex = null;
+
+      function lerp(a,b,t){ return a+(b-a)*t; }
+      function lerpPt(a,b,t){ return {x:lerp(a.x,b.x,t), y:lerp(a.y,b.y,t)}; }
+
+      async function startAR(){
+        modal.style.display='flex';
+        arLoading.style.display='flex';
+        arLoadingText.textContent='Запрос доступа к камере...';
+
+        try {
+          stream = await navigator.mediaDevices.getUserMedia({
+            video:{ facingMode:'environment', width:{ideal:1280}, height:{ideal:720} },
+            audio:false
+          });
+        } catch(e1){
+          try {
+            stream = await navigator.mediaDevices.getUserMedia({ video:true, audio:false });
+          } catch(e2){
+            arLoadingText.textContent='⚠️ Нет доступа к камере';
+            setTimeout(stopAR,2500); return;
+          }
+        }
+
+        arVideo.srcObject = stream;
+        await new Promise(r=>arVideo.onloadedmetadata=r);
+        arVideo.play();
+
+        arCanvas.width  = arVideo.videoWidth  || 640;
+        arCanvas.height = arVideo.videoHeight || 480;
+
+        arLoadingText.textContent='Загрузка AI модели рук...';
+
+        // Load MediaPipe Hands via CDN
+        await loadScript('https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js');
+        await loadScript('https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js');
+        await loadScript('https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js');
+
+        arLoadingText.textContent='Инициализация...';
+
+        handsModel = new Hands({locateFile: f=>`https://cdn.jsdelivr.net/npm/@mediapipe/hands/${f}`});
+        handsModel.setOptions({ maxNumHands:1, modelComplexity:1, minDetectionConfidence:0.6, minTrackingConfidence:0.5 });
+        handsModel.onResults(onHandResults);
+
+        await handsModel.initialize();
+        arLoading.style.display='none';
+        renderLoop();
+      }
+
+      function loadScript(src){
+        return new Promise((res,rej)=>{
+          if(document.querySelector(`script[src="${src}"]`)){ res(); return; }
+          const s=document.createElement('script'); s.src=src; s.onload=res; s.onerror=rej;
+          document.head.appendChild(s);
+        });
+      }
+
+      let lastSend = 0;
+      function renderLoop(){
+        animFrameId = requestAnimationFrame(renderLoop);
+        const now = performance.now();
+        // Send frame to MediaPipe at ~20fps
+        if(now - lastSend > 50 && handsModel){
+          lastSend = now;
+          handsModel.send({image: arVideo}).catch(()=>{});
+        }
+        // Draw
+        ctx.clearRect(0,0,arCanvas.width,arCanvas.height);
+        if(handVisible && smoothWrist && smoothIndex){
+          drawBraceletOnWrist(smoothWrist, smoothIndex);
+          arDetected.style.display='block';
+          arStatus.style.opacity='0';
+        } else {
+          arDetected.style.display='none';
+          arStatus.style.opacity='1';
+        }
+        braceletAngle += 0.04;
+        handVisible = false; // will be set true if hand detected this frame
+      }
+
+      function onHandResults(results){
+        if(!results.multiHandLandmarks || results.multiHandLandmarks.length===0) return;
+        const lm = results.multiHandLandmarks[0];
+        const W = arCanvas.width, H = arCanvas.height;
+        // Wrist = landmark 0, Index MCP = 5, Pinky MCP = 17
+        const wrist = { x: lm[0].x*W, y: lm[0].y*H };
+        const indexMCP = { x: lm[5].x*W, y: lm[5].y*H };
+        const pinkyMCP = { x: lm[17].x*W, y: lm[17].y*H };
+        // Bracelet should sit just above the wrist
+        // Midpoint of index MCP and pinky MCP = mid-palm base
+        const palmBase = { x:(indexMCP.x+pinkyMCP.x)/2, y:(indexMCP.y+pinkyMCP.y)/2 };
+        // Wrist center for bracelet = 70% toward wrist from palm base
+        const bCenter = lerpPt(palmBase, wrist, 0.65);
+        // Smooth it
+        if(!smoothWrist){ smoothWrist=bCenter; smoothIndex=indexMCP; }
+        else {
+          smoothWrist = lerpPt(smoothWrist, bCenter, 0.35);
+          smoothIndex = lerpPt(smoothIndex, indexMCP, 0.35);
+        }
+        handVisible = true;
+      }
+
+      function drawBraceletOnWrist(wristPt, indexPt){
+        const W = arCanvas.width, H = arCanvas.height;
+        // Determine wrist width from video (approximate based on canvas size)
+        // Scale bracelet to ~15% of shorter dimension
+        const baseSize = Math.min(W,H) * 0.16;
+        // Rotation from wrist to index finger (for tilt)
+        const dx = indexPt.x - wristPt.x;
+        const dy = indexPt.y - wristPt.y;
+        const rot = Math.atan2(dy, dx) - Math.PI/2;
+
+        ctx.save();
+        ctx.translate(wristPt.x, wristPt.y);
+        ctx.rotate(rot);
+
+        const RX = baseSize;
+        const RY = RX * (0.28 + 0.1*Math.abs(Math.sin(braceletAngle)));
+        const bandH = baseSize * 0.28;
+
+        // Drop shadow
+        ctx.shadowColor='rgba(0,0,0,0.4)'; ctx.shadowBlur=16; ctx.shadowOffsetY=6;
+
+        // Outer band body
+        ctx.beginPath();
+        ctx.ellipse(0,-bandH/2, RX, RY,0,0,Math.PI);
+        ctx.lineTo(RX, bandH/2);
+        ctx.ellipse(0, bandH/2, RX, RY,0,Math.PI,0,true);
+        ctx.closePath();
+        const og=ctx.createLinearGradient(-RX,0,RX,0);
+        og.addColorStop(0,'rgba(100,70,0,0.9)');
+        og.addColorStop(0.3,'rgba(220,160,40,0.95)');
+        og.addColorStop(0.5,'rgba(255,220,80,0.98)');
+        og.addColorStop(0.7,'rgba(200,140,30,0.95)');
+        og.addColorStop(1,'rgba(90,60,0,0.9)');
+        ctx.fillStyle=og; ctx.fill();
+
+        ctx.shadowColor='transparent';
+
+        // Top edge
+        ctx.beginPath();
+        ctx.ellipse(0,-bandH/2, RX, RY,0,Math.PI,2*Math.PI);
+        ctx.ellipse(0,-bandH/2, RX*0.82, RY*0.72,0,2*Math.PI,Math.PI,true);
+        const tg=ctx.createLinearGradient(-RX,-bandH*1.5,RX,-bandH*1.5);
+        tg.addColorStop(0,'#c09020'); tg.addColorStop(0.5,'#f0d050'); tg.addColorStop(1,'#a07010');
+        ctx.fillStyle=tg; ctx.fill();
+
+        // Inner hole
+        ctx.beginPath();
+        ctx.ellipse(0,0,RX*0.82,RY*0.72,0,0,Math.PI*2);
+        ctx.fillStyle='rgba(0,0,0,0.0)'; ctx.fill();
+
+        // Highlight
+        ctx.save(); ctx.globalAlpha=0.25;
+        ctx.beginPath();
+        ctx.ellipse(-RX*0.2,-bandH*0.3,RX*0.4,RY*0.5,0,Math.PI,2*Math.PI);
+        ctx.fillStyle='#fffce0'; ctx.fill();
+        ctx.restore();
+
+        // Screws
+        for(let s=0;s<10;s++){
+          const sa=(2*Math.PI*s/10)+braceletAngle*0.5;
+          const sx=RX*Math.cos(sa), sy=RY*Math.sin(sa);
+          const frontFace=Math.cos(sa-braceletAngle*0.5)>-0.1;
+          if(!frontFace) continue;
+          const sz=bandH*(s%2===0?-0.35:0.35);
+          const sr=Math.max(2.5,baseSize*0.065);
+          const sg=ctx.createRadialGradient(sx-sr*0.3,sy+sz-sr*0.3,0,sx,sy+sz,sr);
+          sg.addColorStop(0,'#f8e060'); sg.addColorStop(0.6,'#c09020'); sg.addColorStop(1,'#7a5000');
+          ctx.beginPath(); ctx.arc(sx,sy+sz,sr,0,Math.PI*2);
+          ctx.fillStyle=sg; ctx.fill();
+          ctx.strokeStyle='rgba(0,0,0,0.3)'; ctx.lineWidth=0.8; ctx.stroke();
+          // slot
+          ctx.save(); ctx.translate(sx,sy+sz); ctx.rotate(sa+Math.PI/4);
+          ctx.fillStyle='rgba(0,0,0,0.4)';
+          ctx.fillRect(-sr*0.75,-sr*0.2,sr*1.5,sr*0.4); ctx.restore();
+        }
+
+        // "Cartier" text engraved
+        ctx.save();
+        ctx.font=`italic ${Math.max(6,baseSize*0.09)}px serif`;
+        ctx.fillStyle='rgba(120,80,0,0.5)'; ctx.textAlign='center';
+        ctx.fillText('© Cartier',0,bandH*0.3); ctx.restore();
+
+        ctx.restore();
+      }
+
+      function stopAR(){
+        if(animFrameId){ cancelAnimationFrame(animFrameId); animFrameId=null; }
+        if(stream){ stream.getTracks().forEach(t=>t.stop()); stream=null; }
+        if(handsModel){ handsModel.close(); handsModel=null; }
+        modal.style.display='none';
+        handVisible=false; smoothWrist=null; smoothIndex=null;
+      }
+
+      btnAr && btnAr.addEventListener('click',startAR);
+      arClose && arClose.addEventListener('click',stopAR);
+
+      // Learn more button wires to inquiry
+      const learnBtn = document.getElementById('learnMoreCartier');
+      if(learnBtn){
+        learnBtn.addEventListener('click',function(e){
+          e.stopPropagation();
+          openInquiry(this.closest('.product-card'));
+        });
+      }
+    })();
 
     bodyEl.classList.add('fullscreen');bodyEl.style.padding='0';heroText.classList.add('appear');
     animationTimeout=setTimeout(()=>{heroText.style.opacity='0';heroText.style.transition='opacity 0.5s ease';setTimeout(()=>{heroText.style.display='none';exampleContent.classList.add('visible');if(window.innerWidth<=768)burgerBtn.style.display='flex';},500);},2000);
